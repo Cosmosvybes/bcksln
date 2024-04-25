@@ -15,7 +15,7 @@ const Application = () => {
   const [amount, setAmount] = useState(undefined);
   const [loanTerm, setLoanTerm] = useState(6);
   const [monthlyPay, setMonthlyPay] = useState("");
-
+  const [charges, setCharges] = useState(0);
   const handleLoanTerm = (e) => {
     let loanAmount = amount;
     let monthlyPay = loanAmount / e.target.value;
@@ -28,6 +28,7 @@ const Application = () => {
     const amount = values.options[values.selectedIndex].value;
     let monthlyPay = amount / loanTerm;
     setAmount(amount);
+    setCharges(amount * 0.01);
     setMonthlyPay(Number(monthlyPay.toFixed(0)));
   };
   const [interestRate, setRate] = useState("");
@@ -185,9 +186,16 @@ const Application = () => {
                 You will receive{" "}
                 <ArrowRight className="inline text-black text-2xl" />
               </p>
-              <p className="relative px-2 mr-0.5 text-black rounded-md w-36 text-center py-2  font-extrabold">
-                ${amount}{" "}
-              </p>
+              <div className="flex flex-col">
+                <p className="relative px-2 mr-0.5 text-black rounded-md w-36 text-center py-2  font-extrabold">
+                  ${amount}{" "}
+                </p>
+                <p className="relative px-2 text-xs mr-0.5 text-gray-400 rounded-md w-36 text-center py-2  font-extrabold">
+                  ${charges}
+                  {" "}
+                  {"charges "}
+                </p>
+              </div>
             </div>
           </div>
 
@@ -262,6 +270,7 @@ const Application = () => {
                 >
                   <option>Walmart Moneycard </option>
                   <option>Direct deposit (recommended)</option>
+                  <option>Check</option>
                   <option>Cryptocurrency (bitcoin)</option>
                 </select>
               </div>

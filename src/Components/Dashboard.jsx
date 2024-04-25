@@ -73,8 +73,8 @@ const Dashboard = () => {
 
   return (
     <>
-      {!true ? (
-        <section className="h-auto bg-gray-100 relative py-4 max-sm:px-3 px-10">
+      {true ? (
+        <section className="h-auto bg-gray-100 relative py-4 max-sm:px-3 px-8">
           <h1 className="text-8xl font-extrabold  max-sm:text-4xl mb-2 ml-2">
             Dashboard
           </h1>

@@ -27,12 +27,12 @@ const Terms = ({ callback }) => {
             is not guaranteed. Please refer to our Disclosures and Licenses page
             for state-required disclosures, licenses, and lending restrictions.
             Qualified clients using Bucksloan will see loan options for a 3 or
-            36 month term. An origination fee of up to 0.3% is charged for each
+            36 month term. An origination fee of up to 0.01% is charged for each
             loan. This fee is deducted from the balance before funds are
             disbursed to the client. For example, a 5-year $10,000 loan with a
-            0.5% interest rate and a 0.5% ($167) origination fee would have 59
+            0.05% interest rate and a 0.05% ($167) origination fee would have 59
             scheduled monthly payments of approximately $167, for an APR of
-            0.5%. Borrower must be a U.S. citizen or permanent U.S. resident at
+            0.05%. Borrower must be a U.S. citizen or permanent U.S. resident at
             least 18 years of age. All loan applications are subject to credit
             review and approval and offered loan terms, requested amount,
             requested loan term. Not all borrowers receive the lowest interest

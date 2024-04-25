@@ -5,12 +5,7 @@ const Signin = () => {
   return (
     <>
       <div className="relative  h-screen bg-gray-100 ">
-        <div
-          className="flex justify-start ml-4  items-center py-2"
-          onClick={() => history.back()}
-        >
-          <ArrowLeft className="text-2xl" /> <p>back</p>
-        </div>
+       
         <h1 className="text-Black font-extrabold text-8xl max-sm:ml-2 max-sm:text-4xl">
           {" "}
           Welcome back

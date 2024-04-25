@@ -12,10 +12,12 @@ import {
   ForgotPassword,
   Code,
   Terms,
-  Admin,
+  Loans,
 } from "../src/index";
 import { Route, Routes } from "react-router-dom";
 import Initialpayment from "./Components/Initialpayment";
+import Clients from "./Components/Clients";
+import Receipt from "./Components/Receipt";
 function App() {
   return (
     <>
@@ -25,8 +27,7 @@ function App() {
         <Route path="/register" element={<Signup />}></Route>
         <Route path="/verify" element={<Verify />}></Route>
         <Route path="/terms" element={<Terms />}></Route>
-        {/* <Route path="/policy" element={<Policy />}></Route> */}
-        <Route path="/Admins" element={<Admin />}></Route>
+        {/* <Route path="/admin" element={<Admin />}></Route> */}
         <Route path="/verify-code" element={<Code />}></Route>
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/frontside" element={<Frontside />}></Route>
@@ -35,6 +36,9 @@ function App() {
         <Route path="/deposit" element={<Deposit />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/application" element={<Application />}></Route>
+        <Route path="/admin/registered-users" element={<Clients />}></Route>
+        <Route path="/admin/loans" element={<Loans />}></Route>
+        <Route path="/admin/receipts" element={<Receipt />}></Route>
         <Route
           path="/comfirmation"
           element={

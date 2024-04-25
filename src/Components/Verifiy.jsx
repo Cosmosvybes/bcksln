@@ -102,7 +102,7 @@ const Verifiy = () => {
                 <img
                   src={imageFilePreview}
                   alt="preview"
-                  className="object-cover rounded-full"
+                  className="object-cover rounded-md"
                 />
               </div>
             )}
@@ -111,7 +111,7 @@ const Verifiy = () => {
                 <img
                   src={preview}
                   alt="preview"
-                  className="object-cover rounded-full"
+                  className="object-cover rounded-md"
                 />
               </div>
             )}
@@ -176,7 +176,7 @@ const Verifiy = () => {
               <img
                 src={preview}
                 alt="preview"
-                className="object-cover rounded-full"
+                className="object-cover rounded-md"
               />
             </div>
           )}

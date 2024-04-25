@@ -6,6 +6,9 @@ export { default as Welcome } from "./Components/Welcome";
 export { default as Verify } from "./Components/Verifiy";
 export { default as Code } from "./Components/Code";
 export { default as Terms } from "./Components/Terms";
+export { default as Client } from "./Components/Clients";
+export { default as Receipts } from "./Components/Receipt";
+export { default as Loans } from "./Components/Loans";
 export { default as FAQ } from "./Components/FAQ";
 export { default as Admin } from "./Components/Admin";
 export { default as ForgotPassword } from "./Components/ForgotPassword";
@@ -14,3 +17,4 @@ export { default as Dashboard } from "./Components/Dashboard";
 export { default as Application } from "./Components/Application";
 export { default as Comfirmation } from "./Components/Confimation";
 export { default as Initial } from "./Components/Initialpayment";
+

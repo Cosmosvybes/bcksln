@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const Deposit = () => {
   return (
     <>
-      <section className="bg-gray-100 relative h-auto py-2   max-sm:h-auto px-8 max-sm:px-4">
+      <section className="bg-gray-100 relative h-auto py-2   max-sm:h-auto px-8 max-sm:px-2">
         <div className="flex ml-2 justify-start  items-center">
           <button className="mt-4 ml-1" onClick={() => history.back()}>
             <ArrowLeft className="text-2xl inline " /> back
