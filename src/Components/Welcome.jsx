@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Welcome = () => {
   return (
     <>
-      <div className="flex justify-start items-center h-screen flex-col">
+      <div className="flex justify-start items-center h-screen max-sm:h-96 flex-col  relative ">
         <img src={heart} alt="heart" className="w-30 h-30 object-cover" />
         <h1 className="text-black font-bold  text-7xl max-sm:text-2xl  max-lg:text-xs">
           {" "}

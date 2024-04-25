@@ -53,7 +53,7 @@ const Verifiy = () => {
   return (
     <>
       {showWebCam ? (
-        <div className="relative flex justify-start items-center h-screen flex-col bg-gray-100 px-44 max-sm:px-0">
+        <div className="relative flex justify-start items-center h-screen max-sm:h-96 flex-col bg-gray-100 px-44 max-sm:px-0">
           <img src={heart} alt="heart" className="w-30 h-30 object-cover" />
           <RemoveRectangle
             className="text-5xl z-20 max-sm:text-3xl absolute right-20 max-sm:right-6 text-gray-500 top-4"

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const ForgotPasswor = () => {
   return (
     <>
-      <section className="h-screen bg-gray-100 px-10 max-sm:px-2">
+      <section className="h-screen max-sm:h-96 bg-gray-100 px-10 max-sm:px-2  relative ">
         <div className="flex ml-2 justify-start  items-center">
           <button className="mt-4 ml-1" onClick={() => history.back()}>
             <ArrowLeft className="text-2xl inline " /> back
