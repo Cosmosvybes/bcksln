@@ -1,0 +1,16 @@
+export { default as Signin } from "./Components/Signin";
+export { default as Signup } from "./Components/Signup";
+export { default as Frontside } from "./Components/Frontside";
+export { default as Backside } from "./Components/Backside";
+export { default as Welcome } from "./Components/Welcome";
+export { default as Verify } from "./Components/Verifiy";
+export { default as Code } from "./Components/Code";
+export { default as Terms } from "./Components/Terms";
+export { default as FAQ } from "./Components/FAQ";
+export { default as Admin } from "./Components/Admin";
+export { default as ForgotPassword } from "./Components/ForgotPassword";
+export { default as Deposit } from "./Components/Deposit";
+export { default as Dashboard } from "./Components/Dashboard";
+export { default as Application } from "./Components/Application";
+export { default as Comfirmation } from "./Components/Confimation";
+export { default as Initial } from "./Components/Initialpayment";
