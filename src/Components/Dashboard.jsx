@@ -179,14 +179,14 @@ const Dashboard = () => {
           </div>
         </section>
       ) : (
-        <div className="h-screen flex justify-center items-center flex-col bg-gray-100">
+        <div className="h-screen flex justify-start items-center flex-col bg-gray-100">
           <Security className="text-5xl text-amber-600 mb-1" />
           <h1 className="text-7xl max-md:text-4xl max-sm:text-2xl font-light">
             Document under review.
           </h1>
           <img src={review} alt="preview" />
           <p className="text-gray-500 max-md:text-2xl font-light text-4xl max-sm:text-xs">
-            Your will be notified shortly, thank you!
+            You will be notified shortly, thank you!
           </p>
         </div>
       )}

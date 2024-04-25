@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { RemoveRectangle } from "react-huge-icons/outline";
 const Terms = ({ callback }) => {
   useEffect(() => {
-    scrollTo({ top: 0 });
+    scrollTo({ top: 0, behavior: "smooth", left: 0 });
   }, []);
   return (
     <>
-      <section className="h-screen bg-gray-100 px-10 max-sm:px-2">
+      <section className="h-screen  bg-gray-100 px-10 max-sm:px-2">
         <div className="flex mr-3 justify-end  items-center">
           <button className="mt-4 ml-0" onClick={callback}>
             <RemoveRectangle

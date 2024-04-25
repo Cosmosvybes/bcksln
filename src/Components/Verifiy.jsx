@@ -56,10 +56,10 @@ const Verifiy = () => {
         <div className="relative flex justify-start items-center h-screen flex-col bg-gray-100 px-44 max-sm:px-0">
           <img src={heart} alt="heart" className="w-30 h-30 object-cover" />
           <RemoveRectangle
-            className="text-5xl max-sm:text-3xl absolute right-20 max-sm:right-6 text-gray-500 top-4"
+            className="text-5xl z-20 max-sm:text-3xl absolute right-20 max-sm:right-6 text-gray-500 top-4"
             onClick={() => history.back()}
           />
-          <h1 className="text-Black font-extrabold text-7xl max-sm:text-2xl ">
+          <h1 className="text-Black font-extrabold text-7xl max-md:text-3xl max-sm:text-2xl ">
             Identity Verification
           </h1>
           <div className="flex h-auto w-full flex-col py-2  bg-gray-200 rounded-md border justify-center items-center px-2 ">
@@ -135,9 +135,9 @@ const Verifiy = () => {
             </div>
         </div>
       ) : (
-        <div className="flex h-screen justify-center items-center px-5 flex-col relative">
+        <div className="flex h-screen justify-start mt-10 items-center px-5 flex-col relative">
           <RemoveRectangle
-            className="text-2xl absolute right-20 max-sm:right-6 text-gray-500 top-4"
+            className="text-2xl z-20 absolute right-20 max-sm:right-6 text-gray-500 top-4"
             onClick={handleSwitch}
           />
           {!question && (

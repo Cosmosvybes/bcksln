@@ -1,15 +1,17 @@
 import { ArrowLeft, ArrowRight } from "react-huge-icons/outline";
 import signin from "../assets/signin.png";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Terms from "./Terms";
 const Signin = () => {
   const [showTerms, setShowTerms] = useState(true);
-
+  
   const handleSwitch = () => {
     setShowTerms(!showTerms);
   };
-
+  useEffect(() => {
+    scrollTo({ top: 0, behavior: "smooth", left: 0 });
+  }, []);
   return (
     <>
       {!showTerms ? (
