@@ -76,7 +76,7 @@ const Clients = () => {
   return (
     <>
       <section className="bg-gray-100 px-8 max-sm:px-2 ">
-        <div className="grid grid-cols-3 gap-2  max-sm:grid-cols-1 py-2 px-2 overflow-auto bg-gray-50 h-auto">
+        <div className="grid grid-cols-3 gap-2  max-sm:grid-cols-1  py-2 px-2 overflow-auto bg-gray-50 h-auto">
           {users.map((user) => (
             <div className="relative" key={user.id}>
               <User

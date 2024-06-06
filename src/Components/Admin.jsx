@@ -52,11 +52,13 @@ const Admin = () => {
 
   return (
     <>
-      <section className="bg-gray-100 overflow-y-clip h-screen">
-        <MenuLineHorizontalHalf
-          className="text-5xl hidden max-sm:block text-amber-700"
-          onClick={handleSwitch}
-        />
+      <section className="bg-gray-100 max-sm:overflow-y-scroll max-md:overflow-y-scroll max-lg:overflow-y-scroll h-screen">
+        {!menuSwitch && (
+          <MenuLineHorizontalHalf
+            className="text-5xl hidden fixed z-20 top-0 left-0 max-sm:block text-amber-700"
+            onClick={handleSwitch}
+          />
+        )}
         {menuSwitch && (
           <div
             className={`absolute max-sm:flex max-md:flex max-lg:flex flex-col hidden justify-between left-0 top-0 z-10 ${
@@ -129,7 +131,7 @@ const Admin = () => {
                 </p>
               </div>
             </div>
-            <div className="w-full main h-screen py-2 overflow-y-scroll ">
+            <div className="w-full main h-auto py-2 overflow-y-scroll ">
               {view}
             </div>
           </div>

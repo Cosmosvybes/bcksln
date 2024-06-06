@@ -31,7 +31,25 @@ const Receipt = () => {
       image2: image2,
       isVerified: false,
     },
-   
+
+    {
+      id: 13,
+      firstname: "Rolland",
+      amount: 500,
+      email: "nicole-netreon@nicole.com",
+      image1: image1,
+      image2: image2,
+      isVerified: false,
+    },
+    {
+      id: 13,
+      firstname: "Rolland",
+      amount: 500,
+      email: "nicole-netreon@nicole.com",
+      image1: image1,
+      image2: image2,
+      isVerified: false,
+    },
   ]);
   const handleApprov = (id) => {
     setReceipts(
@@ -60,7 +78,7 @@ const Receipt = () => {
   return (
     <>
       <section className="bg-gray-100 px-8 max-sm:px-2  ">
-        <div className="grid grid-cols-2 gap-3  max-sm:grid-cols-1  py-2 px-2  bg-gray-50 h-auto">
+        <div className="grid grid-cols-2 gap-3  max-sm:grid-cols-1  overflow-auto py-2 px-2  bg-gray-50 h-auto">
           {receipts.map((receipt) => (
             <div className="relative" key={receipt.id}>
               <PaymentReceipt

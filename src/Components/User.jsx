@@ -12,7 +12,7 @@ const User = ({
   reject,
 }) => {
   return (
-    <div className="flex justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-2">
+    <div className="flex max-sm:w-auto justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-2">
       <p className=" text-white rounded-md px-1 py-1 bg-green-300 ">
         {" "}
         Identity Info

@@ -26,7 +26,7 @@ const LoanDetails = ({
 }) => {
   return (
     <>
-      <div className="flex justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-0">
+      <div className="flex max-sm:w-auto justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-0">
         <p className=" text-start text-green-500 rounded-md px-1 py-1 bg-gray-50 ">
           {" "}
           Loan Information
