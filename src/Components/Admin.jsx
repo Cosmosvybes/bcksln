@@ -1,51 +1,139 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  CoinDollar,
-  DocumentText,
-  MoneyDollar,
-  UsersTriple,
+  ArrowDropLeft,
+  HomeFilter,
+  MenuLineHorizontalHalf,
 } from "react-huge-icons/solid";
-import { Link, Route, Routes } from "react-router-dom";
-import Clients from "./Clients";
-import Loans from "./Loans";
-import { Receipts } from "..";
+
+import Button from "./Button";
+import { Client, Loans } from "..";
+import Receipt from "./Receipt";
 
 const Admin = () => {
+  const [page, setPage] = useState("Registered users");
+  const [pages] = useState([
+    {
+      id: 1,
+      pageName: "Registered users",
+      isSlected: true,
+    },
+    { id: 2, pageName: "Loan application", isSlected: false },
+    { id: 3, pageName: "Payment Receipt", isSlected: false },
+    ,
+  ]);
+
+  const handleView = () => {
+    switch (page) {
+      case "Registered users":
+        return <Client />;
+      case "Loan application":
+        return <Loans />;
+      case "Payment Receipt":
+        return <Receipt />;
+      default:
+        break;
+    }
+  };
+
+  const view = <div className="relative">{handleView()}</div>;
+
+  const handlePageNavigate = (name) => {
+    const pageSelected = pages.find((page) => page.pageName === name);
+    setPage(pageSelected.pageName);
+    pages.map((page) => ({
+      ...page,
+      isSlected: (page.isSlected = page.pageName == name && !page.isSlected),
+    }));
+  };
+  const [menuSwitch, setSwitch] = useState(false);
+  const handleSwitch = () => {
+    setSwitch(!menuSwitch);
+  };
+
   return (
     <>
-      {" "}
-      <section className="flex w-full justify-between flex-col h-auto gap-2 bg-gray-100 ">
-        <h1 className="text-8xl font-extrabold  max-sm:text-4xl mb-2 max-sm:text-center max-md:text-center ml-3">
-          Administrator
-        </h1>
-        <header className="bg-gray-100 h-full  max-sm:h-18 w-52 ml-10 gap-5 max-sm:ml-0 max-sm:w-auto  justify-start items-center py-5 max-sm:py-2 flex  max-sm:flex-row max-sm:justify-center">
-          <Link to={"/admin/registered-users"} className="hover:underline py-2">
-            {" "}
-            <div className="flex flex-col">
-              <UsersTriple className="inline text-4xl " />{" "}
-              <p className="inline max-sm:text-xs  ">Users </p>
+      <section className="bg-gray-100 overflow-y-clip h-screen">
+        <MenuLineHorizontalHalf
+          className="text-5xl hidden max-sm:block text-amber-700"
+          onClick={handleSwitch}
+        />
+        {menuSwitch && (
+          <div
+            className={`absolute max-sm:flex max-md:flex max-lg:flex flex-col hidden justify-between left-0 top-0 z-10 ${
+              menuSwitch ? "w-52" : "w-0"
+            } transition duration-300 h-screen bg-amber-500`}
+          >
+            <div className="relative w-full   gap-1 flex flex-col h-full">
+              {pages.map((page, i) => (
+                <div className="relative" key={i}>
+                  <Button
+                    name={page.pageName}
+                    view={handlePageNavigate}
+                    isSelected={page.isSlected}
+                  />
+                </div>
+              ))}
             </div>
-          </Link>
-          <Link to={"/admin/loans"} className="hover:underline py-2">
-            {" "}
-            <div className="flex flex-col">
-              <DocumentText className="inline text-4xl " />{" "}
-              <p className="inline max-sm:text-xs  ">Loans </p>
+
+            <ArrowDropLeft
+              onClick={handleSwitch}
+              className="text-4xl text-amber-950 absolute right-0 top-0"
+            />
+
+            <div className="relative   flex-col px-2 ">
+              {" "}
+              <div className="relative flex justify-start  ">
+                <HomeFilter className="inline text-amber-700" />
+                <h1 className="text-sm  text-amber-700 font-semibold">
+                  Admin {"/"}
+                  {""} {page}
+                </h1>
+              </div>
+              <p className=" text-amber-700">
+                Bucksloan &copy; {new Date().getFullYear}
+              </p>
             </div>
-          </Link>
-          <Link to={"/admin/receipts"} className="hover:underline py-2">
-            {" "}
-            <div className="flex flex-col">
-              <CoinDollar className="inline text-4xl " />{" "}
-              <p className="inline max-sm:text-xs  ">Pays </p>
+          </div>
+        )}
+        <div className="flex w-full justify-between flex-col h-screen   bg-amber-500 ">
+          <div className="relative w-full bg-gray-100 h-screen flex justify-between">
+            <div className="flex flex-col w-96  bg-amber-300 max-sm:hidden ">
+              <div className="relative h-24 flex items-center mb-1  bg-amber-700">
+                <h1 className="text-2xl font-bold text-amber-300 ml-5">
+                  Admin Data
+                </h1>
+              </div>
+              <div className="relative w-full   gap-1 flex flex-col h-full">
+                {pages.map((page, i) => (
+                  <div className="relative" key={i}>
+                    <Button
+                      name={page.pageName}
+                      view={handlePageNavigate}
+                      isSelected={page.isSlected}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="relative h-52  flex-col px-2 ">
+                {" "}
+                <div className="relative flex justify-start  ">
+                  <HomeFilter className="inline text-amber-700" />
+                  <h1 className="text-sm  text-amber-700 font-semibold">
+                    Admin {"/"}
+                    {""} {page}
+                  </h1>
+                </div>
+                <p className=" text-amber-700">
+                  Bucksloan &copy; {new Date().getFullYear}
+                </p>
+              </div>
             </div>
-          </Link>
-        </header>
-        {/* <Routes>
-          <Route path="/admin/registered-users" element={<Clients />}></Route>
-          <Route path="/admin/deposit-receipt" element={<Receipts />}></Route>
-          <Route path="/admin/loans" element={<Loans />}></Route>
-        </Routes> */}
+            <div className="w-full main h-screen py-2 overflow-y-scroll ">
+              {view}
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );

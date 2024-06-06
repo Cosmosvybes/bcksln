@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Admin from "./Admin";
 import PaymentReceipt from "./PaymentReceipt";
 import image1 from "../assets/activate.png";
 import image2 from "../assets/Pia_486x440px_Auto Loan_keys.png";
@@ -32,15 +31,7 @@ const Receipt = () => {
       image2: image2,
       isVerified: false,
     },
-    {
-      id: 25,
-      firstname: "Alex",
-      amount: 500,
-      email: "nicole-netreon@nicole.com",
-      image1: image1,
-      image2: image2,
-      isVerified: false,
-    },
+   
   ]);
   const handleApprov = (id) => {
     setReceipts(
@@ -68,9 +59,8 @@ const Receipt = () => {
   };
   return (
     <>
-      <Admin />
-      <section className="bg-gray-100 px-8 max-sm:px-2 ">
-        <div className="grid grid-cols-3 gap-2  max-sm:grid-cols-1  py-2 px-2 bg-gray-50 h-auto">
+      <section className="bg-gray-100 px-8 max-sm:px-2  ">
+        <div className="grid grid-cols-2 gap-3  max-sm:grid-cols-1  py-2 px-2  bg-gray-50 h-auto">
           {receipts.map((receipt) => (
             <div className="relative" key={receipt.id}>
               <PaymentReceipt

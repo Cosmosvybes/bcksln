@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Admin from "./Admin";
 import LoanDetails from "./LoanDetails";
 
 const Loans = () => {
@@ -56,6 +55,45 @@ const Loans = () => {
       paymentDetails: "0129332293",
       isApproved: false,
     },
+    {
+      id: 25,
+      name: "nicole",
+      loanType: "Mortage",
+      amount: 2000,
+      loanTerm: "10 Months",
+      monthlyPay: "150",
+      totalDue: "2150",
+      monthlyEarnings: "500",
+      paymentMethod: "Direct Deposit",
+      paymentDetails: "0129332293",
+      isApproved: false,
+    },
+    {
+      id: 55,
+      name: "nicole",
+      loanType: "Mortage",
+      amount: 2000,
+      loanTerm: "10 Months",
+      monthlyPay: "150",
+      totalDue: "2150",
+      monthlyEarnings: "500",
+      paymentMethod: "Direct Deposit",
+      paymentDetails: "0129332293",
+      isApproved: false,
+    },
+    {
+      id: 57,
+      name: "nicole",
+      loanType: "Mortage",
+      amount: 2000,
+      loanTerm: "10 Months",
+      monthlyPay: "150",
+      totalDue: "2150",
+      monthlyEarnings: "500",
+      paymentMethod: "Direct Deposit",
+      paymentDetails: "0129332293",
+      isApproved: false,
+    },
   ]);
   const handleApprove = (id) => {
     setLoans(
@@ -84,9 +122,8 @@ const Loans = () => {
 
   return (
     <>
-      <Admin />
       <section className="bg-gray-100 px-8 max-sm:px-2 ">
-        <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1  py-2 px-2 bg-gray-50 h-auto">
+        <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1  py-2 px-2 bg-gray-50 h-screen ">
           {loans.map((loan) => (
             <div className="relative" key={loan.id}>
               <LoanDetails

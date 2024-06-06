@@ -1,5 +1,5 @@
-import { ArrowLeft} from "react-huge-icons/solid";
-import Upload from "./Upload";
+import { ArrowLeft } from "react-huge-icons/solid";
+import Upload from "../Upload";
 
 const Frontside = () => {
   return (
@@ -11,13 +11,17 @@ const Frontside = () => {
           </button>
         </div>
         <h1 className="text-8xl max-sm:text-2xl font-thin max-sm:text-center mt-2 text-gray-400 ">
-          UPLOAD CARD FRONTSIDE
+          UPLOAD CARD PHOTOS
         </h1>
         <div
           className="flex h-auto py-3 justify-center items-center bg-gray-50
         "
         >
-          <Upload side={"Upload Card front"} to={"backside"} stage={"NEXT"} />
+          <Upload
+            side={"Upload Card front"}
+            to={"checking-card"}
+            stage={"UPLOAD PHOTO"}
+          />
         </div>
       </section>
     </>

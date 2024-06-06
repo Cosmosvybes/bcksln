@@ -11,12 +11,12 @@ const PaymentReceipt = ({
 }) => {
   return (
     <>
-      <div className="flex justify-center py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-2">
+      <div className="flex justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-2">
         <p className=" text-white rounded-md px-1 py-1 bg-green-300 ">
           {" "}
           Payment Receipt
         </p>
-        <div className="flex justify-center items-center">
+        <div className="flex justify-start items-center">
           <a href={imageOne}>
             {" "}
             {imageOne && (
@@ -37,14 +37,14 @@ const PaymentReceipt = ({
             )}
           </a>
         </div>
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex justify-start items-center gap-2">
           <h1> Sender: {firstname}</h1>
         </div>
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-start gap-2">
           <Mail className="inline " />
           <h3 className="max-sm:text-xs text-center"> Email :{email}</h3>
         </div>
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-start gap-2">
           <BadgePercent className="inline " />
           <p className="text-center ">
             Status{" "}
@@ -54,7 +54,7 @@ const PaymentReceipt = ({
           </p>
         </div>
 
-        <div className="flex justify-center max-sm:w-auto items-center gap-1">
+        <div className="flex justify-start max-sm:w-auto items-center gap-1">
           <button
             onClick={() => reject(id)}
             className="bg-red-500 px-2 py-1 rounded-md text-white"

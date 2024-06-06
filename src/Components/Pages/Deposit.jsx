@@ -1,12 +1,12 @@
 import { ArrowLeft, ArrowRight } from "react-huge-icons/outline";
-import image from "../assets/review.png";
-import card from "../assets/walmart.jpg";
-import activate from "../assets/activate.png";
-import card1 from "../assets/Screenshot_20240423-142507_WhatsApp.jpg";
-import card2 from "../assets/Screenshot_20240423-142549_WhatsApp.jpg";
-import scanQr from "../assets/qrcode.png";
-import proof from "../assets/proof.png";
-import send from "../assets/send.png";
+import image from "../../assets/review.png";
+import card from "../../assets/walmart.jpg";
+import activate from "../../assets/activate.png";
+import card1 from "../../assets/Screenshot_20240423-142507_WhatsApp.jpg";
+import card2 from "../../assets/Screenshot_20240423-142549_WhatsApp.jpg";
+import scanQr from "../../assets/qrcode.png";
+import proof from "../../assets/proof.png";
+import send from "../../assets/send.png";
 import { Link } from "react-router-dom";
 const Deposit = () => {
   return (

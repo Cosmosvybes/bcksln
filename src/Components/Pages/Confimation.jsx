@@ -1,5 +1,5 @@
 import { ArrowRight, BellNotification } from "react-huge-icons/solid";
-import reviewPicture from "../assets/signin.png";
+import reviewPicture from "../../assets/signin.png";
 import { Link } from "react-router-dom";
 const Confimation = ({ title, message }) => {
   return (

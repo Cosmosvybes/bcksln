@@ -1,24 +1,21 @@
-import React, { useRef, useState } from "react";
-import heart from "../assets/icon_heart.webp";
+import React, { useEffect, useRef, useState } from "react";
+import heart from "../../assets/icon_heart.webp";
 import {
   ArrowRight,
   CameraOnePieceSwitch,
-  Image,
-  ImageAdd,
-  ImageUpload,
-  NextArrow,
-  PowerCircle,
   Quiz,
   RemoveRectangle,
-  UserAdd,
 } from "react-huge-icons/outline";
 import Webcam from "react-webcam";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ImageDownload } from "react-huge-icons/solid";
+import { toast } from "react-toastify";
+
 const Verifiy = () => {
   const webcameRef = useRef(null);
   const [preview, setPreview] = useState(null);
   const [switchBtn, setSwitchBtn] = useState(true);
+  const navigate = useNavigate();
   const handleUpload = () => {
     const imageUrl = webcameRef.current.getScreenshot();
     const formData = new FormData();
@@ -34,6 +31,8 @@ const Verifiy = () => {
   };
   const [imageFilePreview, setImageFilePreview] = useState(null);
   const [imageToServer, setServerImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [response, setResponse] = useState("");
   const handleUploadPreview = (e) => {
     let imageFile = e.target.files[0];
     let imageUrl = URL.createObjectURL(imageFile);
@@ -45,23 +44,60 @@ const Verifiy = () => {
     if (!preview || !imageToServer) return;
     let identity = document.querySelector("#identity");
     let identityType = identity.options[identity.selectedIndex].value;
-    let objectData = { identityType, imageToServer, preview };
-    console.log(objectData, preview);
-    setSwitchBtn(false);
-  };
+    const formData = new FormData();
+    formData.append("image", imageToServer);
+    formData.append("image", preview);
+    formData.append("identityType", identityType);
 
+    fetch("/api/identity/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((result) => {
+        setIsLoading(true);
+        if (!result.ok) {
+          throw new Error("Operation failed, internal error");
+        }
+        return result.json();
+      })
+      .then((response) => {
+        setIsLoading(false);
+        if (response.responseId) {
+          toast.success(response.response);
+          // setResponse(response.response);
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 3000);
+        }
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        toast.error(err.message);
+      });
+  };
+  useEffect(() => {
+    const clearResponse = () => {
+      setTimeout(() => {
+        setResponse("");
+        setIsLoading(false);
+      }, 5000);
+    };
+    clearResponse();
+  }, [response]);
   return (
     <>
       {showWebCam ? (
-        <div className="relative flex justify-start items-center h-screen max-sm:h-96 flex-col bg-gray-100 px-44 max-sm:px-0">
+        <div className="relative flex justify-start items-center h-screen max-sm:h-screen flex-col py-2 bg-gray-100 px-44 max-sm:px-2">
           <img src={heart} alt="heart" className="w-30 h-30 object-cover" />
           <RemoveRectangle
             className="text-5xl z-20 max-sm:text-3xl absolute right-20 max-sm:right-6 text-gray-500 top-4"
             onClick={() => history.back()}
           />
+
           <h1 className="text-Black font-extrabold text-7xl max-md:text-3xl max-sm:text-2xl ">
             Identity Verification
           </h1>
+
           <div className="flex h-auto w-full flex-col py-2  bg-gray-200 rounded-md border justify-center items-center px-2 ">
             <div className="flex justify-center items-center mb-2">
               <p className="mr-2 font-bold">Select proof of identity</p>
@@ -76,16 +112,19 @@ const Verifiy = () => {
             </div>
 
             <div className="flex justify-center border border-gray-300 items-center w-96 max-sm:w-full h-12 bg-gray-50 rounded-lg mt-2  ">
-              <input
-                type="file"
-                id="uploadId"
-                className="hidden"
-                onChange={handleUploadPreview}
-              />
-              <label htmlFor="uploadId">
-                <ImageDownload className="text-gray-400 text-2xl" />
-              </label>{" "}
-              <p className="ml-2 ">Upload document</p>
+              <form encType="multipart/form-data" method="POST">
+                <input
+                  type="file"
+                  id="uploadId"
+                  name="image"
+                  className="hidden"
+                  onChange={handleUploadPreview}
+                />
+                <label htmlFor="uploadId">
+                  <ImageDownload className="text-gray-400 text-2xl inline" />
+                </label>{" "}
+                <p className="ml-2 inline ">Upload document</p>
+              </form>
             </div>
             <div className="flex justify-center border border-gray-300 items-center w-96 max-sm:w-full h-12 bg-gray-50 rounded-lg mt-4">
               <CameraOnePieceSwitch
@@ -94,11 +133,10 @@ const Verifiy = () => {
               />
               <p className="ml-2 ">Take selfie</p>
             </div>
-           
           </div>
           <div className="flex justify-start gap-1">
             {imageFilePreview && (
-              <div className="flex w-20 h-20 mt-2">
+              <div className="flex w-10 h-10 mt-2">
                 <img
                   src={imageFilePreview}
                   alt="preview"
@@ -107,7 +145,7 @@ const Verifiy = () => {
               </div>
             )}
             {preview && (
-              <div className="flex w-20 h-20 mt-2">
+              <div className="flex w-10 h-10 mt-2">
                 <img
                   src={preview}
                   alt="preview"
@@ -117,22 +155,22 @@ const Verifiy = () => {
             )}
           </div>
           <div className="flex justify-center mt-4">
-              {switchBtn ? (
-                <button
-                  className="bg-black rounded-lg px-4 py-2 text-white hover:bg-gray-800"
-                  onClick={handleProceed}
-                >
-                  Submit details
-                </button>
-              ) : (
-                <Link
-                  to={"/dashboard"}
-                  className="bg-black rounded-lg px-4 py-2 text-white duration-300 transition-opacity hover:bg-gray-800"
-                >
-                  Continue <ArrowRight className="inline text-2xl" />
-                </Link>
-              )}
-            </div>
+            {switchBtn ? (
+              <button
+                className="bg-black rounded-lg px-4 py-2 text-white hover:bg-gray-800"
+                onClick={handleProceed}
+              >
+                {isLoading ? "Loading" : "Submit details"}
+              </button>
+            ) : (
+              <Link
+                to={"/dashboard"}
+                className="bg-black rounded-lg px-4 py-2 text-white duration-300 transition-opacity hover:bg-gray-800"
+              >
+                Continue <ArrowRight className="inline text-2xl" />
+              </Link>
+            )}
+          </div>
         </div>
       ) : (
         <div className="flex h-screen justify-start mt-10 items-center px-5 flex-col relative">

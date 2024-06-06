@@ -1,11 +1,11 @@
 import { ArrowLeft, ArrowRight } from "react-huge-icons/outline";
-import { Mail, MailNotification } from "react-huge-icons/solid";
+import { MailNotification } from "react-huge-icons/solid";
 import { Link } from "react-router-dom";
 
 const ForgotPasswor = () => {
   return (
     <>
-      <section className="h-screen max-sm:h-96 bg-gray-100 px-10 max-sm:px-2  relative ">
+      <section className="h-screen max-sm:h-auto bg-gray-100 px-10 max-sm:px-2  relative ">
         <div className="flex ml-2 justify-start  items-center">
           <button className="mt-4 ml-1" onClick={() => history.back()}>
             <ArrowLeft className="text-2xl inline " /> back
@@ -15,7 +15,7 @@ const ForgotPasswor = () => {
           Forgot Password
         </h1>
         <div className="flex bg-gray-50 h-96  mt-4 flex-col justify-center items-center rounded-lg max-sm:px-4">
-          <MailNotification className="text-5xl max-sm:text-6xl"/>
+          <MailNotification className="text-5xl max-sm:text-6xl" />
           <h1 className="text-4xl max-sm:text-3xl mb-1">Mail Address Here</h1>
           <p className="max-sm:text-center max-sm:text-xs">
             Enter your email address for password recovery

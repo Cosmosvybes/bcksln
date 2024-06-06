@@ -26,56 +26,56 @@ const LoanDetails = ({
 }) => {
   return (
     <>
-      <div className="flex justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-2">
-        <p className=" text-green-500 rounded-md px-1 py-1 bg-gray-50 ">
+      <div className="flex justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-0">
+        <p className=" text-start text-green-500 rounded-md px-1 py-1 bg-gray-50 ">
           {" "}
           Loan Information
         </p>
         <div className="flex justify-start items-center gap-2">
           <strong>
             {" "}
-            Status <ArrowRight className="inline text-2xl" />{" "}
-            <p className="inline" style={{ color: status ? "green" : "brown" }}>
+            Status <ArrowRight className="inline text-gray-400 text-2xl" />{" "}
+            <p className="inline text-gray-400" style={{ color: status ? "green" : "brown" }}>
               {" "}
               {status ? "Approved" : "Rejected"}
             </p>
           </strong>
         </div>
         <div className="flex justify-start items-center gap-2">
-          <h1>User : {userName}</h1>
+          <h1 className=" text-center text-gray-400 ">Username  {userName}</h1>
           {/* <h1> {lastname}</h1> */}
         </div>
         <div className="flex items-center justify-start gap-2">
-          <BookOpenInfo className="inline " />
-          <h3 className=" text-center">Loan Type: {loanType}</h3>
+          <BookOpenInfo className="inline text-amber-500 " />
+          <h3 className=" text-center text-gray-400 ">Loan Type: {loanType}</h3>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <Dollar className="inline " />
-          <p className="text-center ">Amount : {amount}</p>
+          <Dollar className="inline text-amber-500 " />
+          <p className="text-center text-gray-400  ">Amount : {amount}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <DocumentText className="inline " />
-          <p className="text-center ">Loan term : {term}</p>
+          <DocumentText className="inline text-amber-500 " />
+          <p className="text-center text-gray-400  ">Loan term : {term}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <Dollar className="inline " />
-          <p className="text-center ">Monthly Payment: {monthlyPay}</p>
+          <Dollar className="inline text-amber-500 " />
+          <p className="text-center text-gray-400  ">Monthly Payment: {monthlyPay}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <CalculatorModernWritten className="inline " />
-          <p className="text-center ">Total Due: {totalDue}</p>
+          <CalculatorModernWritten className="inline text-amber-500 " />
+          <p className="text-center text-gray-400  ">Total Due: {totalDue}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <Earnings className="inline " />
-          <p className="text-center ">Customer Earnings: {MonthlyEarnings}</p>
+          <Earnings className="inline text-amber-500 " />
+          <p className="text-center text-gray-400  ">Customer Earnings: {MonthlyEarnings}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <Atm className="inline " />
-          <p className="text-center ">Payment method: {paymentMethod}</p>
+          <Atm className="inline text-amber-500 " />
+          <p className="text-center text-gray-400  ">Payment method: {paymentMethod}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <InformationCircle className="inline " />
-          <p className="text-center ">Payment Details: {paymentDetails}</p>
+          <InformationCircle className="inline text-amber-500 " />
+          <p className="text-center text-gray-400  ">Payment Details: {paymentDetails}</p>
         </div>
 
         <div className="flex justify-start max-sm:w-auto items-center gap-3">
@@ -87,7 +87,7 @@ const LoanDetails = ({
           </button>{" "}
           <button
             onClick={() => approve(id)}
-            className="text-green-600 bg-green-300 rounded-md px-2 py-1"
+            className="text-green-600 bg-green-200 rounded-md px-2 py-1"
           >
             Approve
           </button>

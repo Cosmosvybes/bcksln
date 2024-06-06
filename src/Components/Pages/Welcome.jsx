@@ -1,5 +1,5 @@
 import { ArrowRight, Tick } from "react-huge-icons/outline";
-import heart from "../assets/icon_heart.webp";
+import heart from "../../assets/icon_heart.webp";
 import { Link } from "react-router-dom";
 const Welcome = () => {
   return (
