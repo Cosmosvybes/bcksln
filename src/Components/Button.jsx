@@ -4,8 +4,10 @@ const Button = ({ name, view, isSelected }) => {
       <button
         onClick={() => view(name)}
         className={`py-3 text-left ${
-          isSelected && "border-l-4 border-amber-700"
-        } rounded-none bg-amber-500  hover:bg-amber-600 px-3 w-full text-amber-700 font-semibold`}
+          isSelected && "border-b-4 border-amber-700"
+        } ${
+          isSelected && "bg-amber-600"
+        } rounded-none  hover:bg-amber-400 px-3 w-full text-amber-800 font-semibold`}
       >
         {name}
       </button>

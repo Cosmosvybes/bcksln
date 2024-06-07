@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import {
   ArrowDropLeft,
   HomeFilter,
+  MenuLineHorizontal,
   MenuLineHorizontalHalf,
 } from "react-huge-icons/solid";
 
 import Button from "./Button";
 import { Client, Loans } from "..";
 import Receipt from "./Receipt";
+import { ArrowBackCircle } from "react-huge-icons/outline";
 
 const Admin = () => {
   const [page, setPage] = useState("Registered users");
@@ -47,22 +49,29 @@ const Admin = () => {
   };
   const [menuSwitch, setSwitch] = useState(false);
   const handleSwitch = () => {
-    setSwitch(!menuSwitch);
+    let body = document.body;
+    body.addEventListener("click", () => {
+      setSwitch(!menuSwitch);
+    });
+    // setSwitch(!menuSwitch);
   };
 
   return (
     <>
-      <section className="bg-gray-100 max-sm:overflow-y-scroll max-md:overflow-y-scroll max-lg:overflow-y-scroll h-screen">
+      <section className="bg-gray-100  scroll-smooth">
         {!menuSwitch && (
-          <MenuLineHorizontalHalf
-            className="text-5xl hidden fixed z-20 top-0 left-0 max-sm:block text-amber-700"
-            onClick={handleSwitch}
-          />
+          <div className="h-14 hidden fixed z-20 top-0 right-0 max-sm:block bg-transparent w-full">
+            <MenuLineHorizontal
+              className="text-5xl absolute right-0 text-amber-500"
+              onClick={handleSwitch}
+            />
+          </div>
         )}
+
         {menuSwitch && (
           <div
             className={`absolute max-sm:flex max-md:flex max-lg:flex flex-col hidden justify-between left-0 top-0 z-10 ${
-              menuSwitch ? "w-52" : "w-0"
+              menuSwitch ? "w-72" : "w-0"
             } transition duration-300 h-screen bg-amber-500`}
           >
             <div className="relative w-full   gap-1 flex flex-col h-full">
@@ -77,9 +86,9 @@ const Admin = () => {
               ))}
             </div>
 
-            <ArrowDropLeft
+            <ArrowBackCircle
               onClick={handleSwitch}
-              className="text-4xl text-amber-950 absolute right-0 top-0"
+              className="text-4xl text-amber-950 absolute right-2 top-2"
             />
 
             <div className="relative   flex-col px-2 ">
@@ -131,9 +140,7 @@ const Admin = () => {
                 </p>
               </div>
             </div>
-            <div className="w-full main h-auto py-2 overflow-y-scroll ">
-              {view}
-            </div>
+            <div className="w-full main h-auto py-2 overflow-y-auto ">{view}</div>
           </div>
         </div>
       </section>

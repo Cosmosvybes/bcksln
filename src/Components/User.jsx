@@ -59,13 +59,13 @@ const User = ({
       <div className="flex  justify-start max-sm:w-auto items-center gap-1">
         <button
           onClick={() => reject(id)}
-          className="bg-red-500 px-2 py-1 rounded-md text-white"
+          className="bg-red-500 px-3 py-2 rounded-md text-white"
         >
           Reject
         </button>{" "}
         <button
           onClick={() => approve(id)}
-          className="text-green-600 bg-green-300 rounded-md px-2 py-1"
+          className="text-green-600 bg-green-300 rounded-md px-3 py-2"
         >
           Approve
         </button>

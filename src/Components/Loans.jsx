@@ -123,7 +123,7 @@ const Loans = () => {
   return (
     <>
       <section className="bg-gray-100 px-8 max-sm:px-2 ">
-        <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1 overflow-x-auto  py-2 px-2 bg-gray-50 h-auto">
+        <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1   py-2 px-2 bg-gray-50 h-auto">
           {loans.map((loan) => (
             <div className="relative" key={loan.id}>
               <LoanDetails

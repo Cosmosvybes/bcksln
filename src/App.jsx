@@ -42,7 +42,7 @@ function App() {
         <Route path="/deposit" element={<Deposit />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/application" element={<Application />}></Route>
-        {/* <Route path="/admin/registered-users" element={<Clients />}></Route> */}
+
         <Route path="/admin/" element={<Admin />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route

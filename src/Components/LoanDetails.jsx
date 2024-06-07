@@ -46,48 +46,48 @@ const LoanDetails = ({
           {/* <h1> {lastname}</h1> */}
         </div>
         <div className="flex items-center justify-start gap-2">
-          <BookOpenInfo className="inline text-amber-500 " />
+          <BookOpenInfo className="inline text-amber-500 text-2xl " />
           <h3 className=" text-center text-gray-400 ">Loan Type: {loanType}</h3>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <Dollar className="inline text-amber-500 " />
+          <Dollar className="inline text-amber-500 text-2xl " />
           <p className="text-center text-gray-400  ">Amount : {amount}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <DocumentText className="inline text-amber-500 " />
+          <DocumentText className="inline text-amber-500 text-2xl " />
           <p className="text-center text-gray-400  ">Loan term : {term}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <Dollar className="inline text-amber-500 " />
+          <Dollar className="inline text-amber-500 text-2xl " />
           <p className="text-center text-gray-400  ">Monthly Payment: {monthlyPay}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <CalculatorModernWritten className="inline text-amber-500 " />
+          <CalculatorModernWritten className="inline text-amber-500 text-2xl " />
           <p className="text-center text-gray-400  ">Total Due: {totalDue}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <Earnings className="inline text-amber-500 " />
+          <Earnings className="inline text-amber-500 text-2xl " />
           <p className="text-center text-gray-400  ">Customer Earnings: {MonthlyEarnings}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <Atm className="inline text-amber-500 " />
+          <Atm className="inline text-amber-500 text-2xl " />
           <p className="text-center text-gray-400  ">Payment method: {paymentMethod}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <InformationCircle className="inline text-amber-500 " />
+          <InformationCircle className="inline text-amber-500 text-2xl " />
           <p className="text-center text-gray-400  ">Payment Details: {paymentDetails}</p>
         </div>
 
-        <div className="flex justify-start max-sm:w-auto items-center gap-3">
+        <div className="flex justify-start max-sm:w-auto mt-2 items-center gap-3">
           <button
             onClick={() => reject(id)}
-            className="bg-red-500 px-2 py-1 rounded-md text-white"
+            className="bg-red-500 px-3 py-2 rounded-md text-white"
           >
             Reject
           </button>{" "}
           <button
             onClick={() => approve(id)}
-            className="text-green-600 bg-green-200 rounded-md px-2 py-1"
+            className="text-green-600 bg-green-300 rounded-md px-3 py-2"
           >
             Approve
           </button>
