@@ -7,13 +7,13 @@ import { toast } from "react-toastify";
 import { Button, Col, Form, Input, Label, Row, Spinner } from "reactstrap";
 
 const Signin = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [response, setResponse] = useState("");
+
   const handleSignIn = (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setLoading(true);
     fetch("https://bck-server.onrender.com/api/signin", {
       method: "POST",
       credentials: "include",
@@ -21,29 +21,25 @@ const Signin = () => {
       body: JSON.stringify({ email, password }),
     })
       .then((result) => {
-        setIsLoading(true);
+        setLoading(false);
         if (!result.ok) throw new Error("Sign in failed");
         return result.json();
       })
       .then((response) => {
-        setIsLoading(false);
+        setLoading(false);
         if (response.isAuthorised) {
           location.href = "/two-factor/authentication";
         } else {
           toast.warning(response.response);
-          setIsLoading(false);
+          setLoading(false);
           // setResponse(response.response);
         }
       })
       .catch((err) => {
         toast.error(err.message);
-        setIsLoading(false);
+        setLoading(false);
       });
-  
   };
-
-
-  
 
   return (
     <>
@@ -57,7 +53,7 @@ const Signin = () => {
         </h3>
         <div className="flex justify-between w-full max-sm:w-auto bg-gray-100 mt-2 rounded-md px-8 py-3 max-sm:px-2 max-sm:flex-col">
           <div className="relative block">
-            <h1 className="text-black font-extralight text-sm ml-2 mb-2">
+            <h1 className="text-black font-extralight text-sm  mb-2">
               Enter your login details
             </h1>
             <div className="relative max-sm:w-full h-auto ml-">
@@ -84,7 +80,7 @@ const Signin = () => {
                     placeholder="Password here"
                     className="border border-gray-100 w-full m px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                   />
-                  {isLoading ? (
+                  {loading ? (
                     <div className="relative flex justify-end w-full max-sm:w-full items-center">
                       <Spinner type="border" className="mt-1 text-end" />
                     </div>
