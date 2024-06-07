@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import {
   ArrowDropLeft,
   HomeFilter,
@@ -55,6 +55,14 @@ const Admin = () => {
     });
     // setSwitch(!menuSwitch);
   };
+  useLayoutEffect(() => {
+    async function testApi() {
+      let response = await fetch("http://localhost:8080/api/test");
+      let responseData = await response.json();
+      console.log(responseData);
+    }
+    testApi();
+  }, []);
 
   return (
     <>
@@ -140,7 +148,9 @@ const Admin = () => {
                 </p>
               </div>
             </div>
-            <div className="w-full main h-auto py-2 overflow-y-auto ">{view}</div>
+            <div className="w-full main h-auto py-2 overflow-y-auto ">
+              {view}
+            </div>
           </div>
         </div>
       </section>

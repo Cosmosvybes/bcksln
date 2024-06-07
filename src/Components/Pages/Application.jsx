@@ -1,11 +1,13 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "react-huge-icons/outline";
 import deposit from "../../assets/support.webp";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Spinner } from "reactstrap";
 
 const Application = () => {
   let navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [loanTypes] = useState([
     { id: 1, name: "Mortage loans", interest: 0.05 },
     { id: 2, name: "Salary advance", interest: 0.03 },
@@ -79,20 +81,14 @@ const Application = () => {
     );
     if (choice === "Check") {
       setIsCheck(true);
-      // setIsCheck(true);
     }
     setMethod(choice);
-    // setIsCheck(false);
   };
 
   useLayoutEffect(() => {
     handleAmount();
     handleInterest();
   }, [loanInterest, amount]);
-
-  // useLayoutEffect(() => {
-  //   handlePaymentMethod();
-  // }, []);
 
   const [monthlyEarningAmount, setMonthlyEarnings] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
@@ -108,6 +104,7 @@ const Application = () => {
 
   //function for loan application
   const handleApplication = async () => {
+    setLoading(true);
     const employmentOption = document.querySelector("#employmentStatus");
     let employementStatus =
       employmentOption.options[employmentOption.selectedIndex].value;
@@ -137,18 +134,24 @@ const Application = () => {
         ...bankDetails,
       };
 
-      let serverResponse = await fetch("api/new-loan/apply", {
-        method: "POST",
-        headers: { "Content-Type": "Application/json" },
-        body: JSON.stringify(data),
-      });
+      let serverResponse = await fetch(
+        "https://bck-server.onrender.com/api/new-loan/apply",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "Application/json" },
+          body: JSON.stringify(data),
+        }
+      );
       if (!serverResponse.ok) {
+        setLoading(false);
         let response = await serverResponse.json();
         toast.warning(response.response);
         return;
       }
       let response = await serverResponse.json();
       toast.success(response.response);
+      setLoading(false);
     } else if (isCheck) {
       let mailingAddress = {
         postalCode,
@@ -168,17 +171,23 @@ const Application = () => {
         ...mailingAddress,
       };
 
-      let serverResponse = await fetch("api/new-loan/apply", {
-        method: "POST",
-        headers: { "Content-Type": "Application/json" },
-        body: JSON.stringify(data),
-      });
+      let serverResponse = await fetch(
+        "https://bck-server.onrender.com/api/new-loan/apply",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "Application/json" },
+          body: JSON.stringify(data),
+        }
+      );
       if (!serverResponse.ok) {
+        setLoading(false);
         let response = await serverResponse.json();
         toast.warning(response.response);
         return;
       }
       let response = await serverResponse.json();
+      setLoading(false);
       toast.success(response.response);
       navigate("/dashboard");
     } else if (cryptoDeposit) {
@@ -192,17 +201,23 @@ const Application = () => {
         isVeteran,
         walletAddress,
       };
-      let serverResponse = await fetch("api/new-loan/apply", {
-        method: "POST",
-        headers: { "Content-Type": "Application/json" },
-        body: JSON.stringify(data),
-      });
+      let serverResponse = await fetch(
+        "https://bck-server.onrender.com/api/new-loan/apply",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "Application/json" },
+          body: JSON.stringify(data),
+        }
+      );
       if (!serverResponse.ok) {
+        setLoading(false);
         let response = await serverResponse.json();
         toast.warning(response.response);
         return;
       }
       let response = await serverResponse.json();
+      setLoading(false);
       toast.success(response.response);
       navigate("/dashboard");
     } else {
@@ -218,17 +233,23 @@ const Application = () => {
         paymentMethod: "Walmart MoneyCard",
       };
 
-      let serverResponse = await fetch("api/new-loan/apply", {
-        method: "POST",
-        headers: { "Content-Type": "Application/json" },
-        body: JSON.stringify(data),
-      });
+      let serverResponse = await fetch(
+        "https://bck-server.onrender.com/api/new-loan/apply",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "Application/json" },
+          body: JSON.stringify(data),
+        }
+      );
       if (!serverResponse.ok) {
+        setLoading(false);
         let response = await serverResponse.json();
         toast.warning(response.response);
         return;
       }
       let response = await serverResponse.json();
+      setLoading(false);
       toast.success(response.response);
       navigate("/dashboard");
     }
@@ -269,7 +290,7 @@ const Application = () => {
           />
         </div>
         <div className="flex justify-between gap-2 items-start h-auto max-sm:flex-col">
-          <div className="relative mt-2 w-auto text-black  bg-gray-50 h-auto  rounded-lg  py-2 px-5  max-sm:px-2">
+          <div className="relative mt-2 w-auto text-black  bg-gray-50 h-auto  rounded-lg  py-2 px-1  max-sm:px-2">
             <div className="flex justify-start items-center w-96 max-sm:w-auto max-sm:h-auto  h-auto max-sm:text-xs px-2 rounded-md bg-green-300">
               <p className="text-green-600 py-1 px-1">
                 <strong className="text-green-700"> EXCITING NEWS: </strong>{" "}
@@ -555,12 +576,18 @@ const Application = () => {
             </div>
             <div className="flex w-full  justify-start px-2">
               <div className="flex justify-start flex-col max-sm:w-full mt-2">
-                <button
-                  onClick={handleApplication}
-                  className="bg-black rounded-lg py-3 text-center text-white w-52 bg-gray-50max-sm:w-full hover:bg-gray-900"
-                >
-                  Apply now <ArrowRight className="inline text-2xl" />
-                </button>
+                {loading ? (
+                  <div className="relative flex justify-end w-full max-sm:w-full items-center">
+                    <Spinner type="border" className="mt-1 text-end" />
+                  </div>
+                ) : (
+                  <button
+                    onClick={handleApplication}
+                    className="bg-black rounded-lg py-3 text-center text-white w-52 bg-gray-50max-sm:w-full hover:bg-gray-900"
+                  >
+                    Apply now <ArrowRight className="inline text-2xl" />
+                  </button>
+                )}
               </div>
             </div>
           </div>

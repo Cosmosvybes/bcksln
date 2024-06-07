@@ -27,19 +27,17 @@ const LoanDetails = ({
   return (
     <>
       <div className="flex max-sm:w-auto justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-0">
-        <p className=" text-start text-green-500 rounded-md px-1 py-1 bg-gray-50 ">
-          {" "}
-          Loan Information
-        </p>
+      <p className="  rounded-md  py-1 text-green-700 "> Loan Details</p>
+        <div className="relative ml-0 py-0.5 w-10 bg-green-700 -mt-1"></div>
         <div className="flex justify-start items-center gap-2">
-          <strong>
+          <p>
             {" "}
             Status <ArrowRight className="inline text-gray-400 text-2xl" />{" "}
             <p className="inline text-gray-400" style={{ color: status ? "green" : "brown" }}>
               {" "}
               {status ? "Approved" : "Rejected"}
             </p>
-          </strong>
+          </p>
         </div>
         <div className="flex justify-start items-center gap-2">
           <h1 className=" text-center text-gray-400 ">Username  {userName}</h1>

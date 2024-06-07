@@ -4,7 +4,7 @@ import picture from "../../assets/profilepic.png";
 import img from "../../assets/revolving_deposit.webp";
 import { Link } from "react-router-dom";
 import Loan from "./Loan";
-import { Suspense, useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Activity from "../Activity";
 import { Security } from "react-huge-icons/solid";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,7 +58,7 @@ const Dashboard = () => {
           <h1 className="text-8xl font-extrabold  max-sm:text-4xl mb-2 ml-2">
             Dashboard
           </h1>
-          <div className="flex px-5  max-sm:px-1 justify-between items-center bg-gray-50 rounded-lg">
+          <div className="flex px-3 max-sm:px-0   justify-between items-center bg-gray-50 rounded-lg">
             <h1 className="text-5xl font-bold max-sm:text-2xl  max-sm:font-bold">
               Hello, {user?.firstname}
               <p className=" text-xs text-gray-400">
@@ -124,7 +124,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="relative mt-2 bg-gray-50 h-auto w-full rounded-lg  py-3 px-5  max-sm:px-2">
+          <div className="relative mt-2 bg-gray-50 h-auto w-full rounded-lg  py-3 px-1   max-sm:px-0">
             <div className="flex justify-between items-center">
               <h1 className="text-4xl font-extrabold text-black  max-sm:text-xl mb-2 ml-1">
                 Activity
@@ -168,7 +168,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className="relative mt-2 bg-gray-50 h-auto w-full rounded-lg  py-3 px-5  max-sm:px-2">
+          <div className="relative mt-2 bg-gray-50 h-auto w-full rounded-lg  py-3 px-1  max-sm:px-0">
             <h1 className="text-4xl font-extrabold text-black  max-sm:text-xl mb-2 ml-1">
               Recommended Loans
             </h1>

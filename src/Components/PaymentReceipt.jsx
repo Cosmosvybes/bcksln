@@ -12,10 +12,8 @@ const PaymentReceipt = ({
   return (
     <>
       <div className="flex max-sm:w-auto justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-2">
-        <p className=" text-white rounded-md px-1 py-1 bg-green-300 ">
-          {" "}
-          Payment Receipt
-        </p>
+        <p className="  rounded-md px-1 py-1 text-green-700 "> Payment Receipt</p>
+        <div className="relative ml-2 py-0.5 w-10 bg-green-700 -mt-2"></div>
         <div className="flex justify-start items-center">
           <a href={imageOne}>
             {" "}

@@ -21,16 +21,16 @@ import Initialpayment from "./Components/Pages/Initialpayment";
 // import Clients from "./Components/Clients";
 import Receipt from "./Components/Receipt";
 import TwoFactor from "./Components/Pages/TwoFactor";
-// import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   return (
     <>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Admin />}></Route>
+        <Route path="/" element={<Signin />}></Route>
         <Route path="/welcome" element={<Welcome />}></Route>
         <Route path="/register" element={<Signup />}></Route>
         <Route path="/verify" element={<Verify />}></Route>

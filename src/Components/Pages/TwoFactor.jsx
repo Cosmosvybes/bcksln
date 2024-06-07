@@ -2,21 +2,29 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, MailArrowLeft } from "react-huge-icons/outline";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Spinner } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.css";
+
 const TwoFactor = () => {
   let navigate = useNavigate();
   const [code, setCode] = useState("");
-  const [response, setResponse] = useState("");
+  let [loading, setLoading] = useState(false);
+
   const handleSubmit = () => {
-    fetch("/api/verify", {
+    setLoading(true);
+    fetch("https://bck-server.onrender.com/api/verify", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "Application/json" },
       body: JSON.stringify({ userCode: code }),
     })
       .then((result) => {
+        setLoading(true);
         if (!result.ok) throw new Error("Operation failed");
         return result.json();
       })
       .then((response) => {
+        setLoading(false);
         if (response.isAUthenticated && response.user.isVerified) {
           document.cookie =
             "Two_Fa=; expires=Thu, 01 Oct 1970 00:00; path=/api/";
@@ -25,21 +33,16 @@ const TwoFactor = () => {
             navigate("/welcome");
           }
         } else {
-          toast.error(response.response);
+          toast.warning(response.response);
         }
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err.message);
       });
+    console.log(loading);
   };
-  useEffect(() => {
-    const cleareResponse = () => {
-      setTimeout(() => {
-        setResponse("");
-      }, 3000);
-    };
-    cleareResponse();
-  }, [response]);
+
   return (
     <>
       <section className="h-screen max-sm:h-auto py-2 bg-gray-100 px-10 max-sm:px-2  relative ">
@@ -58,9 +61,7 @@ const TwoFactor = () => {
             {" "}
             Two-Authentication code
           </h1>
-          <p className="text-red-500  max-sm:w-full text-center px-2 ">
-            {response}
-          </p>
+
           <input
             type="phone"
             onChange={(e) => setCode(e.target.value)}
@@ -68,12 +69,18 @@ const TwoFactor = () => {
             placeholder="Enter the 6 digit code"
             className="w-72 max-sm:w-full h-10 rounded-md border text-center bg-gray-100 outline-gray-300 px-2 border-gray-300 mt-3"
           />
-          <button
-            onClick={handleSubmit}
-            className="bg-black rounded-lg py-3 text-center text-white w-72 mt-4 max-sm:w-full hover:bg-gray-900"
-          >
-            PROCEED <ArrowRight className="text-2xl text-white inline" />
-          </button>
+          {loading ? (
+            <div className="relative flex justify-end w-full max-sm:w-full items-center">
+              <Spinner type="border" className="mt-1 text-end" />
+            </div>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              className="bg-black rounded-lg py-2 text-center text-white w-72 mt-4 max-sm:w-full hover:bg-gray-900"
+            >
+              PROCEED <ArrowRight className="text-2xl text-white inline" />
+            </button>
+          )}
         </div>
       </section>
     </>

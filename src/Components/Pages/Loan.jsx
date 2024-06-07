@@ -25,7 +25,7 @@ const Loan = ({ name, percentage, amount }) => {
       <div className="flex justify-end">
         <Link
           to={"/application"}
-          className="bg-black rounded-sm  text-center w-16 text-white mt-2"
+          className="bg-black rounded-sm  text-center w-16 shadow-sm shadow-amber-500 text-white mt-2"
         >
           {" "}
           apply{" "}
