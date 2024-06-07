@@ -71,7 +71,7 @@ const Signin = () => {
               }
             })
             .catch((err) => {
-              // console.log(err.message);
+              setLoading(false);
               toast.error(err.message);
             });
         } else {
@@ -82,16 +82,6 @@ const Signin = () => {
     }
   };
 
-  useEffect(() => {
-    scrollTo({ top: 0, behavior: "smooth", left: 0 });
-    const clearResponse = () => {
-      setTimeout(() => {
-        toast.warning("");
-        setLoading(false);
-      }, 5000);
-    };
-    clearResponse();
-  }, [response]);
   return (
     <>
       {!showTerms ? (
