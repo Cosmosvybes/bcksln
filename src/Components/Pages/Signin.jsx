@@ -39,8 +39,11 @@ const Signin = () => {
         toast.error(err.message);
         setIsLoading(false);
       });
-    // console.log({ email, password });
+  
   };
+
+
+  
 
   return (
     <>
