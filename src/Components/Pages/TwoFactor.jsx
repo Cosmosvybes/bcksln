@@ -11,6 +11,7 @@ const TwoFactor = () => {
   let [loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
+    // https://bck-server.onrender.com
     setLoading(true);
     fetch("https://bck-server.onrender.com/api/verify", {
       method: "POST",

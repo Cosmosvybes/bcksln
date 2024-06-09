@@ -1,10 +1,10 @@
 import { ArrowLeft, ArrowRight } from "react-huge-icons/outline";
 import signin from "../../assets/signin.png";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { toast } from "react-toastify";
-import { Button, Col, Form, Input, Label, Row, Spinner } from "reactstrap";
+import { Button, Col, Form, Input, Label, Spinner } from "reactstrap";
 
 const Signin = () => {
   const [loading, setLoading] = useState(false);
