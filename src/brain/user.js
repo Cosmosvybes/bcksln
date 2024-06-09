@@ -1,10 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-
 export const getUser = createAsyncThunk("user/getUser", async () => {
-  const user = await fetch("https://bck-server.onrender.com/api/user", {
-    credentials: "include",
-  });
+  const userToken = localStorage.getItem("userToken");
+  const user = await fetch(
+    `https://bck-server.onrender.com/api/user/${userToken}`,
+    {
+      credentials: "include",
+    }
+  );
   const userData = await user.json();
   return userData.userACcount;
 });

@@ -29,7 +29,7 @@ const Signin = () => {
         setLoading(false);
         if (response.isAuthorised) {
           localStorage.setItem("token", response.token);
-          console.log(response.token);
+          localStorage.setItem("userToken", response.userToken);
           location.href = "/two-factor/authentication";
         } else {
           toast.warning(response.response);
