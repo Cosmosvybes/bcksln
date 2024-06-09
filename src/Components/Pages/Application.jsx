@@ -232,9 +232,9 @@ const Application = () => {
         walletAddress,
         paymentMethod: "Walmart MoneyCard",
       };
-
+      let userToken = localStorage.getItem("userToken");
       let serverResponse = await fetch(
-        "https://bck-server.onrender.com/api/new-loan/apply",
+        `https://bck-server.onrender.com/api/new-loan/apply/${userToken}`,
         {
           method: "POST",
           credentials: "include",

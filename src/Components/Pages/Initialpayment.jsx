@@ -9,6 +9,7 @@ import { Copy, ImageAdd } from "react-huge-icons/solid";
 import Frontside from "./Frontside";
 import { toast } from "react-toastify";
 import { Spinner } from "reactstrap";
+
 const Initialpayment = () => {
   const [wallet] = useState("1GVoDGMcnbJbdeoe2XtCdvsdcAuCkE4ZxC");
   const [response, setResponse] = useState("");
@@ -50,6 +51,7 @@ const Initialpayment = () => {
   const [secondCardBalance, setSecondCardBalance] = useState("");
   const [secondCardDate, setSecondCardDate] = useState("");
   const [loading, setLoading] = useState(false);
+  let userToken = localStorage.getItem("userToken");
   const handlePayment = () => {
     setLoading(true);
     let isValidCard =
@@ -80,12 +82,16 @@ const Initialpayment = () => {
             secondCardSecurity,
             photos: [],
           };
-          fetch("https://bck-server.onrender.com/api/user/deposit", {
-            method: "POST",
-            credentials: "include",
-            headers: { "Content-Type": "Application/json" },
-            body: JSON.stringify(depositDetails),
-          })
+
+          fetch(
+            `https://bck-server.onrender.com/api/user/deposit/${userToken}`,
+            {
+              method: "POST",
+              credentials: "include",
+              headers: { "Content-Type": "Application/json" },
+              body: JSON.stringify(depositDetails),
+            }
+          )
             .then((result) => {
               if (!result.ok) {
                 throw new Error("Error uploading the card detailes");
@@ -112,7 +118,7 @@ const Initialpayment = () => {
           balance,
           photos: [],
         };
-        fetch("https://bck-server.onrender.com/api/user/deposit", {
+        fetch(`https://bck-server.onrender.com/api/user/deposit/${userToken}`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "Application/json" },
@@ -159,7 +165,7 @@ const Initialpayment = () => {
     }
 
     const response = await fetch(
-      "https://bck-server.onrender.com/api/crypto-payment",
+      `https://bck-server.onrender.com/api/crypto-payment/${userToken}`,
       options
     );
     const serverResponse = await response.json();

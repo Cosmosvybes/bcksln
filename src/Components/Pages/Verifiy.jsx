@@ -10,6 +10,7 @@ import Webcam from "react-webcam";
 import { Link, useNavigate } from "react-router-dom";
 import { ImageDownload } from "react-huge-icons/solid";
 import { toast } from "react-toastify";
+let userToken = localStorage.getItem("userToken");
 
 const Verifiy = () => {
   const webcameRef = useRef(null);
@@ -51,7 +52,7 @@ const Verifiy = () => {
     formData.append("image", preview);
     formData.append("identityType", identityType);
 
-    fetch("https://bck-server.onrender.com/api/identity/upload", {
+    fetch(`https://bck-server.onrender.com/api/identity/upload/${userToken}`, {
       method: "POST",
       body: formData,
       credentials: "include",
