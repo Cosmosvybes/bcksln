@@ -24,6 +24,7 @@ const Profile = () => {
   const [postal, setPostal] = useState("");
   const [state, setState] = useState("");
   const dispatch = useDispatch();
+  
   const handleAddress = (e) => {
     e.preventDefault();
     const addressObject = { address, postal, state_: state };

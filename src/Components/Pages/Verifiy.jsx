@@ -32,7 +32,6 @@ const Verifiy = () => {
   const [imageFilePreview, setImageFilePreview] = useState(null);
   const [imageToServer, setServerImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [response, setResponse] = useState("");
   const handleUploadPreview = (e) => {
     let imageFile = e.target.files[0];
     let imageUrl = URL.createObjectURL(imageFile);
@@ -41,7 +40,10 @@ const Verifiy = () => {
   };
 
   const handleProceed = () => {
-    if (!preview || !imageToServer) return;
+    if (!preview || !imageToServer) {
+      toast.warn("upload your verification identity");
+      return;
+    }
     let identity = document.querySelector("#identity");
     let identityType = identity.options[identity.selectedIndex].value;
     const formData = new FormData();
@@ -49,9 +51,10 @@ const Verifiy = () => {
     formData.append("image", preview);
     formData.append("identityType", identityType);
 
-    fetch("/api/identity/upload", {
+    fetch("https://bck-server.onrender.com/api/identity/upload", {
       method: "POST",
       body: formData,
+      credentials: "include",
     })
       .then((result) => {
         setIsLoading(true);
@@ -64,7 +67,6 @@ const Verifiy = () => {
         setIsLoading(false);
         if (response.responseId) {
           toast.success(response.response);
-          // setResponse(response.response);
           setTimeout(() => {
             navigate("/dashboard");
           }, 3000);
@@ -73,17 +75,9 @@ const Verifiy = () => {
       .catch((err) => {
         setIsLoading(false);
         toast.error(err.message);
+        console.log(err);
       });
   };
-  useEffect(() => {
-    const clearResponse = () => {
-      setTimeout(() => {
-        setResponse("");
-        setIsLoading(false);
-      }, 5000);
-    };
-    clearResponse();
-  }, [response]);
   return (
     <>
       {showWebCam ? (
@@ -100,7 +94,7 @@ const Verifiy = () => {
 
           <div className="flex h-auto w-full flex-col py-2  bg-gray-200 rounded-md border justify-center items-center px-2 ">
             <div className="flex justify-center items-center mb-2">
-              <p className="mr-2 font-bold">Select proof of identity</p>
+              <p className="mr-2 ">Identity type</p>
               <select
                 id="identity"
                 className="w-36 border-gray-300 outline-gray-300 rounded-lg px-2 bg-gray-200 py-1"

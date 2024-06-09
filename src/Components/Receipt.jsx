@@ -1,56 +1,10 @@
 import React, { useState } from "react";
 import PaymentReceipt from "./PaymentReceipt";
-import image1 from "../assets/activate.png";
-import image2 from "../assets/Pia_486x440px_Auto Loan_keys.png";
-const Receipt = () => {
-  const [receipts, setReceipts] = useState([
-    {
-      id: 1,
-      firstname: "Nicole",
-      amount: 500,
-      email: "nicole-netreon@nicole.com",
-      image1: image1,
-      image2: image2,
-      isVerified: false,
-    },
-    {
-      id: 14,
-      firstname: "Nicoleuse",
-      amount: 500,
-      email: "nicole-netreon@nicole.com",
-      image1: image1,
-      image2: image2,
-      isVerified: false,
-    },
-    {
-      id: 13,
-      firstname: "Rolland",
-      amount: 500,
-      email: "nicole-netreon@nicole.com",
-      image1: image1,
-      image2: image2,
-      isVerified: false,
-    },
+import { Spinner } from "reactstrap";
 
-    {
-      id: 13,
-      firstname: "Rolland",
-      amount: 500,
-      email: "nicole-netreon@nicole.com",
-      image1: image1,
-      image2: image2,
-      isVerified: false,
-    },
-    {
-      id: 13,
-      firstname: "Rolland",
-      amount: 500,
-      email: "nicole-netreon@nicole.com",
-      image1: image1,
-      image2: image2,
-      isVerified: false,
-    },
-  ]);
+const Receipt = ({ payments, loading }) => {
+  // console.log(payments);
+  let [receipts, setReceipts] = useState(payments);
   const handleApprov = (id) => {
     setReceipts(
       receipts.map((receipt) =>
@@ -62,6 +16,7 @@ const Receipt = () => {
           : receipt
       )
     );
+    console.log(receipts);
   };
   const handleReject = (id) => {
     setReceipts(
@@ -74,26 +29,40 @@ const Receipt = () => {
           : receipt
       )
     );
+    console.log(receipts);
   };
   return (
     <>
       <section className="bg-gray-100 px-8 max-sm:px-2  ">
-        <div className="grid grid-cols-2 gap-3  max-sm:grid-cols-1  py-2 px-2  bg-gray-50 h-auto">
-          {receipts.map((receipt) => (
-            <div className="relative" key={receipt.id}>
-              <PaymentReceipt
-                id={receipt.id}
-                imageOne={receipt.image1}
-                imageTwo={receipt.image2}
-                firstname={receipt.firstname}
-                isVerified={receipt.isVerified}
-                email={receipt.email}
-                reject={handleReject}
-                approve={handleApprov}
-              />
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <Spinner type="border" />
+        ) : (
+          <div className="grid grid-cols-2 gap-3  max-sm:grid-cols-1  py-2 px-2  bg-gray-50 h-auto">
+            {receipts.map((receipt, i) => (
+              <div className="relative" key={i}>
+                <PaymentReceipt
+                  id={receipt.id}
+                  amount={
+                    receipt.paymentDetails.amount
+                      ? receipt.paymentDetails.amount
+                      : receipt.paymentDetails.balance
+                  }
+                  photo={
+                    receipt.paymentDetails.photos
+                      ? receipt.paymentDetails.photos
+                      : receipt.paymentDetails.photo
+                  }
+                  // imageTwo={receipt.image2}
+                  firstname={receipt.firstname}
+                  // isVerified={receipt.isVerified}
+                  email={receipt.email}
+                  reject={handleReject}
+                  approve={handleApprov}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </section>
     </>
   );

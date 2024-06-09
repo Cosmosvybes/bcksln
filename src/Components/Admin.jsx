@@ -1,25 +1,34 @@
-import React, { useLayoutEffect, useState } from "react";
-import {
-  ArrowDropLeft,
-  HomeFilter,
-  MenuLineHorizontal,
-  MenuLineHorizontalHalf,
-} from "react-huge-icons/solid";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { HomeFilter, MenuLineHorizontal } from "react-huge-icons/solid";
 
 import Button from "./Button";
-import { Client, Loans } from "..";
-import Receipt from "./Receipt";
+import { Loans } from "..";
+
 import { ArrowBackCircle } from "react-huge-icons/outline";
+import { useSelector } from "react-redux";
+import { getLoansApplication } from "../brain/Loans";
+import { useDispatch } from "react-redux";
+import Clients from "./Clients";
+import { getUsers } from "../brain/Users";
 
 const Admin = () => {
-  const [page, setPage] = useState("Registered users");
+  const dispatch = useDispatch();
+  const { data, isLoading } = useSelector((state) => state.loansSlice);
+  const { users, userLoading } = useSelector((state) => state.customers);
+
+  useLayoutEffect(() => {
+    dispatch(getLoansApplication());
+    dispatch(getUsers());
+  }, []);
+
+  const [page, setPage] = useState("Loan Application");
   const [pages] = useState([
     {
       id: 1,
       pageName: "Registered users",
-      isSlected: true,
+      isSlected: false,
     },
-    { id: 2, pageName: "Loan application", isSlected: false },
+    { id: 2, pageName: "Loan application", isSlected: true },
     { id: 3, pageName: "Payment Receipt", isSlected: false },
     ,
   ]);
@@ -27,11 +36,11 @@ const Admin = () => {
   const handleView = () => {
     switch (page) {
       case "Registered users":
-        return <Client />;
+        return <Clients allUsers={users} loading={userLoading} />;
       case "Loan application":
-        return <Loans />;
+        return <Loans allDataLoans={data} loading={isLoading} />;
       case "Payment Receipt":
-        return <Receipt />;
+      // return <Receipt payments={payments} />;
       default:
         break;
     }
@@ -48,6 +57,7 @@ const Admin = () => {
     }));
   };
   const [menuSwitch, setSwitch] = useState(false);
+
   const handleSwitch = () => {
     let body = document.body;
     body.addEventListener("click", () => {
@@ -55,20 +65,12 @@ const Admin = () => {
     });
     // setSwitch(!menuSwitch);
   };
-  useLayoutEffect(() => {
-    async function testApi() {
-      let response = await fetch("http://localhost:8080/api/test");
-      let responseData = await response.json();
-      console.log(responseData);
-    }
-    testApi();
-  }, []);
 
   return (
     <>
       <section className="bg-gray-100  scroll-smooth">
         {!menuSwitch && (
-          <div className="h-14 hidden fixed z-20 top-0 right-0 max-sm:block bg-transparent w-full">
+          <div className="h-10 hidden fixed z-20 top-0 right-0 max-sm:block bg-transparent  backdrop-blur-md  w-full">
             <MenuLineHorizontal
               className="text-5xl absolute right-0 text-amber-500"
               onClick={handleSwitch}

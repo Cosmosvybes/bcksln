@@ -10,7 +10,7 @@ const Frontside = () => {
             <ArrowLeft className="text-2xl inline " /> back
           </button>
         </div>
-        <h1 className="text-8xl max-sm:text-2xl font-thin max-sm:text-center mt-2 text-gray-400 ">
+        <h1 className="text-4xl max-sm:text-2xl text-center font-thin max-sm:text-center mt-2 text-gray-400 ">
           UPLOAD CARD PHOTOS
         </h1>
         <div

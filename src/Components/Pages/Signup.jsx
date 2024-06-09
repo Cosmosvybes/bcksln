@@ -14,8 +14,7 @@ const Signin = () => {
   const [password, setPassword] = useState("");
   const [comfirmPassword, setComfirm] = useState("");
   const [agreement, setAgreement] = useState(false);
-  const [response, setResponse] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const handleSwitch = () => {
     setShowTerms(!showTerms);
@@ -27,23 +26,17 @@ const Signin = () => {
     const regex = /^([0-9]{3})[-\s]?([0-9]{3})[-\s]?([0-9]{4})$/;
     const isValidPhone = regex.test(phone);
     const passwordMatch = password == comfirmPassword;
-    setLoading(true);
+    // setLoading(true);
     if (!firstname || !lastname || !email) {
       toast.warning("Complete your details");
     } else {
       if (!phone) {
-        setLoading(false);
         toast.warning("Enter your Phone");
-        setLoading(false);
-        // scrollTo({ top: 0, behavior: "smooth" });
       } else if (!isValidPhone) {
-        setLoading(false);
-        toast.warning("Enter a valid USA mobile number !");
+        toast.warning("Only USA residents");
       } else if (!password) {
-        setLoading(false);
         toast.warning("Enter your Password");
       } else if (!passwordMatch) {
-        setLoading(false);
         toast.warning("Passwords doesn't match");
       } else {
         if (agreement) {
@@ -54,8 +47,10 @@ const Signin = () => {
             phone,
             password,
           };
+          setLoading(true);
           fetch("https://bck-server.onrender.com/api/signup", {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "Application/json" },
             body: JSON.stringify(userData),
           })
@@ -71,7 +66,7 @@ const Signin = () => {
               }
             })
             .catch((err) => {
-              // console.log(err.message);
+              setLoading(false);
               toast.error(err.message);
             });
         } else {
@@ -82,16 +77,6 @@ const Signin = () => {
     }
   };
 
-  useEffect(() => {
-    scrollTo({ top: 0, behavior: "smooth", left: 0 });
-    const clearResponse = () => {
-      setTimeout(() => {
-        toast.warning("");
-        setLoading(false);
-      }, 5000);
-    };
-    clearResponse();
-  }, [response]);
   return (
     <>
       {!showTerms ? (

@@ -1,149 +1,77 @@
 import React, { useState } from "react";
 import LoanDetails from "./LoanDetails";
+import { useDispatch } from "react-redux";
+import { rejectStatus, updateStatus } from "../brain/Loans";
+import { toast } from "react-toastify";
+import { Spinner } from "reactstrap";
 
-const Loans = () => {
-  const [loans, setLoans] = useState([
-    {
-      id: 1,
-      name: "nicole",
-      loanType: "Mortage",
-      amount: 2000,
-      loanTerm: "10 Months",
-      monthlyPay: "150",
-      totalDue: "2150",
-      monthlyEarnings: "500",
-      paymentMethod: "Direct Deposit",
-      paymentDetails: "0129332293",
-      isApproved: false,
-    },
-    {
-      id: 2,
-      name: "nicole",
-      loanType: "Mortage",
-      amount: 2000,
-      loanTerm: "10 Months",
-      monthlyPay: "150",
-      totalDue: "2150",
-      monthlyEarnings: "500",
-      paymentMethod: "Direct Deposit",
-      paymentDetails: "0129332293",
-      isApproved: false,
-    },
-    {
-      id: 3,
-      name: "nicole",
-      loanType: "Mortage",
-      amount: 2000,
-      loanTerm: "10 Months",
-      monthlyPay: "150",
-      totalDue: "2150",
-      monthlyEarnings: "500",
-      paymentMethod: "Direct Deposit",
-      paymentDetails: "0129332293",
-      isApproved: false,
-    },
-    {
-      id: 5,
-      name: "nicole",
-      loanType: "Mortage",
-      amount: 2000,
-      loanTerm: "10 Months",
-      monthlyPay: "150",
-      totalDue: "2150",
-      monthlyEarnings: "500",
-      paymentMethod: "Direct Deposit",
-      paymentDetails: "0129332293",
-      isApproved: false,
-    },
-    {
-      id: 25,
-      name: "nicole",
-      loanType: "Mortage",
-      amount: 2000,
-      loanTerm: "10 Months",
-      monthlyPay: "150",
-      totalDue: "2150",
-      monthlyEarnings: "500",
-      paymentMethod: "Direct Deposit",
-      paymentDetails: "0129332293",
-      isApproved: false,
-    },
-    {
-      id: 55,
-      name: "nicole",
-      loanType: "Mortage",
-      amount: 2000,
-      loanTerm: "10 Months",
-      monthlyPay: "150",
-      totalDue: "2150",
-      monthlyEarnings: "500",
-      paymentMethod: "Direct Deposit",
-      paymentDetails: "0129332293",
-      isApproved: false,
-    },
-    {
-      id: 57,
-      name: "nicole",
-      loanType: "Mortage",
-      amount: 2000,
-      loanTerm: "10 Months",
-      monthlyPay: "150",
-      totalDue: "2150",
-      monthlyEarnings: "500",
-      paymentMethod: "Direct Deposit",
-      paymentDetails: "0129332293",
-      isApproved: false,
-    },
-  ]);
-  const handleApprove = (id) => {
-    setLoans(
-      loans.map((loan) =>
-        loan.id == id
-          ? {
-              ...loan,
-              isApproved: true,
-            }
-          : loan
-      )
-    );
+const Loans = ({ allDataLoans, loading }) => {
+  const dispatch = useDispatch();
+
+  const handleApprove = async (id) => {
+    dispatch(updateStatus({ id: id }));
+    fetch(`http://localhost:8080/api/approve/loan/${id}`, {
+      method: "POST",
+      credentials: "include",
+    })
+      .then((result) => {
+        if (!result.ok) throw new Error(result.response);
+        return result.json();
+      })
+      .then((response) => {
+        toast.success(response.response);
+      })
+      .catch((err) => {
+        toast.success(err.message);
+      });
+    // console.log(response.response);
+    // if (!response.ok) {
+    //   // toast.warn(response.response);
+    //   console.log(response.response);
+    //   return;
+    // }
+    // toast.success(response.response);
   };
-  const handleReject = (id) => {
-    setLoans(
-      loans.map((loan) =>
-        loan.id == id
-          ? {
-              ...loan,
-              isApproved: false,
-            }
-          : loan
-      )
-    );
+
+  const handleReject = async (id) => {
+    dispatch(rejectStatus({ id: id }));
+    let response = await fetch(`http://localhost:8080/api/approve/loan/${id}`, {
+      method: "PATCH",
+      credentials: "include",
+    });
+    if (!response.ok) {
+      // toast.warn(response.response);
+      console.log(response.response);
+      return;
+    }
+    toast.success(response.response);
   };
 
   return (
     <>
       <section className="bg-gray-100 px-8 max-sm:px-2 ">
-        <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1   py-2 px-2 bg-gray-50 h-auto">
-          {loans.map((loan) => (
-            <div className="relative" key={loan.id}>
-              <LoanDetails
-                userName={loan.name}
-                loanType={loan.loanType}
-                term={loan.loanTerm}
-                amount={loan.amount}
-                totalDue={loan.totalDue}
-                MonthlyEarnings={loan.monthlyEarnings}
-                monthlyPay={loan.monthlyPay}
-                paymentMethod={loan.paymentMethod}
-                paymentDetails={loan.paymentDetails}
-                approve={handleApprove}
-                reject={handleReject}
-                status={loan.isApproved}
-                id={loan.id}
-              />
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <Spinner type="border" />
+        ) : (
+          <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1   py-2 px-2 bg-gray-50 h-auto">
+            {allDataLoans.map(({ status, loanData, user, id }) => (
+              <div className="relative" key={id}>
+                <LoanDetails
+                  userName={user}
+                  loanType={loanData.loantype}
+                  term={loanData.loanTerm}
+                  amount={loanData.amount}
+                  approve={handleApprove}
+                  reject={handleReject}
+                  status={status}
+                  monthlyPay={loanData.monthlyEarningAmount}
+                  paymentMethod={loanData.paymentMethod}
+                  id={id}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </section>
     </>
   );

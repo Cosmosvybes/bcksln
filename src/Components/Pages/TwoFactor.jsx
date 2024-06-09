@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ArrowLeft, ArrowRight, MailArrowLeft } from "react-huge-icons/outline";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Spinner } from "reactstrap";
+import { Input, Spinner } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
 const TwoFactor = () => {
@@ -25,44 +25,47 @@ const TwoFactor = () => {
       })
       .then((response) => {
         setLoading(false);
-        if (response.isAUthenticated && response.user.isVerified) {
+        if (response.isAUthenticated && response.user?.isVerified) {
           document.cookie =
-            "Two_Fa=; expires=Thu, 01 Oct 1970 00:00; path=/api/";
+            "Two_Fa=; expires=Thu, 01 Oct 1970 00:00; path=/api/verify";
           navigate("/dashboard");
           if (!response.user.isVerified) {
             navigate("/welcome");
           }
         } else {
-          toast.warning(response.response);
+          if (response.isAUthenticated) {
+            navigate("/welcome");
+          } else {
+            toast.warn(response.response);
+          }
         }
       })
       .catch((err) => {
         setLoading(false);
         toast.error(err.message);
       });
-    console.log(loading);
   };
 
   return (
     <>
       <section className="h-screen max-sm:h-auto py-2 bg-gray-100 px-10 max-sm:px-2  relative ">
         <div className="flex ml-2 justify-start  items-center">
-          <button className="mt-4 ml-1" onClick={() => history.back()}>
+          <button className="mt-1 ml-1" onClick={() => history.back()}>
             <ArrowLeft className="text-2xl inline " /> back
           </button>
         </div>
 
-        <h1 className="text-8xl  mt-2 font-extrabold  max-sm:text-4xl mb-2 ml-2">
+        <h1 className="text-5xl  mt-2 font-extrabold text-center  max-sm:text-4xl mb-2 ml-2">
           2FA Authentication
         </h1>
         <div className="flex bg-gray-50 h-96   mt-4 flex-col justify-center items-center rounded-lg max-sm:px-4">
           <MailArrowLeft className="text-7xl max-sm:text-6xl" />
           <h1 className="text-4xl max-sm:text-2xl mb-1 ">
             {" "}
-            Two-Authentication code
+            Authentication code
           </h1>
 
-          <input
+          <Input
             type="phone"
             onChange={(e) => setCode(e.target.value)}
             value={code}

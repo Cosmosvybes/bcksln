@@ -1,10 +1,9 @@
-import { BadgePercent, Mail } from "react-huge-icons/solid";
+import { BadgePercent, Mail, MoneyDollar } from "react-huge-icons/solid";
 const PaymentReceipt = ({
   firstname,
-  imageOne,
-  imageTwo,
+  photo,
   email,
-  isVerified,
+  amount,
   id,
   approve,
   reject,
@@ -12,44 +11,45 @@ const PaymentReceipt = ({
   return (
     <>
       <div className="flex max-sm:w-auto justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-2">
-        <p className="  rounded-md px-1 py-1 text-green-700 "> Payment Receipt</p>
-        <div className="relative ml-2 py-0.5 w-10 bg-green-700 -mt-2"></div>
-        <div className="flex justify-start items-center">
-          <a href={imageOne}>
-            {" "}
-            {imageOne && (
-              <img
-                src={imageOne}
-                alt="user"
-                className="h-12 w-16 rounded-md object-contain"
-              />
-            )}
-          </a>
-          <a href={imageTwo}>
-            {id && (
-              <img
-                src={imageTwo}
-                alt="user"
-                className="h-12 w-16 object-contain rounded-md"
-              />
-            )}
-          </a>
+        <p className=" rounded-md  py-1 text-green-700 "> Payment Receipt</p>
+        <div className="relative py-0.5 w-10 bg-green-700 -mt-2"></div>
+        <p> Photos</p>
+        <div
+          className={`justify-start items-center grid ${
+            typeof photo == "object" ? "grid-cols-2" : "grid-cols-1"
+          } `}
+        >
+          {typeof photo === "object" ? (
+            photo.map((photoImage, i) => (
+              <div className="relative" key={i}>
+                <img
+                  src={photoImage}
+                  alt="image"
+                  className="w-10 h-10 object-contain"
+                />
+              </div>
+            ))
+          ) : (
+            <img
+              src={photo}
+              alt="image"
+              className="w-10 h-10 object-contain "
+            />
+          )}
         </div>
         <div className="flex justify-start items-center gap-2">
-          <h1> Sender: {firstname}</h1>
+          <h1> Sender {firstname}</h1>
         </div>
         <div className="flex items-center justify-start gap-2">
           <Mail className="inline text-2xl" />
-          <h3 className="max-sm:text-xs text-center"> Email :{email}</h3>
+          <h3 className="max-sm:text-xs text-center">Email {email}</h3>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <BadgePercent className="inline text-2xl " />
-          <p className="text-center ">
-            Status{" "}
-            <span style={{ color: isVerified ? "green" : "Brown" }}>
-              {isVerified ? "Approved" : "Rejected"}{" "}
-            </span>
-          </p>
+          {/* <BadgePercent className="inline text-2xl " /> */}
+          {/* <p className="text-center "> */}
+          <MoneyDollar className="inline text-2xl" />
+          <h3 className="max-sm:text-xs text-center">Amount ${amount}</h3>
+          {/* </p> */}
         </div>
 
         <div className="flex justify-start max-sm:w-auto items-center gap-1">
@@ -60,7 +60,7 @@ const PaymentReceipt = ({
             Reject
           </button>{" "}
           <button
-            onClick={() => approve(id)}
+            onClick={() => approve(email)}
             className="text-green-600 bg-green-300 rounded-md px-3 py-2"
           >
             Approve

@@ -268,7 +268,7 @@ const Application = () => {
     <>
       <section className="h-auto py-2 bg-gray-100">
         <div className="flex ml-4 justify-start  items-center">
-          <button className="mt-4 ml-1" onClick={() => history.back()}>
+          <button className="mt-0 ml-1" onClick={() => history.back()}>
             <ArrowLeft className="text-2xl inline" /> back
           </button>
         </div>
