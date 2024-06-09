@@ -26,8 +26,8 @@ const TwoFactor = () => {
       .then((response) => {
         setLoading(false);
         if (response.isAUthenticated && response.user?.isVerified) {
-          document.cookie =
-            "Two_Fa=; expires=Thu, 01 Oct 1970 00:00; path=/api/verify";
+          // document.cookie =
+          //   "Two_Fa=; expires=Thu, 01 Oct 1970 00:00; path=/api/verify";
           navigate("/dashboard");
           if (!response.user.isVerified) {
             navigate("/welcome");
