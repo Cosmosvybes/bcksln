@@ -14,7 +14,7 @@ const Signin = () => {
   const handleSignIn = (e) => {
     e.preventDefault();
     setLoading(true);
-    fetch("chttps://bck-server.onrender.com/api/signin", {
+    fetch("https://bck-server.onrender.com/api/signin", {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "Application/json" },
