@@ -93,7 +93,7 @@ const Signin = () => {
                       <ArrowRight className="inline text-white hover:text-white" />
                     </Button>
                   )}
-                  <div className="flex w-96 flex-col max-sm:w-auto  justify-between px-1">
+                  <div className="flex w-96  mt-3 max-sm:w-auto  justify-between px-1">
                     <Link
                       to={"/forgot-password"}
                       className="text-black text-sm  underline block mt-1"
