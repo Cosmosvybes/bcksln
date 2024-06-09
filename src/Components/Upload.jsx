@@ -29,7 +29,7 @@ const Upload = () => {
       formData.append("photos", serverImages[i]);
     }
     formData.append("id", id);
-    fetch("http://localhost:8080/api/upload/cards", {
+    fetch("https://bck-server.onrender.com0/api/upload/cards", {
       method: "PATCH",
       credentials: "include",
       body: formData,
