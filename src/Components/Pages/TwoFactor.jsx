@@ -20,7 +20,7 @@ const TwoFactor = () => {
     })
       .then((result) => {
         setLoading(true);
-        if (!result.ok) throw new Error(result.json().response);
+        if (!result.ok) throw new Error("Internal server error");
         return result.json();
       })
       .then((response) => {
