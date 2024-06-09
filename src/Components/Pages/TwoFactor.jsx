@@ -20,7 +20,7 @@ const TwoFactor = () => {
     })
       .then((result) => {
         setLoading(true);
-        if (!result.ok) throw new Error("Operation failed");
+        if (!result.ok) throw new Error(result.json().response);
         return result.json();
       })
       .then((response) => {
