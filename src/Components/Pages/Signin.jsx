@@ -14,7 +14,7 @@ const Signin = () => {
   const handleSignIn = (e) => {
     e.preventDefault();
     setLoading(true);
-    fetch("https://bck-server.onrender.com/api/signin", {
+    fetch("chttps://bck-server.onrender.com/api/signin", {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "Application/json" },
@@ -28,6 +28,8 @@ const Signin = () => {
       .then((response) => {
         setLoading(false);
         if (response.isAuthorised) {
+          localStorage.setItem("token", response.token);
+          console.log(response.token);
           location.href = "/two-factor/authentication";
         } else {
           toast.warning(response.response);

@@ -11,9 +11,11 @@ const TwoFactor = () => {
   let [loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
+    const token = localStorage.getItem("token");
     // https://bck-server.onrender.com
-    setLoading(true);
-    fetch("https://bck-server.onrender.com/api/verify", {
+    //bck-server.onrender.com
+    https: setLoading(true);
+    fetch(`https://bck-server.onrender.com/api/verify/${token}`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "Application/json" },
