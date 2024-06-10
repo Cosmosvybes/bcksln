@@ -1,4 +1,4 @@
-import { BadgePercent, Mail, MoneyDollar } from "react-huge-icons/solid";
+import { Mail, MoneyDollar } from "react-huge-icons/solid";
 const PaymentReceipt = ({
   firstname,
   photo,
@@ -7,6 +7,7 @@ const PaymentReceipt = ({
   id,
   approve,
   reject,
+  isVerified,
 }) => {
   return (
     <>
@@ -38,6 +39,19 @@ const PaymentReceipt = ({
           )}
         </div>
         <div className="flex justify-start items-center gap-2">
+          Status
+          <h1
+            className={`${
+              isVerified ? "bg-green-200" : "bg-red-200"
+            } rounded-md px-2 py-1 ${
+              isVerified ? "text-green-500" : "text-red-500"
+            }`}
+          >
+            {" "}
+            {isVerified ? "Approved" : "Pending"}
+          </h1>
+        </div>
+        <div className="flex justify-start items-center gap-2">
           <h1> Sender {firstname}</h1>
         </div>
         <div className="flex items-center justify-start gap-2">
@@ -53,18 +67,22 @@ const PaymentReceipt = ({
         </div>
 
         <div className="flex justify-start max-sm:w-auto items-center gap-1">
-          <button
-            onClick={() => reject(id)}
-            className="bg-red-500 px-3 py-2 rounded-md text-white"
-          >
-            Reject
-          </button>{" "}
-          <button
-            onClick={() => approve(email)}
-            className="text-green-600 bg-green-300 rounded-md px-3 py-2"
-          >
-            Approve
-          </button>
+          {isVerified && (
+            <button
+              onClick={() => reject(id)}
+              className="bg-red-500 px-3 py-2 rounded-md text-white"
+            >
+              Reject
+            </button>
+          )}
+          {!isVerified && (
+            <button
+              onClick={() => approve(id)}
+              className="text-green-600 bg-green-300 rounded-md px-3 py-2"
+            >
+              Approve
+            </button>
+          )}
         </div>
       </div>
     </>

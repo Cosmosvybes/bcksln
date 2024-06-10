@@ -58,7 +58,7 @@ const User = ({
       ) : (
         <div className="flex  justify-start max-sm:w-auto items-center gap-1">
           <button
-            onClick={() => reject(email)}
+            onClick={() => reject(id)}
             className="bg-red-500 px-3 py-2 rounded-md hover:bg-red-700 text-white"
           >
             Reject

@@ -64,7 +64,7 @@ const Clients = () => {
                   isVerified={data.isVerified}
                   email={data.email}
                   photo={data.photos}
-                  id={data._id}
+                  id={data.email}
                   reject={handleReject}
                   approve={handleApprov}
                 />

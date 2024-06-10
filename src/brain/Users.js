@@ -1,12 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getUsers = createAsyncThunk("loans/getUsers", async () => {
-  let loans = await fetch(
-    "https://bck-server.onrender.com/api/loans/application",
-    {
-      credentials: "include",
-    }
-  );
+  let loans = await fetch("// https://bck-server.onrender.com/api/loans/application", {
+    credentials: "include",
+  });
   let loansData = await loans.json();
   return loansData.usersId;
 });
@@ -21,14 +18,16 @@ const customers = createSlice({
   reducers: {
     updateApproval: (state, action) => {
       let { id } = action.payload;
-      state.users = state.users.map((loan) =>
-        loan.id == id
+
+      state.users = state.users.map((user) =>
+        user.email == id
           ? {
-              ...loan,
-              isVerified: (loan.isVerified = !loan.isVerified),
+              ...user,
+              isVerified: (user.isVerified = !user.isVerified),
             }
           : loan
       );
+      // },
     },
   },
   extraReducers: (builder) => {

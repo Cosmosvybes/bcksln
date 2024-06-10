@@ -13,6 +13,7 @@ const Loans = () => {
   const dispatch = useDispatch();
   const { data, isLoading } = useSelector((state) => state.loansSlice);
 
+  
   useLayoutEffect(() => {
     dispatch(getLoansApplication());
   }, []);

@@ -1,39 +1,25 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import PaymentReceipt from "./PaymentReceipt";
 import { Spinner } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { approveHandler, getReceipts } from "../brain/Receipt";
 
 const Receipt = () => {
   const { data, isLoading } = useSelector((state) => state.receiptSlice);
-  console.log(data);
-  // console.log(payments);
-  // let [receipts, setReceipts] = useState(payments);
-  // const handleApprov = (id) => {
-  //   setReceipts(
-  //     receipts.map((receipt) =>
-  //       receipt.id == id
-  //         ? {
-  //             ...receipt,
-  //             isVerified: true,
-  //           }
-  //         : receipt
-  //     )
-  //   );
-  //   console.log(receipts);
-  // };
-  // const handleReject = (id) => {
-  //   setReceipts(
-  //     receipts.map((receipt) =>
-  //       receipt.id == id
-  //         ? {
-  //             ...receipt,
-  //             isVerified: false,
-  //           }
-  //         : receipt
-  //     )
-  //   );
+  const dispatch = useDispatch();
 
-  // };
+  useLayoutEffect(() => {
+    dispatch(getReceipts());
+  }, []);
+
+
+  const handleApprov = (id) => {
+    dispatch(approveHandler({ id: id }));
+  };
+
+  const handleReject = (id) => {
+    dispatch(approveHandler({ id: id }));
+  };
   return (
     <>
       <section className="bg-gray-100 px-8 max-sm:px-2 ">
@@ -43,10 +29,10 @@ const Receipt = () => {
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3  max-sm:grid-cols-1  py-2 px-2  bg-gray-50 h-auto">
-            {/* {data.map((receipt, i) => (
+            {data.map((receipt, i) => (
               <div className="relative" key={i}>
                 <PaymentReceipt
-                  id={receipt.id}
+                  id={receipt._id}
                   amount={
                     receipt.paymentDetails.amount
                       ? receipt.paymentDetails.amount
@@ -59,13 +45,13 @@ const Receipt = () => {
                   }
                   // imageTwo={receipt.image2}
                   firstname={receipt.firstname}
-                  // isVerified={receipt.isVerified}
+                  isVerified={receipt.isApproved}
                   email={receipt.email}
                   reject={handleReject}
                   approve={handleApprov}
                 />
               </div>
-            ))} */}
+            ))}
           </div>
         )}
       </section>

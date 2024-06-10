@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { HomeFilter, MenuLineHorizontal } from "react-huge-icons/solid";
 import Button from "./Button";
-import { Loans } from "..";
-import { ArrowBackCircle } from "react-huge-icons/outline";
+import { Loans, Receipts } from "..";
+import { ArrowBackCircle, Receipt } from "react-huge-icons/outline";
 import Clients from "./Clients";
 
 const Admin = () => {
@@ -25,7 +25,7 @@ const Admin = () => {
       case "Loan application":
         return <Loans />;
       case "Payment Receipt":
-      // return <Receipt payments={payments} />;
+        return <Receipts />;
       default:
         break;
     }
