@@ -153,7 +153,7 @@ const Dashboard = () => {
                       name={history.loanData.loantype}
                       amount={history.loanData.amount}
                       date={history.date}
-                      status={history.status}
+                      status={history.isApproved}
                       paymentMethod={history.loanData.paymentMethod}
                       loanTerm={history.loanData.loanTerm}
                       callback={handleShowMore}

@@ -1,10 +1,5 @@
 import { File, RemoveCircle } from "react-huge-icons/outline";
-import {
-  ListViewCircle,
-  MenuCircleHorizontal,
-  Money,
-} from "react-huge-icons/solid";
-import MoreInfo from "./MoreInfo";
+import { MenuCircleHorizontal, Money } from "react-huge-icons/solid";
 
 const Activity = ({ name, amount, status, callback, id }) => {
   return (
@@ -17,12 +12,12 @@ const Activity = ({ name, amount, status, callback, id }) => {
         </div>
         <div className="flex flex-col gap-1">
           <p
-            style={{ color: status == "Approved" ? "green" : "Brown" }}
+            // style={{ color: status == "Approved" ? "green" : "Brown" }}
             className={`text-xs px-1 py-1 rounded-md font-thin ${
-              status === "Approved" ? "bg-green-200" : "bg-yellow-200"
-            }`}
+              status ? "text-green-500" : "text-amber-600"
+            } ${status ? "bg-green-200" : "bg-amber-200"}`}
           >
-            {status}
+            {status ? "Approved" : "Pending"}
           </p>
         </div>
         <MenuCircleHorizontal className="inline" onClick={() => callback(id)} />
