@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getUsers = createAsyncThunk("loans/getUsers", async () => {
-  let loans = await fetch("// https://bck-server.onrender.com/api/loans/application", {
+  let loans = await fetch("https://bck-server.onrender.com/api/loans/application", {
     credentials: "include",
   });
   let loansData = await loans.json();
