@@ -76,13 +76,13 @@ const LoanDetails = ({
         </div>
 
         <div className="flex justify-start max-sm:w-auto mt-2 items-center gap-3">
-          <button
-            onClick={() => reject(id)}
+          {/* <button
+            // onClick={() => reject(id)}
             className="bg-red-500 px-3 py-2 rounded-md text-white"
             disabled
           >
             Reject
-          </button>{" "}
+          </button>{" "} */}
           <button
             onClick={() => approve(id, email)}
             className="text-green-600 bg-green-300 rounded-md px-3 py-2"

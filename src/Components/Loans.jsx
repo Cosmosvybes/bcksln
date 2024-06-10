@@ -69,7 +69,7 @@ const Loans = () => {
                   term={loanData.loanTerm}
                   amount={loanData.amount}
                   approve={handleApprove}
-                  reject={handleReject}
+                  // reject={handleReject}
                   status={status}
                   monthlyPay={loanData.monthlyEarningAmount}
                   paymentMethod={loanData.paymentMethod}
