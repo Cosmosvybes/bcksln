@@ -1,34 +1,19 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { HomeFilter, MenuLineHorizontal } from "react-huge-icons/solid";
-
 import Button from "./Button";
 import { Loans } from "..";
-
 import { ArrowBackCircle } from "react-huge-icons/outline";
-import { useSelector } from "react-redux";
-import { getLoansApplication } from "../brain/Loans";
-import { useDispatch } from "react-redux";
 import Clients from "./Clients";
-import { getUsers } from "../brain/Users";
 
 const Admin = () => {
-  const dispatch = useDispatch();
-  const { data, isLoading } = useSelector((state) => state.loansSlice);
-  const { users, userLoading } = useSelector((state) => state.customers);
-
-  useLayoutEffect(() => {
-    dispatch(getLoansApplication());
-    dispatch(getUsers());
-  }, []);
-
-  const [page, setPage] = useState("Loan Application");
+  const [page, setPage] = useState("Registered users");
   const [pages] = useState([
     {
       id: 1,
       pageName: "Registered users",
-      isSlected: false,
+      isSlected: true,
     },
-    { id: 2, pageName: "Loan application", isSlected: true },
+    { id: 2, pageName: "Loan application", isSlected: false },
     { id: 3, pageName: "Payment Receipt", isSlected: false },
     ,
   ]);
@@ -36,9 +21,9 @@ const Admin = () => {
   const handleView = () => {
     switch (page) {
       case "Registered users":
-        return <Clients allUsers={users} loading={userLoading} />;
+        return <Clients />;
       case "Loan application":
-        return <Loans allDataLoans={data} loading={isLoading} />;
+        return <Loans />;
       case "Payment Receipt":
       // return <Receipt payments={payments} />;
       default:
@@ -47,7 +32,6 @@ const Admin = () => {
   };
 
   const view = <div className="relative">{handleView()}</div>;
-
   const handlePageNavigate = (name) => {
     const pageSelected = pages.find((page) => page.pageName === name);
     setPage(pageSelected.pageName);
@@ -63,7 +47,6 @@ const Admin = () => {
     body.addEventListener("click", () => {
       setSwitch(!menuSwitch);
     });
-    // setSwitch(!menuSwitch);
   };
 
   return (

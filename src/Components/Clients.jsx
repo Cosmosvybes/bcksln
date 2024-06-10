@@ -1,13 +1,16 @@
 import { toast } from "react-toastify";
 import User from "./User";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateApproval } from "../brain/Users";
+import { useLayoutEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers, updateApproval } from "../brain/Users";
 import { Spinner } from "reactstrap";
 
-const Clients = ({ allUsers, loading }) => {
-  // let [users, setUsers] = useState(allUsers ? allUsers : []);
-  console.log(allUsers);
+const Clients = () => {
+  const { users, userLoading } = useSelector((state) => state.customers);
+  // console.log(allUsers);
+  useLayoutEffect(() => {
+    dispatch(getUsers());
+  }, []);
   const dispatch = useDispatch();
 
   const handleApprov = async (id) => {
@@ -34,11 +37,11 @@ const Clients = ({ allUsers, loading }) => {
   return (
     <>
       <section className="bg-gray-100 px-8 max-sm:px-2 ">
-        {loading ? (
+        {userLoading ? (
           <Spinner type="border" />
         ) : (
           <div className="grid grid-cols-2 gap-2  max-sm:grid-cols-1  py-2 px-2  bg-gray-50 h-auto">
-            {allUsers.map((data, i) => (
+            {users.map((data, i) => (
               <div className="relative" key={i}>
                 <User
                   firstname={data.user.firstname}
