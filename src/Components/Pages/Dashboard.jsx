@@ -4,7 +4,7 @@ import picture from "../../assets/profilepic.png";
 import img from "../../assets/revolving_deposit.webp";
 import { Link } from "react-router-dom";
 import Loan from "./Loan";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import Activity from "../Activity";
 import { Security } from "react-huge-icons/solid";
 import { useDispatch, useSelector } from "react-redux";
@@ -87,7 +87,7 @@ const Dashboard = () => {
             </h1>
 
             <h1 className="text-4xl max-sm:text-xl text-gray-100 font-extrabold">
-              $ 200,000.00
+              $ {user?.accountBalance}
             </h1>
             <div className="flex flex-col justify-start">
               <strong className="text-sm font-bold text-gray-50">
