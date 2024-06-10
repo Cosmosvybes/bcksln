@@ -3,6 +3,7 @@ import PaymentReceipt from "./PaymentReceipt";
 import { Spinner } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { approveHandler, getReceipts } from "../brain/Receipt";
+import { toast } from "react-toastify";
 
 const Receipt = () => {
   const { data, isLoading } = useSelector((state) => state.receiptSlice);
@@ -12,9 +13,17 @@ const Receipt = () => {
     dispatch(getReceipts());
   }, []);
 
-
-  const handleApprov = (id) => {
+  const handleApprov = async (id) => {
     dispatch(approveHandler({ id: id }));
+    let response = await fetch(
+      `https://bck-server.onrender.com/api/approve/loan/${id}`
+    );
+
+    if (response.ok) {
+      toast.warning(response.response);
+      return;
+    }
+    toast.success(response.response);
   };
 
   const handleReject = (id) => {

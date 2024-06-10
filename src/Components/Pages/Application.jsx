@@ -101,7 +101,7 @@ const Application = () => {
   const [province, setProvince] = useState("");
   const [isCheck, setIsCheck] = useState(false);
   const [useIdAddress, setUseIdAddress] = useState(false);
-
+  let userToken = localStorage.getItem("userToken");
   //function for loan application
   const handleApplication = async () => {
     setLoading(true);
@@ -135,7 +135,7 @@ const Application = () => {
       };
 
       let serverResponse = await fetch(
-        "https://bck-server.onrender.com/api/new-loan/apply",
+        `https://bck-server.onrender.com/api/new-loan/apply/${userToken}`,
         {
           method: "POST",
           credentials: "include",
@@ -172,7 +172,7 @@ const Application = () => {
       };
 
       let serverResponse = await fetch(
-        "https://bck-server.onrender.com/api/new-loan/apply",
+        `https://bck-server.onrender.com/api/new-loan/apply/${userToken}`,
         {
           method: "POST",
           credentials: "include",
@@ -202,7 +202,7 @@ const Application = () => {
         walletAddress,
       };
       let serverResponse = await fetch(
-        "https://bck-server.onrender.com/api/new-loan/apply",
+        `https://bck-server.onrender.com/api/new-loan/apply/${userToken}`,
         {
           method: "POST",
           credentials: "include",
@@ -232,7 +232,7 @@ const Application = () => {
         walletAddress,
         paymentMethod: "Walmart MoneyCard",
       };
-      let userToken = localStorage.getItem("userToken");
+
       let serverResponse = await fetch(
         `https://bck-server.onrender.com/api/new-loan/apply/${userToken}`,
         {

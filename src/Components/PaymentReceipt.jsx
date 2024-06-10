@@ -43,7 +43,7 @@ const PaymentReceipt = ({
           <h1
             className={`${
               isVerified ? "bg-green-200" : "bg-red-200"
-            } rounded-md px-2 py-1 ${
+            } rounded-md px-2 py-0.5 ${
               isVerified ? "text-green-500" : "text-red-500"
             }`}
           >
