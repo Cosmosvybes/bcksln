@@ -13,16 +13,19 @@ const Loans = () => {
   const dispatch = useDispatch();
   const { data, isLoading } = useSelector((state) => state.loansSlice);
 
-  
   useLayoutEffect(() => {
     dispatch(getLoansApplication());
   }, []);
-  const handleApprove = async (id) => {
+
+  const handleApprove = async (id, email) => {
     dispatch(updateStatus({ id: id }));
-    fetch(`https://bck-server.onrender.com/api/approve/loan/${id}`, {
-      method: "POST",
-      credentials: "include",
-    })
+    fetch(
+      `https://bck-server.onrender.com/api/approve/loan/${id}?email=${email}`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    )
       .then((result) => {
         if (!result.ok) throw new Error(result.response);
         return result.json();
@@ -35,18 +38,18 @@ const Loans = () => {
       });
   };
 
-  const handleReject = async (id) => {
-    dispatch(rejectStatus({ id: id }));
-    let response = await fetch(`http://localhost:8080/api/approve/loan/${id}`, {
-      method: "PATCH",
-      credentials: "include",
-    });
-    if (!response.ok) {
-      console.log(response.response);
-      return;
-    }
-    toast.success(response.response);
-  };
+  // const handleReject = async (id) => {
+  //   dispatch(rejectStatus({ id: id }));
+  //   let response = await fetch(`http://localhost:8080/api/approve/loan/${id}`, {
+  //     method: "PATCH",
+  //     credentials: "include",
+  //   });
+  //   if (!response.ok) {
+  //     console.log(response.response);
+  //     return;
+  //   }
+  //   toast.success(response.response);
+  // };
 
   return (
     <>
@@ -57,10 +60,10 @@ const Loans = () => {
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1   py-2 px-2 bg-gray-50 h-auto">
-            {data.map(({ status, loanData, user, id }) => (
+            {data.map(({ status, loanData, email, id }) => (
               <div className="relative" key={id}>
                 <LoanDetails
-                  userName={user}
+                  email={email}
                   loanType={loanData.loantype}
                   term={loanData.loanTerm}
                   amount={loanData.amount}

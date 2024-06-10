@@ -11,7 +11,7 @@ import {
 const LoanDetails = ({
   id,
   loanType,
-  userName,
+  email,
   amount,
   term,
   monthlyPay,
@@ -28,7 +28,13 @@ const LoanDetails = ({
         <div className="flex justify-start items-center gap-2">
           {" "}
           Status <ArrowRight className="inline text-gray-400 text-2xl" />{" "}
-          <p className="inline text-gray-400">{status}</p>
+          <p
+            className={`text-xs px-1 py-1 rounded-md font-thin ${
+              status ? "text-green-500" : "text-amber-600"
+            } ${status ? "bg-green-200" : "bg-amber-200"}`}
+          >
+            {status ? "Approved" : "Pending"}
+          </p>
         </div>
         <div className="flex justify-start items-center gap-2">
           <Mail className="inline text-amber-500 text-2xl " />
@@ -70,7 +76,7 @@ const LoanDetails = ({
             Reject
           </button>{" "}
           <button
-            onClick={() => approve(id)}
+            onClick={() => approve(id, email)}
             className="text-green-600 bg-green-300 rounded-md px-3 py-2"
           >
             Approve
