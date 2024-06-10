@@ -3,9 +3,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const getLoansApplication = createAsyncThunk(
   "loans/getApplication",
   async () => {
-    let loans = await fetch("https://bck-server.onrender.com/api/loans/application", {
-      credentials: "include",
-    });
+    let loans = await fetch(
+      "https://bck-server.onrender.com/api/loans/application",
+      {
+        credentials: "include",
+      }
+    );
     let loansData = await loans.json();
     return loansData.allLoanApplication;
   }
@@ -25,7 +28,7 @@ const loansSlice = createSlice({
         loan.id == id
           ? {
               ...loan,
-              status: (loan.status = "Approved"),
+              status: (loan.status = true),
             }
           : loan
       );
