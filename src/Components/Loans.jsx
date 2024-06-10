@@ -60,7 +60,7 @@ const Loans = () => {
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1   py-2 px-2 bg-gray-50 h-auto">
-            {data.map(({ status, loanData, userData, email, id }) => (
+            {data.map(({ isApproved, loanData, userData, email, id }) => (
               <div className="relative" key={id}>
                 <LoanDetails
                   email={email}
@@ -70,7 +70,7 @@ const Loans = () => {
                   amount={loanData.amount}
                   approve={handleApprove}
                   // reject={handleReject}
-                  status={status}
+                  status={isApproved}
                   monthlyPay={loanData.monthlyEarningAmount}
                   paymentMethod={loanData.paymentMethod}
                   id={id}
