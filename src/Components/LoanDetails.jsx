@@ -19,6 +19,7 @@ const LoanDetails = ({
   approve,
   reject,
   status,
+  user,
 }) => {
   return (
     <>
@@ -38,7 +39,14 @@ const LoanDetails = ({
         </div>
         <div className="flex justify-start items-center gap-2">
           <Mail className="inline text-amber-500 text-2xl " />
-          <h1 className=" text-center text-gray-400 ">Email {userName}</h1>
+          <h1 className=" text-center text-gray-400 ">Email {email}</h1>
+          {/* <h1> {lastname}</h1> */}
+        </div>
+        <div className="flex justify-start items-center gap-2">
+          <Mail className="inline text-amber-500 text-2xl " />
+          <h1 className=" text-center text-gray-400 ">
+            Name {user.firstname} {user.lastname}
+          </h1>
           {/* <h1> {lastname}</h1> */}
         </div>
         <div className="flex items-center justify-start gap-2">

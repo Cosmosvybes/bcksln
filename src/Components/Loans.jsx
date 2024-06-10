@@ -60,10 +60,11 @@ const Loans = () => {
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1   py-2 px-2 bg-gray-50 h-auto">
-            {data.map(({ status, loanData, email, id }) => (
+            {data.map(({ status, loanData, userData, email, id }) => (
               <div className="relative" key={id}>
                 <LoanDetails
                   email={email}
+                  user={userData}
                   loanType={loanData.loantype}
                   term={loanData.loanTerm}
                   amount={loanData.amount}
