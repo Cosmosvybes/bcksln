@@ -22,7 +22,7 @@ const customers = createSlice({
     updateApproval: (state, action) => {
       let { id } = action.payload;
       state.users = state.users.map((loan) =>
-        loan._id == id
+        loan.id == id
           ? {
               ...loan,
               isVerified: (loan.isVerified = !loan.isVerified),
@@ -30,17 +30,6 @@ const customers = createSlice({
           : loan
       );
     },
-    // rejectStatus: (state, action) => {
-    //   let { id } = action.payload;
-    //   state.data = state.data.map((loan) =>
-    //     loan.id == id
-    //       ? {
-    //           ...loan,
-    //           status: (loan.status = "Pending"),
-    //         }
-    //       : loan
-    //   );
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(getUsers.pending, (state, action) => {

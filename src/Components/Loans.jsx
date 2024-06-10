@@ -1,7 +1,11 @@
 import React, { useLayoutEffect } from "react";
 import LoanDetails from "./LoanDetails";
 import { useDispatch, useSelector } from "react-redux";
-import { getLoansApplication, rejectStatus, updateStatus } from "../brain/Loans";
+import {
+  getLoansApplication,
+  rejectStatus,
+  updateStatus,
+} from "../brain/Loans";
 import { toast } from "react-toastify";
 import { Spinner } from "reactstrap";
 
@@ -14,7 +18,7 @@ const Loans = () => {
   }, []);
   const handleApprove = async (id) => {
     dispatch(updateStatus({ id: id }));
-    fetch(`http://localhost:8080/api/approve/loan/${id}`, {
+    fetch(`https://bck-server.onrender.com/api/approve/loan/${id}`, {
       method: "POST",
       credentials: "include",
     })
@@ -47,7 +51,9 @@ const Loans = () => {
     <>
       <section className="bg-gray-100 px-8 max-sm:px-2 ">
         {isLoading ? (
-          <Spinner type="border" />
+          <div className="relative h-screen flex justify-center items-center">
+            <Spinner type="border" />
+          </div>
         ) : (
           <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1   py-2 px-2 bg-gray-50 h-auto">
             {data.map(({ status, loanData, user, id }) => (
