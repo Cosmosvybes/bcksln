@@ -28,7 +28,7 @@ const MoreInfo = ({ showMore, callback, data }) => {
             <p className="text-amber-500">Approval Status</p>
             <p className={`${
              data.isApproved ? "bg-green-200" : "bg-red-200"
-            } rounded-md px-2 py-0.5 ${
+            } rounded-md w-28 px-2 py-0.5 ${
               data.isApproved ? "text-green-500" : "text-red-500"
             }`}>
               {data.isApproved ? "Approved" : "Pending"}

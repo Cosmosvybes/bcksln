@@ -31,7 +31,7 @@ const LoanDetails = ({
           {" "}
           Status <ArrowRight className="inline text-gray-400 text-2xl" />{" "}
           <p
-            className={`text-xs px-1 py-1 w-32 rounded-md font-thin ${
+            className={`text-xs px-1 py-1 w-28 rounded-md font-thin ${
               status ? "text-green-500" : "text-amber-600"
             } ${status ? "bg-green-200" : "bg-amber-200"}`}
           >
