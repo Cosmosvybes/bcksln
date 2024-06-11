@@ -6,6 +6,7 @@ import {
   MoneyDollar,
   Mail,
   InformationPolygon,
+  CheckCircle,
 } from "react-huge-icons/solid";
 
 const LoanDetails = ({
@@ -30,7 +31,7 @@ const LoanDetails = ({
           {" "}
           Status <ArrowRight className="inline text-gray-400 text-2xl" />{" "}
           <p
-            className={`text-xs px-1 py-1 rounded-md font-thin ${
+            className={`text-xs px-1 py-1 w-32 rounded-md font-thin ${
               status ? "text-green-500" : "text-amber-600"
             } ${status ? "bg-green-200" : "bg-amber-200"}`}
           >
@@ -76,19 +77,16 @@ const LoanDetails = ({
         </div>
 
         <div className="flex justify-start max-sm:w-auto mt-2 items-center gap-3">
-          {/* <button
-            // onClick={() => reject(id)}
-            className="bg-red-500 px-3 py-2 rounded-md text-white"
-            disabled
-          >
-            Reject
-          </button>{" "} */}
-          <button
-            onClick={() => approve(id, email)}
-            className="text-green-600 bg-green-300 rounded-md px-3 py-2"
-          >
-            Approve
-          </button>
+          {!status ? (
+            <button
+              onClick={() => approve(id, email)}
+              className="text-green-600 bg-green-300 rounded-md px-3 py-2"
+            >
+              Approve
+            </button>
+          ) : (
+            <CheckCircle className="text-3xl text-green-500" />
+          )}
         </div>
       </div>
     </>

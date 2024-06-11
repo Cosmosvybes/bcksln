@@ -28,7 +28,7 @@ const loansSlice = createSlice({
         loan.id == id
           ? {
               ...loan,
-              status: (loan.status = true),
+              isAppoved: (loan.isApproved = true),
             }
           : loan
       );

@@ -583,7 +583,7 @@ const Application = () => {
                 ) : (
                   <button
                     onClick={handleApplication}
-                    className="bg-black rounded-lg py-3 text-center text-white w-52 bg-gray-50max-sm:w-full hover:bg-gray-900"
+                    className="bg-black rounded-lg py-2 text-center text-white w-52  max-sm:w-full hover:bg-gray-900"
                   >
                     Apply now <ArrowRight className="inline text-2xl" />
                   </button>
