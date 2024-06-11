@@ -3,7 +3,6 @@ import LoanDetails from "./LoanDetails";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getLoansApplication,
-  rejectStatus,
   updateStatus,
 } from "../brain/Loans";
 import { toast } from "react-toastify";
@@ -59,7 +58,7 @@ const Loans = () => {
             <Spinner type="border" />
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1   py-2 px-2 bg-gray-50 h-auto">
+          <div className="grid grid-cols-3 gap-2 max-sm:flex max-sm:flex-col-reverse py-2 px-2 bg-gray-50 h-auto">
             {data.map(({ isApproved, loanData, userData, email, id }) => (
               <div className="relative" key={id}>
                 <LoanDetails

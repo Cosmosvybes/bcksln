@@ -31,7 +31,7 @@ const LoanDetails = ({
           {" "}
           Status <ArrowRight className="inline text-gray-400 text-2xl" />{" "}
           <p
-            className={`text-xs px-1 py-1 w-28 rounded-md font-thin ${
+            className={`text-xs px-1 py-1 w-18 rounded-md font-thin ${
               status ? "text-green-500" : "text-amber-600"
             } ${status ? "bg-green-200" : "bg-amber-200"}`}
           >
@@ -60,7 +60,9 @@ const LoanDetails = ({
         </div>
         <div className="flex items-center justify-start gap-2">
           <DocumentText className="inline text-amber-500 text-2xl " />
-          <p className="text-center text-gray-400  ">Loan term : {term}</p>
+          <p className="text-center text-gray-400  ">
+            Loan term : {term} Months
+          </p>
         </div>
         <div className="flex items-center justify-start gap-2">
           <MoneyDollar className="inline text-amber-500 text-2xl " />
@@ -85,7 +87,7 @@ const LoanDetails = ({
               Approve
             </button>
           ) : (
-            <CheckCircle className="text-3xl text-green-500" />
+            <CheckCircle className="text-3xl text-green-500 absolute right-1 bottom-2" />
           )}
         </div>
       </div>

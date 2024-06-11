@@ -28,11 +28,13 @@ const loansSlice = createSlice({
         loan.id == id
           ? {
               ...loan,
-              isAppoved: (loan.isApproved = true),
+              isApproved: (loan.isApproved = true),
             }
           : loan
       );
+      // console.log(state.data);
     },
+
     rejectStatus: (state, action) => {
       let { id } = action.payload;
       state.data = state.data.map((loan) =>
