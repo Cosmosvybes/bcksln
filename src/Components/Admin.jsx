@@ -53,7 +53,7 @@ const Admin = () => {
     <>
       <section className="bg-gray-100  scroll-smooth">
         {!menuSwitch && (
-          <div className="h-10 hidden fixed z-20 top-0 right-0 max-sm:block bg-transparent  backdrop-blur-md  w-full">
+          <div className="h-10 hidden fixed z-20 top-0 right-0 max-sm:block bg-transparent   w-full">
             <MenuLineHorizontal
               className="text-5xl absolute right-0 text-amber-500"
               onClick={handleSwitch}
