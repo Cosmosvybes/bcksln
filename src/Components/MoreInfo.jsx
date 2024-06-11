@@ -26,7 +26,13 @@ const MoreInfo = ({ showMore, callback, data }) => {
           </div>
           <div className="relative block">
             <p className="text-amber-500">Approval Status</p>
-            <p className="text-xs text-gray-400">{data.status}</p>
+            <p className={`${
+             data.isApproved ? "bg-green-200" : "bg-red-200"
+            } rounded-md px-2 py-0.5 ${
+              data.isApproved ? "text-green-500" : "text-red-500"
+            }`}>
+              {data.isApproved ? "Approved" : "Pending"}
+            </p>
           </div>
           <div className="relative block">
             <p className="text-amber-500">Payment Method</p>
