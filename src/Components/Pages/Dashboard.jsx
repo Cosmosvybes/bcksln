@@ -13,9 +13,12 @@ import Activity from "../Activity";
 import {
   CardAdd,
   LogoutOpen,
+  Mail,
   RemoveRectangle,
   Security,
   User,
+  UserCircle,
+  UserCircleAdd,
 } from "react-huge-icons/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../brain/user";
@@ -78,7 +81,11 @@ const Dashboard = () => {
   const MainPage = () => {
     return (
       <>
-        <div className="relative hidden w-full max-sm:flex max-md:flex justify-end items-center">
+        <div
+          className={`relative hidden w-full max-sm:flex max-md:flex justify-start ${
+            !showMenu ? "z-30" : "z-0"
+          } items-center`}
+        >
           <MenuLineHorizontal
             className="text-5xl text-amber-500"
             onClick={handleShowMenu}
@@ -221,7 +228,11 @@ const Dashboard = () => {
       case "profile":
         return (
           <div className="relative block overflow-auto">
-            <div className="relative hidden w-full max-sm:flex max-md:flex justify-end items-center">
+            <div
+              className={`relative hidden w-full max-sm:flex max-md:flex justify-start items-center ${
+                !showMenu ? "z-30" : "z-0"
+              }`}
+            >
               <MenuLineHorizontal
                 className="text-5xl text-amber-500"
                 onClick={handleShowMenu}
@@ -233,7 +244,11 @@ const Dashboard = () => {
       case "new loan":
         return (
           <div className="relative block overflow-y-auto">
-            <div className="relative hidden w-full max-sm:flex max-md:flex justify-end items-center">
+            <div
+              className={`relative hidden w-full max-sm:flex max-md:flex justify-start items-center ${
+                !showMenu ? "z-30" : "z-0"
+              }`}
+            >
               <MenuLineHorizontal
                 className="text-5xl text-amber-500"
                 onClick={handleShowMenu}
@@ -262,7 +277,7 @@ const Dashboard = () => {
 
   return (
     <>
-      {user?.isVerified ? (
+      {!user?.isVerified ? (
         <section className="h-screen flex justify-between overflow-y-clip">
           <div className="relative w-96 bg-amber-500 h-screen flex-col max-sm:hidden max-md:hidden">
             <div className="relative w-full bg-amber-500 flex justify-start px-2 items-center h-24">
@@ -272,16 +287,10 @@ const Dashboard = () => {
             </div>
             <div className="relative flex flex-col justify-start gap-1 px-2 py-1">
               <button
-                className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
-                onClick={() => navigatePage("new loan")}
-              >
-                <PlusRectangle className="inline text-3xl" /> New Loan{" "}
-              </button>
-              <button
                 className="w-full py-2 text-left px-2  hover:underline rounded-md  text-black"
                 onClick={() => navigatePage("profile")}
               >
-                <User className="inline text-3xl" />
+                <UserCircle className="inline text-3xl" />
                 Profile{" "}
               </button>
               <button
@@ -290,6 +299,12 @@ const Dashboard = () => {
               >
                 <CardAdd className="inline text-3xl" />
                 WalmartMoney Card{" "}
+              </button>
+              <button
+                className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
+                onClick={() => navigatePage("main Page")}
+              >
+                <Mail className="inline text-4xl" /> Send message{" "}
               </button>
               <button
                 className="w-full py-2 text-left hover:underline px-2 rounded-md text-black hover:text-amber-700"
@@ -315,30 +330,31 @@ const Dashboard = () => {
             {showMenu && (
               <div className="relative flex flex-col justify-start gap-1 px-2 py-1">
                 <button
-                  className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
-                  onClick={() => navigatePage("new loan")}
-                >
-                  <PlusRectangle className="inline text-3xl" /> New Loan{" "}
-                </button>
-                <button
                   className="w-full py-2 text-left px-2  hover:underline rounded-md  text-black"
                   onClick={() => navigatePage("profile")}
                 >
-                  <User className="inline text-3xl" />
+                  <UserCircle className="inline text-4xl" />
                   Profile{" "}
                 </button>
                 <button
                   className="w-full py-2 text-left px-2 rounded-md text-black hover:underline"
                   onClick={() => navigatePage("card")}
                 >
-                  <CardAdd className="inline text-3xl" />
+                  <CardAdd className="inline text-4xl" />
                   WalmartMoney Card{" "}
+                </button>
+
+                <button
+                  className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
+                  onClick={() => navigatePage("main Page")}
+                >
+                  <Mail className="inline text-4xl" /> Send message{" "}
                 </button>
                 <button
                   className="w-full py-2 text-left hover:underline px-2 rounded-md text-black hover:text-amber-700"
                   onClick={handleLogout}
                 >
-                  <LogoutOpen className="inline text-3xl" /> Log out{" "}
+                  <LogoutOpen className="inline text-4xl" /> Log out{" "}
                 </button>
               </div>
             )}
