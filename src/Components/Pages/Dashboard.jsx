@@ -277,7 +277,7 @@ const Dashboard = () => {
 
   return (
     <>
-      {!user?.isVerified ? (
+      {user?.isVerified ? (
         <section className="h-screen flex justify-between overflow-y-clip">
           <div className="relative w-96 bg-amber-500 h-screen flex-col max-sm:hidden max-md:hidden">
             <div className="relative w-full bg-amber-500 flex justify-start px-2 items-center h-24">
