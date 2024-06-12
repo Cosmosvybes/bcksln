@@ -37,12 +37,12 @@ const Profile = () => {
   return (
     <>
       <div className="relative  h-screen bg-gray-100  px-8 max-sm:px-2">
-        <div
+        {/* <div
           className="flex justify-start ml-4   py-2"
           onClick={() => history.back()}
         >
           <ArrowLeft className="text-2xl " /> <p>back</p>
-        </div>
+        </div> */}
         <h1 className="text-Black font-extrabold text-8xl max-sm:ml-4 max-sm:text-4xl mt-2 max-sm:">
           {" "}
           My Profile

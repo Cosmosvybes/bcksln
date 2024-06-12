@@ -265,20 +265,20 @@ const Application = () => {
   };
 
   return (
-    <>
+    <> 
       <section className="h-auto py-2 bg-gray-100">
-        <div className="flex ml-4 justify-start  items-center">
+        {/* <div className="flex ml-4 justify-start  items-center">
           <button className="mt-0 ml-1" onClick={() => history.back()}>
             <ArrowLeft className="text-2xl inline" /> back
           </button>
-        </div>
+        </div> */}
         <div className="flex justify-between items-center">
           <div className="flex flex-col mt-2 justify-start ">
-            <h1 className="text-black font-bold mt-2  text-7xl max-sm:text-2xl ml-6 max-sm:mt-3  max-lg:text-xs">
+            <h1 className="text-black font-bold mt-2  text-7xl max-sm:text-2xl ml-3 max-sm:mt-3  max-lg:text-xs">
               {" "}
               Loan Application.
             </h1>
-            <p className=" text-xs text-gray-400 ml-6">
+            <p className=" text-xs text-gray-400 ml-3">
               Apply and get funded same day 🤑
             </p>
           </div>

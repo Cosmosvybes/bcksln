@@ -32,6 +32,7 @@ const Admin = () => {
   };
 
   const view = <div className="relative">{handleView()}</div>;
+  
   const handlePageNavigate = (name) => {
     const pageSelected = pages.find((page) => page.pageName === name);
     setPage(pageSelected.pageName);
