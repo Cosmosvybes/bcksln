@@ -241,22 +241,6 @@ const Dashboard = () => {
             <Profile />
           </div>
         );
-      case "new loan":
-        return (
-          <div className="relative block overflow-y-auto">
-            <div
-              className={`relative hidden w-full max-sm:flex max-md:flex justify-start items-center ${
-                !showMenu ? "z-30" : "z-0"
-              }`}
-            >
-              <MenuLineHorizontal
-                className="text-5xl text-amber-500"
-                onClick={handleShowMenu}
-              />
-            </div>
-            <Application />
-          </div>
-        );
       default:
         return <MainPage />;
     }
@@ -302,7 +286,7 @@ const Dashboard = () => {
               </button>
               <button
                 className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
-                onClick={() => navigatePage("new loan")}
+                onClick={() => navigatePage("main Page")}
               >
                 <Mail className="inline text-4xl" /> Send message{" "}
               </button>
@@ -346,7 +330,7 @@ const Dashboard = () => {
 
                 <button
                   className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
-                  onClick={() => navigatePage("new loan")}
+                  onClick={() => navigatePage("main Page")}
                 >
                   <Mail className="inline text-4xl" /> Send message{" "}
                 </button>
