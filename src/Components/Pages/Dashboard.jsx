@@ -263,7 +263,7 @@ const Dashboard = () => {
   };
 
   let dashboardContainer = (
-    <div className="h-auto w-full max-sm:overflow-auto  bg-gray-100 relative  py-0 max-sm:px-2 px-8">
+    <div className="h-auto w-full max-sm:overflow-scroll  bg-gray-100 relative  py-0 max-sm:px-2 px-8">
       {handlePageSwitch()}
     </div>
   );
@@ -302,7 +302,7 @@ const Dashboard = () => {
               </button>
               <button
                 className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
-                onClick={() => navigatePage("main Page")}
+                onClick={() => navigatePage("new loan")}
               >
                 <Mail className="inline text-4xl" /> Send message{" "}
               </button>
@@ -346,7 +346,7 @@ const Dashboard = () => {
 
                 <button
                   className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
-                  onClick={() => navigatePage("main Page")}
+                  onClick={() => navigatePage("new loan")}
                 >
                   <Mail className="inline text-4xl" /> Send message{" "}
                 </button>
