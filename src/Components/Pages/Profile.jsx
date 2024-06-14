@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft } from "react-huge-icons/outline";
 import {
   Mobile,
   Mail,
@@ -16,36 +15,60 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUser, updateAddress } from "../../brain/user";
+import { toast } from "react-toastify";
 
-const Profile = () => {
+const Profile = ({ navButton, showMenu }) => {
   const [edit, setEdit] = useState(true);
   const { user } = useSelector((state) => state.userSlice);
   const [address, setAddress] = useState("");
   const [postal, setPostal] = useState("");
   const [state, setState] = useState("");
   const dispatch = useDispatch();
-  
-  const handleAddress = (e) => {
+
+  const handleAddress = async (e) => {
     e.preventDefault();
     const addressObject = { address, postal, state_: state };
     dispatch(updateAddress(addressObject));
     setEdit(true);
+    const response = await fetch(
+      `https://bck-server.onrender.com/api/update/address/${localStorage.getItem(
+        "userToken"
+      )}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "Application/json" },
+        body: JSON.stringify({ address: addressObject }),
+        credentials: "include",
+      }
+    );
+    if (!response.ok) {
+      toast.error(response.response);
+      return;
+    }
+    const responseData = await response.json();
+    toast.success(responseData.response);
+    console.log(JSON.stringify({ address: addressObject }));
   };
   useEffect(() => {
     dispatch(getUser());
   }, []);
   return (
     <>
-      <div className="relative  h-screen bg-gray-100  px-8 max-sm:px-2">
-        {/* <div
-          className="flex justify-start ml-4   py-2"
-          onClick={() => history.back()}
+      <div className="relative   h-screen bg-gray-100  px-8 max-sm:px-2">
+        <div
+          className={`relative ${
+            !showMenu ? "z-30" : "z-0"
+          }   justify-between text-gray-400 items-center hidden max-sm:flex`}
         >
-          <ArrowLeft className="text-2xl " /> <p>back</p>
-        </div> */}
-        <h1 className="text-Black font-extrabold text-8xl max-sm:ml-4 max-sm:text-4xl mt-2 max-sm:">
+          {navButton} <p>Profile</p>{" "}
+          <button className="text-gray-400">
+            <ArrowRight className="inline text-3xl" />{" "}
+          </button>
+        </div>
+        <hr className="mb-2 text-gray-300" />
+        <h1 className="text-Black font-semibold text-5xl  text-gray-400 max-sm:ml-2 max-sm:text-xl  max-sm:">
           {" "}
-          My Profile
+          User Info
         </h1>
         <div className="grid grid-cols-3 gap-3 px-2 py-2 max-sm:grid-cols-1 h-auto bg-gray-50 rounded-md mt-2">
           <div className="flex justify-start py-2 flex-col">
@@ -112,13 +135,16 @@ const Profile = () => {
                 <button className="text-amber-500" onClick={handleAddress}>
                   Save
                 </button>
-                "
               </div>
             )}
           </div>
         </div>
+        <h1 className="text-Black font-semibold text-5xl max-sm:ml-2 text-gray-400 max-sm:text-2xl mt-2 max-sm:">
+          {" "}
+          Others
+        </h1>
 
-        <div className="grid grid-cols-4 gap-3 px-2 py-2 max-sm:grid-cols-1 h-auto bg-gray-50 rounded-md mt-2">
+        <div className="grid grid-cols-2 gap-3 px-2 py-2 max-sm:grid-cols-1 h-auto bg-gray-50 rounded-md mt-2">
           <div className="flex justify-start py-2 flex-col">
             <div className="flex justify-start ">
               <CardAdd className="inline text-2xl text-amber-500 mr-1" />

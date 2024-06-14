@@ -17,7 +17,7 @@ const receiptSlice = createSlice({
     approveHandler: (state, action) => {
       let { id } = action.payload;
       state.data = state.data.map((receipt) =>
-        receipt._id === id
+        receipt.id === id
           ? {
               ...receipt,
               isApproved: (receipt.isApproved = !receipt.isApproved),

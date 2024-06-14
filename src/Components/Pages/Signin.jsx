@@ -73,7 +73,7 @@ const Signin = () => {
                     className="border border-gray-100 w-full px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                   />
                   <Label>
-                    <b className="text-gray-400">Email</b>
+                    <b className="text-gray-400">Password</b>
                   </Label>
                   <Input
                     type="password"
@@ -103,72 +103,21 @@ const Signin = () => {
                       {" "}
                       Forgot password ?
                     </Link>
-                    <Link
-                      to={"/register"}
-                      className="text-black text-sm  underline block mt-1"
-                    >
-                      {" "}
-                      Create new account
-                    </Link>
+                    <div className="relative block">
+                      <p>Are you new here ?</p>
+                      <Link
+                        to={"/register"}
+                        className="text-black text-sm underline  block"
+                      >
+                        {" "}
+                        Create new account
+                      </Link>
+                    </div>
                   </div>
                 </Col>
                 {/* </Row> */}
               </Form>
             </div>
-
-            {/* <Form>
-              <Row>
-                <Col>
-                  <Label>
-                    <b className="text-gray-400">Email</b>
-                  </Label>
-                  <Input
-                    type="text"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your email"
-                    className="border border-gray-100 w-full px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-auto"
-                  />
-                  <Label>
-                    <b className="text-gray-400">Email</b>
-                  </Label>
-                  <Input
-                    type="text"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your email"
-                    className="border border-gray-100 w-full m px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-auto"
-                  />
-                  {isLoading ? (
-                    <Spinner type="border"  className="mt-1"/>
-                  ) : (
-                    <Button
-                      onClick={handleSignIn}
-                      className=" rounded-lg border duration-300 transition border-black bg-black w-44 max-sm:w-32 px-4 py-2  mt-2 text-white hover:bg-gray-800 hover:text-white"
-                    >
-                      Sign in
-                      <ArrowRight className="inline text-white hover:text-white" />
-                    </Button>
-                  )}
-                  <div className="flex w-96 flex-col max-sm:w-auto  justify-between px-1">
-                    <Link
-                      to={"/forgot-password"}
-                      className="text-black text-sm  underline block mt-1"
-                    >
-                      {" "}
-                      Forgot password ?
-                    </Link>
-                    <Link
-                      to={"/register"}
-                      className="text-black text-sm  underline block mt-1"
-                    >
-                      {" "}
-                      Create new account
-                    </Link>
-                  </div>
-                </Col>
-              </Row>
-            </Form> */}
           </div>
           <img src={signin} alt="image" className="object-cover" />
         </div>

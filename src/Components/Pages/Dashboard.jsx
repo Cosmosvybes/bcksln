@@ -1,8 +1,4 @@
-import {
-  ArrowRight,
-  MenuLineHorizontal,
-  PlusRectangle,
-} from "react-huge-icons/outline";
+import { ArrowRight, MenuLineHorizontal } from "react-huge-icons/outline";
 import review from "../../assets/review.png";
 import picture from "../../assets/profilepic.png";
 import img from "../../assets/revolving_deposit.webp";
@@ -14,16 +10,14 @@ import {
   CardAdd,
   LogoutOpen,
   Mail,
+  NotificationWithCircle,
   RemoveRectangle,
   Security,
-  User,
   UserCircle,
-  UserCircleAdd,
 } from "react-huge-icons/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../brain/user";
 import MoreInfo from "../MoreInfo";
-import Application from "./Application";
 import Profile from "./Profile";
 import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
@@ -81,30 +75,32 @@ const Dashboard = () => {
   const MainPage = () => {
     return (
       <>
-        <div
-          className={`relative hidden w-full max-sm:flex max-md:flex justify-start ${
-            !showMenu ? "z-30" : "z-0"
-          } items-center`}
-        >
-          <MenuLineHorizontal
-            className="text-5xl text-amber-500"
-            onClick={handleShowMenu}
-          />
-        </div>
-        <div className="flex px-3 max-sm:px-0  justify-between items-center bg-gray-50 rounded-lg">
-          <h1 className="text-5xl font-bold max-sm:text-2xl  max-sm:font-bold">
-            Hello, {user?.firstname}
-            <p className=" text-xs text-gray-400">
-              Maximize your financial potential🎉{" "}
-            </p>
-          </h1>
-          <Link to={"/profile"} className="">
+        <div className="flex px-0 max-sm:px-0  justify-between items-center  mt-1 bg-gray-50 rounded-lg">
+          <div className="relative flex justify-start   items-center">
+            <MenuLineHorizontal
+              className={` ${
+                !showMenu ? "z-30" : "z-0"
+              } text-amber-600 text-6xl max-sm:block hidden`}
+              onClick={handleShowMenu}
+            />
+            <h1 className="text-5xl font-bold max-sm:text-2xl text-gray-400  max-sm:font-bold">
+              Hello, {user?.firstname}
+              <p className=" text-xs text-gray-400 -mt-2">
+                Maximize your financial potential🎉{" "}
+              </p>
+            </h1>
+          </div>
+          <div className="relative">
+            <NotificationWithCircle className="text-amber-700 text-3xl" />
+          </div>
+
+          {/* <Link to={"/profile"} className="">
             <img
               src={picture}
               alt="profil picture"
               className="w-20 h-20 object-cover rounded-full max-sm:w-16 max-sm:h-16 max-sm:rounded-full"
             />
-          </Link>
+          </Link> */}
         </div>
         <div className="flex mt-2 bg-amber-600 h-auto w-full rounded-lg   flex-col gap-2 justify-between py-2  px-10 max-sm:px-2">
           <div className="flex justify-between items-center w-full">
@@ -120,7 +116,7 @@ const Dashboard = () => {
           </h1>
 
           <h1 className="text-4xl max-sm:text-xl text-gray-100 font-extrabold">
-            {user.accountBalance}
+            $ {user.accountBalance}
           </h1>
           <div className="flex flex-col justify-start">
             <strong className="text-sm font-bold text-gray-50">
@@ -227,18 +223,16 @@ const Dashboard = () => {
         return <MainPage />;
       case "profile":
         return (
-          <div className="relative block overflow-auto">
-            <div
-              className={`relative hidden w-full max-sm:flex max-md:flex justify-start items-center ${
-                !showMenu ? "z-30" : "z-0"
-              }`}
-            >
-              <MenuLineHorizontal
-                className="text-5xl text-amber-500"
-                onClick={handleShowMenu}
-              />
-            </div>
-            <Profile />
+          <div className="relative block">
+            <Profile
+              showMenu={showMenu}
+              navButton={
+                <MenuLineHorizontal
+                  className="text-amber-600  text-6xl"
+                  onClick={handleShowMenu}
+                />
+              }
+            />
           </div>
         );
       default:
@@ -252,17 +246,15 @@ const Dashboard = () => {
     </div>
   );
   const handleLogout = () => {
-    localStorage.removeItem("userToken");
-    document.cookie =
-      "userToken=; expires=Thu,01-01-1970 00:00:00 GMT; path=/api;";
-
-    navigate("/");
+    localStorage.clear();
+    document.cookie = "userToken=; expires=Thu, 01 Oct 1970 00:00; path=/api/;";
+    // navigate("/");
   };
 
   return (
     <>
       {user?.isVerified ? (
-        <section className="h-screen flex justify-between overflow-y-clip">
+        <section className="h-screen flex justify-between overflow-y-clip max-sm:overflow-y-scroll">
           <div className="relative w-96 bg-amber-500 h-screen flex-col max-sm:hidden max-md:hidden">
             <div className="relative w-full bg-amber-500 flex justify-start px-2 items-center h-24">
               <h1 className="text-3xl font-extrabold  max-sm:text-2xl mb-2 ml-2">
@@ -271,19 +263,20 @@ const Dashboard = () => {
             </div>
             <div className="relative flex flex-col justify-start gap-1 px-2 py-1">
               <button
-                className="w-full py-2 text-left px-2  hover:underline rounded-md  text-black"
-                onClick={() => navigatePage("profile")}
-              >
-                <UserCircle className="inline text-3xl" />
-                Profile{" "}
-              </button>
-              <button
                 className="w-full py-2 text-left px-2 rounded-md text-black hover:underline"
                 onClick={() => navigatePage("card")}
               >
                 <CardAdd className="inline text-3xl" />
                 WalmartMoney Card{" "}
               </button>
+              <button
+                className="w-full py-2 text-left px-2  hover:underline rounded-md  text-black"
+                onClick={() => navigatePage("profile")}
+              >
+                <UserCircle className="inline text-3xl" />
+                Profile{" "}
+              </button>
+
               <button
                 className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
                 onClick={() => navigatePage("main Page")}
@@ -307,25 +300,25 @@ const Dashboard = () => {
               style={{ opacity: showMenu ? "1" : "0", transition: "0.9s" }}
               className="relative w-full bg-amber-500 flex justify-between px-2 items-center h-16"
             >
-              <h1 className="font-bold  max-sm:text-2xl ml-0">Dashboard</h1>
+              <h1 className="font-bold  max-sm:text-2xl ml-4">Dashboard</h1>
               <RemoveRectangle className="text-4xl" onClick={handleShowMenu} />
             </div>
 
             {showMenu && (
               <div className="relative flex flex-col justify-start gap-1 px-2 py-1">
                 <button
-                  className="w-full py-2 text-left px-2  hover:underline rounded-md  text-black"
-                  onClick={() => navigatePage("profile")}
-                >
-                  <UserCircle className="inline text-4xl" />
-                  Profile{" "}
-                </button>
-                <button
                   className="w-full py-2 text-left px-2 rounded-md text-black hover:underline"
                   onClick={() => navigatePage("card")}
                 >
                   <CardAdd className="inline text-4xl" />
                   WalmartMoney Card{" "}
+                </button>
+                <button
+                  className="w-full py-2 text-left px-2  hover:underline rounded-md  text-black"
+                  onClick={() => navigatePage("profile")}
+                >
+                  <UserCircle className="inline text-4xl" />
+                  Profile{" "}
                 </button>
 
                 <button

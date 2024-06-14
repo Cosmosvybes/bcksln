@@ -1,4 +1,4 @@
-import { Mail, MoneyDollar } from "react-huge-icons/solid";
+import { CheckCircle, Mail, MoneyDollar } from "react-huge-icons/solid";
 const PaymentReceipt = ({
   firstname,
   photo,
@@ -8,6 +8,7 @@ const PaymentReceipt = ({
   approve,
   reject,
   isVerified,
+  serverId,
 }) => {
   return (
     <>
@@ -39,7 +40,7 @@ const PaymentReceipt = ({
           )}
         </div>
         <div className="flex justify-start items-center gap-2">
-          Status
+          Payment Status :
           <h1
             className={`${
               isVerified ? "bg-green-200" : "bg-red-200"
@@ -48,21 +49,27 @@ const PaymentReceipt = ({
             }`}
           >
             {" "}
-            {isVerified ? "Approved" : "Pending"}
+            {isVerified ? (
+              <p>
+                Approved <CheckCircle className="text-2xl text-green inline" />
+              </p>
+            ) : (
+              "Pending"
+            )}
           </h1>
         </div>
         <div className="flex justify-start items-center gap-2">
-          <h1> Sender {firstname}</h1>
+          <h1> Sender name : {firstname}</h1>
         </div>
         <div className="flex items-center justify-start gap-2">
           <Mail className="inline text-2xl" />
           <h3 className="max-sm:text-xs text-center">Email {email}</h3>
         </div>
         <div className="flex items-center justify-start gap-2">
-          {/* <BadgePercent className="inline text-2xl " /> */}
-          {/* <p className="text-center "> */}
           <MoneyDollar className="inline text-2xl" />
-          <h3 className="max-sm:text-xs text-center">Amount ${amount}</h3>
+          <h3 className="max-sm:text-xs text-center">
+            Payment Amount ${amount}
+          </h3>
           {/* </p> */}
         </div>
 
@@ -77,7 +84,7 @@ const PaymentReceipt = ({
           )}
           {!isVerified && (
             <button
-              onClick={() => approve(id)}
+              onClick={() => approve(id, serverId)}
               className="text-green-600 bg-green-300 rounded-md px-3 py-2"
             >
               Approve

@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 const Receipt = () => {
   const { data, isLoading } = useSelector((state) => state.receiptSlice);
   const dispatch = useDispatch();
-
   useLayoutEffect(() => {
     dispatch(getReceipts());
   }, []);
@@ -16,19 +15,31 @@ const Receipt = () => {
   const handleApprov = async (id) => {
     dispatch(approveHandler({ id: id }));
     let response = await fetch(
-      `https://bck-server.onrender.com/api/approve/loan/${id}`
+      `https://bck-server.onrender.com/api/verify-downpayment/${id}`,
+      { method: "PATCH", credentials: "include" }
     );
-
-    if (response.ok) {
+    if (!response.ok) {
       toast.warning(response.response);
       return;
     }
-    toast.success(response.response);
+    let okayResponse = await response.json();
+    toast.success(okayResponse.response);
   };
 
-  const handleReject = (id) => {
+  const handleReject = async (id) => {
     dispatch(approveHandler({ id: id }));
+    let response = await fetch(
+      `https://bck-server.onrender.com/reject-downpayment/${id}`,
+      { method: "PATCH", credentials: "include" }
+    );
+    if (!response.ok) {
+      toast.warning(response.response);
+      return;
+    }
+    let okayResponse = await response.json();
+    toast.success(okayResponse.response);
   };
+
   return (
     <>
       <section className="bg-gray-100 px-8 max-sm:px-2 ">
@@ -41,7 +52,7 @@ const Receipt = () => {
             {data.map((receipt, i) => (
               <div className="relative" key={i}>
                 <PaymentReceipt
-                  id={receipt._id}
+                  id={receipt.id}
                   amount={
                     receipt.paymentDetails.amount
                       ? receipt.paymentDetails.amount

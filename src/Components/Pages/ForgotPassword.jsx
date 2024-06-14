@@ -32,9 +32,11 @@ const ForgotPasswor = () => {
             Next <ArrowRight className="text-2xl text-white inline" />
           </Link>
         </div>
-        <div className="flex justify-end items-center px-2 mt-2">
-          <Link to={"/"}>
-            Sign in <ArrowRight className="text-2xl text-black inline" />{" "}
+        <div className="relative  block px-2 mt-2">
+          <p className="block">To sign in to your account</p>
+          <Link className="block  underline" to={"/"}>
+            Click here{" "}
+            <ArrowRight className="text-2xl text-black inline" />
           </Link>
         </div>
       </section>

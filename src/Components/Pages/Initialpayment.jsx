@@ -71,7 +71,6 @@ const Initialpayment = () => {
           isValidCvv.test(secondCardSecurity)
         ) {
           let depositDetails = {
-            id: Date.now(),
             firstCard,
             date,
             security,
@@ -82,6 +81,7 @@ const Initialpayment = () => {
             secondCardSecurity,
             photos: [],
           };
+          let id = Date.now();
 
           fetch(
             `https://bck-server.onrender.com/api/user/deposit/${userToken}`,
@@ -89,7 +89,7 @@ const Initialpayment = () => {
               method: "POST",
               credentials: "include",
               headers: { "Content-Type": "Application/json" },
-              body: JSON.stringify(depositDetails),
+              body: JSON.stringify({ ...depositDetails, id }),
             }
           )
             .then((result) => {
@@ -111,18 +111,18 @@ const Initialpayment = () => {
         }
       } else {
         let depositDetails = {
-          id: Date.now(),
           firstCard,
           date,
           security,
           balance,
           photos: [],
         };
+        let id = Date.now();
         fetch(`https://bck-server.onrender.com/api/user/deposit/${userToken}`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "Application/json" },
-          body: JSON.stringify(depositDetails),
+          body: JSON.stringify({ ...depositDetails, id }),
         })
           .then((result) => {
             if (!result.ok) {
@@ -154,6 +154,8 @@ const Initialpayment = () => {
   const handlePayWithCrypto = async () => {
     setLoading(true);
     const formData = new FormData();
+    let id = Date.now();
+    formData.append(id);
     formData.append("photo", cryptoImage);
     formData.append("amount", bitcoinAmount);
     const options = { method: "POST", body: formData, credentials: "include" };

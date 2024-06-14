@@ -43,13 +43,12 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/application" element={<Application />}></Route>
 
-        <Route path="/admin/" element={<Admin />}></Route>
+        <Route path="/administration/account" element={<Admin />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route
           path="/two-factor/authentication"
           element={<TwoFactor />}
         ></Route>
-        <Route path="/admin/receipts" element={<Receipt />}></Route>
         <Route
           path="/comfirmation"
           element={
