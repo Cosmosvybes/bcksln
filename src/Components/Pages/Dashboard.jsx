@@ -12,7 +12,6 @@ import {
   Mail,
   NotificationWithCircle,
   RemoveRectangle,
-  Security,
   UserCircle,
 } from "react-huge-icons/solid";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +19,7 @@ import { getUser } from "../../brain/user";
 import MoreInfo from "../MoreInfo";
 import Profile from "./Profile";
 import { useNavigate } from "react-router-dom";
+import ReviewPage from "./ReviewPage";
 const Dashboard = () => {
   let navigate = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
@@ -246,9 +246,10 @@ const Dashboard = () => {
     </div>
   );
   const handleLogout = () => {
-    localStorage.clear();
-    document.cookie = "userToken=; expires=Thu, 01 Oct 1970 00:00; path=/api/;";
-    // navigate("/");
+    localStorage.removeItem("userToken");
+    // document.cookie =
+    //   "userToken=; expires=Thu, 01 Oct 1970 00:00; path=/api/; sameSite=None; secure; domain=https://bck-server.onrender.com";
+    if (!localStorage.getItem("userToken")) navigate("/");
   };
 
   return (
@@ -287,7 +288,7 @@ const Dashboard = () => {
                 className="w-full py-2 text-left hover:underline px-2 rounded-md text-black hover:text-amber-700"
                 onClick={handleLogout}
               >
-                <LogoutOpen className="inline text-3xl" /> Log out{" "}
+                <LogoutOpen className="inline text-3xl" /> Sign out{" "}
               </button>
             </div>
           </div>
@@ -331,7 +332,7 @@ const Dashboard = () => {
                   className="w-full py-2 text-left hover:underline px-2 rounded-md text-black hover:text-amber-700"
                   onClick={handleLogout}
                 >
-                  <LogoutOpen className="inline text-4xl" /> Log out{" "}
+                  <LogoutOpen className="inline text-4xl" /> Sign out{" "}
                 </button>
               </div>
             )}
@@ -339,16 +340,7 @@ const Dashboard = () => {
           {dashboardContainer}
         </section>
       ) : (
-        <div className="h-screen flex justify-start py-4 items-center flex-col bg-gray-100">
-          <Security className="text-5xl text-amber-600 mb-1" />
-          <h1 className="text-7xl max-md:text-4xl max-sm:text-2xl font-light">
-            Document under review.
-          </h1>
-          <img src={review} alt="preview" />
-          <p className="text-gray-500 max-md:text-2xl font-light text-4xl max-sm:text-xs">
-            You will be notified shortly, thank you!
-          </p>
-        </div>
+        <ReviewPage />
       )}
     </>
   );
