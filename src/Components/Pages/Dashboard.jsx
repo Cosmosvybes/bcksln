@@ -3,16 +3,14 @@ import {
   ArrowRight,
   MenuLineHorizontal,
 } from "react-huge-icons/outline";
-import review from "../../assets/review.png";
-import picture from "../../assets/profilepic.png";
+// import review from "../../assets/review.png";
+// import picture from "../../assets/profilepic.png";
 import img from "../../assets/revolving_deposit.webp";
 import { Link } from "react-router-dom";
 import Loan from "./Loan";
 import { useLayoutEffect, useState } from "react";
 import Activity from "../Activity";
 import {
-  ArrowDownCircle,
-  Atm,
   CardAdd,
   LogoutOpen,
   Mail,
@@ -27,6 +25,8 @@ import Profile from "./Profile";
 import { useNavigate } from "react-router-dom";
 import ReviewPage from "./ReviewPage";
 import { toast } from "react-toastify";
+
+
 const Dashboard = () => {
   let navigate = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
@@ -49,7 +49,10 @@ const Dashboard = () => {
   const [showMoreDetails, setShowMoreDetails] = useState(false);
   const [loanMoreInfo, setMoreInfo] = useState({});
   const [showMenu, setShowDashboard] = useState(false);
-  let cardNumber = String(user.cards[0].firstCard).slice(0, 5);
+  const [card] = useState(user.cards[0]);
+
+  console.log(user);
+
   const handleShowMore = (id) => {
     setShowMoreDetails(!showMoreDetails);
     let loanInfo = user.transactions.find((loan) => loan.id === id);
@@ -143,7 +146,7 @@ const Dashboard = () => {
               {" "}
               <CardAdd className="text-3xl text-black inline" />
               {user.cards.length > 0 ? (
-                cardNumber + "..."
+                card.firstcard.splice(0, 5) + "..."
               ) : (
                 <p> card not linked yet</p>
               )}
