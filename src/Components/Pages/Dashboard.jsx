@@ -1,4 +1,8 @@
-import { ArrowRight, MenuLineHorizontal } from "react-huge-icons/outline";
+import {
+  ArrowDownRectangle,
+  ArrowRight,
+  MenuLineHorizontal,
+} from "react-huge-icons/outline";
 import review from "../../assets/review.png";
 import picture from "../../assets/profilepic.png";
 import img from "../../assets/revolving_deposit.webp";
@@ -7,6 +11,8 @@ import Loan from "./Loan";
 import { useLayoutEffect, useState } from "react";
 import Activity from "../Activity";
 import {
+  ArrowDownCircle,
+  Atm,
   CardAdd,
   LogoutOpen,
   Mail,
@@ -20,10 +26,12 @@ import MoreInfo from "../MoreInfo";
 import Profile from "./Profile";
 import { useNavigate } from "react-router-dom";
 import ReviewPage from "./ReviewPage";
+import { toast } from "react-toastify";
 const Dashboard = () => {
   let navigate = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
+
   useLayoutEffect(() => {
     dispatch(getUser());
   }, []);
@@ -41,7 +49,7 @@ const Dashboard = () => {
   const [showMoreDetails, setShowMoreDetails] = useState(false);
   const [loanMoreInfo, setMoreInfo] = useState({});
   const [showMenu, setShowDashboard] = useState(false);
-
+  let cardNumber = String(user.cards[0].firstCard).slice(0, 5);
   const handleShowMore = (id) => {
     setShowMoreDetails(!showMoreDetails);
     let loanInfo = user.transactions.find((loan) => loan.id === id);
@@ -127,13 +135,27 @@ const Dashboard = () => {
             </p>
           </div>
 
+          <hr className="text-amber-100" />
+          <div className="relative  block">
+            <p className="text-gray-50 text-xs ml-1">Card Linked</p>
+
+            <p className="text-gray-100 inline">
+              {" "}
+              <CardAdd className="text-3xl text-black inline" />
+              {user.cards.length > 0 ? (
+                cardNumber + "..."
+              ) : (
+                <p> card not linked yet</p>
+              )}
+            </p>
+          </div>
           <div className="flex w-full justify-start gap-3 max-sm:justify-between items-center">
             <Link
               to={"/deposit"}
               className="w-28 bg-black rounded-md px-0 text-xs py-2  text-center text-gray-100  "
             >
               Deposit
-              <ArrowRight className="text-white text-xs inline" />
+              <ArrowDownRectangle className="text-white text-xs ml-0.5 inline" />
             </Link>
             {true ? (
               <Link
@@ -247,9 +269,8 @@ const Dashboard = () => {
   );
   const handleLogout = () => {
     localStorage.removeItem("userToken");
-    // document.cookie =
-    //   "userToken=; expires=Thu, 01 Oct 1970 00:00; path=/api/; sameSite=None; secure; domain=https://bck-server.onrender.com";
     if (!localStorage.getItem("userToken")) navigate("/");
+    toast.success("account signed out");
   };
 
   return (
@@ -268,7 +289,7 @@ const Dashboard = () => {
                 onClick={() => navigatePage("card")}
               >
                 <CardAdd className="inline text-3xl" />
-                WalmartMoney Card{" "}
+                My Account{" "}
               </button>
               <button
                 className="w-full py-2 text-left px-2  hover:underline rounded-md  text-black"
@@ -312,7 +333,7 @@ const Dashboard = () => {
                   onClick={() => navigatePage("card")}
                 >
                   <CardAdd className="inline text-4xl" />
-                  WalmartMoney Card{" "}
+                  My Account{" "}
                 </button>
                 <button
                   className="w-full py-2 text-left px-2  hover:underline rounded-md  text-black"

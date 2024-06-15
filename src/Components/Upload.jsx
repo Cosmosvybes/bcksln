@@ -4,6 +4,7 @@ import { ImageUpload } from "react-huge-icons/solid";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Input, Spinner } from "reactstrap";
+import { isLoggedIn } from "./Auth/Auth.controller";
 
 const Upload = () => {
   const [images, setImage] = useState([]);
@@ -29,26 +30,25 @@ const Upload = () => {
       formData.append("photos", serverImages[i]);
     }
     formData.append("id", id);
-    fetch("https://bck-server.onrender.com0/api/upload/cards", {
+    fetch(`https://bck-server.onrender.com/api/upload/cards/${isLoggedIn}`, {
       method: "PATCH",
       credentials: "include",
       body: formData,
     })
       .then((result) => {
-        if (!result.ok) throw new Error("Operation failed");
+        if (!result.ok) throw new Error("Operation failed, try again");
         return result.json();
       })
       .then((response) => {
         toast.success(response.response);
         setLoading(false);
-        // if (response) {
-        //   // navigate("/checking-card");
-        // }
+        if (response.response) {
+          navigate("/checking-card");
+        }
       })
       .catch((err) => {
         toast.error(err.message);
         setLoading(false);
-        console.log(err.message);
       });
     console.log(formData.getAll("photos"));
   };
