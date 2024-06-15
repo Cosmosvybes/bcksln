@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 export const getUser = createAsyncThunk("user/getUser", async () => {
   const userToken = localStorage.getItem("userToken");
@@ -16,6 +17,7 @@ const userSlice = createSlice({
   name: "userProfile",
   initialState: {
     user: {},
+    accountCard: {},
     isLoading: true,
   },
   reducers: {
@@ -31,6 +33,7 @@ const userSlice = createSlice({
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
+      state.accountCard = action.payload.cards[0];
     });
     builder.addCase(getUser.rejected, (state, action) => {
       state.isLoading = false;

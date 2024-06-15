@@ -26,10 +26,9 @@ import { useNavigate } from "react-router-dom";
 import ReviewPage from "./ReviewPage";
 import { toast } from "react-toastify";
 
-
 const Dashboard = () => {
   let navigate = useNavigate();
-  const { user } = useSelector((state) => state.userSlice);
+  const { user, accountCard } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -49,9 +48,6 @@ const Dashboard = () => {
   const [showMoreDetails, setShowMoreDetails] = useState(false);
   const [loanMoreInfo, setMoreInfo] = useState({});
   const [showMenu, setShowDashboard] = useState(false);
-  const [card] = useState(user.cards[0]);
-
-  console.log(user);
 
   const handleShowMore = (id) => {
     setShowMoreDetails(!showMoreDetails);
@@ -146,7 +142,7 @@ const Dashboard = () => {
               {" "}
               <CardAdd className="text-3xl text-black inline" />
               {user.cards.length > 0 ? (
-                card.firstcard.splice(0, 5) + "..."
+                String(accountCard.firstCard).slice(0, 7) + "..."
               ) : (
                 <p> card not linked yet</p>
               )}
