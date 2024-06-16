@@ -36,12 +36,12 @@ const Dashboard = () => {
   }, []);
 
   const [loans] = useState([
-    { id: 1, name: "Mortage", interest: 0.05, amount: "20,000" },
-    { id: 2, name: "Student loan", interest: 0.02, amount: "17,000 " },
-    { id: 3, name: "Auto loans", interest: 0.05, amount: "10,000" },
-    { id: 4, name: "Business loans ", interest: 0.1, amount: "200,000" },
+    { id: 1, name: "Mortage", interest: 0.05, amount: "400,000" },
+    { id: 2, name: "Student loan", interest: 0.02, amount: "40,000 " },
+    { id: 3, name: "Auto loans", interest: 0.05, amount: "50,000" },
+    { id: 4, name: "Business loans ", interest: 0.1, amount: "500,000" },
     { id: 5, name: "Salary advance ", interest: 0.03, amount: "7,000" },
-    { id: 45, name: "Pool loans ", interest: 0.04, amount: "25,000" },
+    { id: 45, name: "Personal loans ", interest: 0.04, amount: "100,000" },
   ]);
 
   const [displayActivities, setActivities] = useState(2);

@@ -265,7 +265,7 @@ const Application = () => {
   };
 
   return (
-    <> 
+    <>
       <section className="h-auto py-2 bg-gray-100">
         {/* <div className="flex ml-4 justify-start  items-center">
           <button className="mt-0 ml-1" onClick={() => history.back()}>
@@ -332,10 +332,14 @@ const Application = () => {
                 <option>3000</option>
                 <option>5000</option>
                 <option>10000</option>
+                <option>20000</option>
                 <option>50000</option>
+                <option>70000</option>
                 <option>100000</option>
-                <option>150000</option>
-                <option>200000</option>
+                <option>300000</option>
+                <option>400000</option>
+                <option>5000000</option>
+                <option>10000000</option>
               </select>
             </div>
             <div className="flexflex-col w-96  mt-2 bg-gray-200  max-sm:w-auto rounded-md items-center justify-between px-2 py-3">

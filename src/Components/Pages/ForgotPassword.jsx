@@ -1,8 +1,42 @@
+import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "react-huge-icons/outline";
 import { MailNotification } from "react-huge-icons/solid";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { Input, Spinner } from "reactstrap";
 
 const ForgotPasswor = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handlePasswordRecovery = async (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    let response = await fetch("https://bck-server.onrender.com/api/password-recovery", {
+      method: "PATCH",
+      headers: { "Content-Type": "Application/json" },
+      body: JSON.stringify({ email }),
+    });
+    let data = await response.json();
+    if (!response.ok) {
+      setIsLoading(false);
+      toast.response("Server error, try again");
+      return;
+    }
+    if (data.response === "user not found") {
+      setIsLoading(false);
+      toast.warning(data.response);
+    } else {
+      toast.success(data.response);
+      setIsLoading(false);
+      localStorage.setItem("token", data.data.token);
+      localStorage.setItem("email", data.data.email);
+      navigate("/password/recovery/auth");
+    }
+  };
+
   return (
     <>
       <section className="h-screen max-sm:h-auto bg-gray-100 px-10 max-sm:px-2  relative ">
@@ -20,23 +54,30 @@ const ForgotPasswor = () => {
           <p className="max-sm:text-center max-sm:text-xs">
             Enter your email address for password recovery
           </p>
-          <input
+          <Input
             type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Email address"
             className="w-72 max-sm:w-full h-10 rounded-md border bg-gray-100 outline-gray-300 px-2 border-gray-300 mt-3"
           />
-          <Link
-            to={"/verify-code"}
-            className="bg-black rounded-lg py-3 text-center text-white w-72 mt-4 max-sm:w-full hover:bg-gray-900"
-          >
-            Next <ArrowRight className="text-2xl text-white inline" />
-          </Link>
+          <div className="relative mt-2 max-sm:w-full">
+            {isLoading ? (
+              <Spinner type="border" />
+            ) : (
+              <button
+                onClick={handlePasswordRecovery}
+                className="bg-black rounded-lg py-2 text-center text-white w-72 mt-4 max-sm:w-full hover:bg-gray-900"
+              >
+                Next <ArrowRight className="text-2xl text-white inline" />
+              </button>
+            )}
+          </div>
         </div>
         <div className="relative  block px-2 mt-2">
           <p className="block">To sign in to your account</p>
           <Link className="block  underline" to={"/"}>
-            Click here{" "}
-            <ArrowRight className="text-2xl text-black inline" />
+            Click here <ArrowRight className="text-2xl text-black inline" />
           </Link>
         </div>
       </section>

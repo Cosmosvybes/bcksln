@@ -21,6 +21,7 @@ import "react-toastify/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.css";
 import { isLoggedIn } from "./Components/Auth/Auth.controller";
+import PasswordAuth from "./Components/Pages/Password.Auth";
 
 function App() {
   return (
@@ -39,8 +40,8 @@ function App() {
         ></Route>
         <Route path="/terms" element={<Terms />}></Route>
         <Route
-          path="/verify-code"
-          element={isLoggedIn ? <Code /> : <Signin />}
+          path="/change/new-password"
+          element={ <Code /> }
         ></Route>
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route
@@ -50,6 +51,11 @@ function App() {
         <Route path="/initial/deposit" element={<Initialpayment />}></Route>
         <Route path="/deposit" element={<Deposit />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route
+          path="/password/recovery/auth"
+          element={<PasswordAuth />}
+        ></Route>
+
         <Route
           path="/application"
           element={isLoggedIn ? <Application /> : <Signin />}
@@ -65,7 +71,7 @@ function App() {
         ></Route>
         <Route
           path="/two-factor/authentication"
-          element={isLoggedIn ? <TwoFactor /> : <Signin />}
+          element={<TwoFactor />}
         ></Route>
         <Route
           path="/comfirmation"
