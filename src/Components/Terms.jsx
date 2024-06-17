@@ -6,7 +6,7 @@ const Terms = ({ callback }) => {
   }, []);
   return (
     <>
-      <section className="h-screen relative max-sm:h-96 bg-gray-100 px-10 max-sm:px-2">
+      <section className="h-auto relative max-sm:h-auto bg-gray-100 px-10 max-sm:px-2">
         <div className="flex mr-3 justify-end  items-center">
           <button className="mt-4 ml-0" onClick={callback}>
             <RemoveRectangle

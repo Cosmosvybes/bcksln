@@ -39,10 +39,7 @@ function App() {
           element={isLoggedIn ? <Verify /> : <Signin />}
         ></Route>
         <Route path="/terms" element={<Terms />}></Route>
-        <Route
-          path="/change/new-password"
-          element={ <Code /> }
-        ></Route>
+        <Route path="/change/new-password" element={<Code />}></Route>
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route
           path="/frontside"
