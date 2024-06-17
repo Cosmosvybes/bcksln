@@ -80,26 +80,27 @@ const Signin = () => {
   return (
     <>
       {!showTerms ? (
-        <div className="relative py-10 max-md:py-0 max-sm:py-0 px-52 max-sm:px-0 h-auto bg-gray-100 ">
+        <div className="relative py-10 max-md:py-0 max-sm:py-0 px-64 max-lg:px-0 max-sm:px-0 h-screen max-sm:h-auto flex flex-col max-lg:gap-2 bg-gray-100 ">
           <button
             className="flex justify-start  max-sm:ml-3 ml-8 items-center py-2"
             onClick={() => history.back()}
           >
             <ArrowLeft className="text-2xl inline" /> back
           </button>
-          <h1 className="text-Black font-semibold text-5xl max-sm:text-4xl ml-8 max-sm:ml-3 ">
+          <h1 className="text-Black font-semibold text-5xl max-sm:text-4xl ml-8 max-sm:ml-2 ">
             {" "}
-            Join us
+            Get started
           </h1>
           <h3 className="text-gray-500 font-extralight text-3xl ml-8 max-sm:text-xs  max-sm:ml-3 ">
-            Sign up a new account
+            Sign up to join us.
           </h3>
-          <div className="flex justify-between gap-2 w-full max-lg:w-auto max-md:w-auto bg-gray-100 mt-2 rounded-md px-8  py-3 max-sm:px-2 max-md:flex-col-reverse max-sm:flex-col">
+
+          <div className="flex justify-between gap-2 w-full  max-lg:w-auto max-md:w-auto bg-gray-100 mt-2 rounded-md px-8  py-3 max-sm:px-2 max-md:flex-col-reverse max-sm:flex-col">
             <div className="relative block">
               <h1 className="text-black font-extralight text-sm  mb-2">
                 Enter your details
               </h1>
-              <div className="relative max-sm:w-full h-auto ml-">
+              <div className="relative max-sm:w-full h-auto ">
                 <Form className="">
                   <Col>
                     <Label>
@@ -140,7 +141,7 @@ const Signin = () => {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="000-000-0000"
-                      className="border  text-xl border-gray-100 w-96 px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
+                      className="border  text-xl border-gray-100 w-96 px-4 py-2 max-lg:w-full rounded-lg outline-gray-400 block max-sm:w-full"
                     />
                     <Label>
                       <b className="text-gray-400 text-sm">Password</b>
@@ -208,7 +209,26 @@ const Signin = () => {
               </div>
             </div>
 
-            <img src={signin} alt="image" className="object-cover " />
+            <div className="relative block w-96 max-md:w-full max-sm:w-full ">
+              <img
+                src={signin}
+                alt="image"
+                className="object-contain h-96 w-full max-md:w-full max-sm:w-full"
+              />
+              <div className="relative  px-2 py-2 w-full">
+                <p className="text-gray-500 max-sm:text-xs text-sm">
+                  Unlock the future you deserve with BucksLoan’s flexible and
+                  affordable loan options! Whether you're planning a dream
+                  vacation, starting a new business, or consolidating debt, we
+                  offer competitive rates and personalized service to help you
+                  reach your financial goals. Apply today and experience a
+                  seamless, hassle-free process with quick approvals and
+                  exceptional customer support. Your dreams are just a click
+                  away—join our community of satisfied customers and take the
+                  first step towards a brighter financial future with BucksLoan!
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       ) : (

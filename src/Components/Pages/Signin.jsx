@@ -45,7 +45,7 @@ const Signin = () => {
 
   return (
     <>
-      <div className="relative py-10 max-md:py-0 max-sm:py-2 px-52 max-sm:px-0 max-md:px-5 flex justify-center flex-col  h-screen bg-gray-100  ">
+      <div className="relative py-10 border max-md:py-0 max-sm:py-2 px-64 max-sm:px-0 max-md:px-5 flex justify-start flex-col  h-screen bg-gray-100 ">
         <h1 className="text-Black font-semibold text-5xl max-sm:ml-2 ml-7 mt-5 max-sm:text-4xl">
           {" "}
           Welcome back
@@ -100,7 +100,7 @@ const Signin = () => {
                       <p>Forgot password?</p>
                       <Link
                         to={"/forgot-password"}
-                        className="text-black text-sm text-left -mt-2  underline block"
+                        className="text-black text-sm text-left -mt-1  underline block"
                       >
                         {" "}
                         click here
@@ -111,7 +111,7 @@ const Signin = () => {
                       <p>Are you new here ?</p>
                       <Link
                         to={"/register"}
-                        className="text-black text-sm text-right underline -mt-2  block"
+                        className="text-black text-sm text-right underline -mt-1  block"
                       >
                         {" "}
                         Create account
@@ -123,7 +123,14 @@ const Signin = () => {
               </Form>
             </div>
           </div>
-          <img src={signin} alt="image" className="object-cover" />
+          <div className="relative block w-96 max-md:w-full max-sm:w-full ">
+            <img src={signin} alt="image" className="object-cover" />
+            <p className="text-gray-500 text-sm max-sm:text-xs">
+              Unlock your potential with BucksLoan! Enjoy quick approvals,
+              competitive rates, and personalized service. Sign in now to take
+              the first step toward achieving your financial goals.
+            </p>
+          </div>
         </div>
       </div>
     </>

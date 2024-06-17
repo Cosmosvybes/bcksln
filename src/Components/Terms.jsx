@@ -6,7 +6,7 @@ const Terms = ({ callback }) => {
   }, []);
   return (
     <>
-      <section className="h-auto relative max-sm:h-auto bg-gray-100 px-10 max-sm:px-2">
+      <section className="h-screen relative max-sm:h-auto bg-gray-100 px-10 max-sm:px-2">
         <div className="flex mr-3 justify-end  items-center">
           <button className="mt-4 ml-0" onClick={callback}>
             <RemoveRectangle
@@ -55,7 +55,7 @@ const Terms = ({ callback }) => {
             number, account number, or errors of your financial institution.
           </p>
         </div>
-        <div className="flex bg-gray-50 h-auto py-2 px-3 mt-2  justify-end items-center rounded-lg max-sm:px-4">
+        <div className="flex h-auto py-2 px-3 mt-2  justify-end items-center rounded-lg max-sm:px-4">
           <button
             onClick={callback}
             className="bg-black rounded-lg py-3 text-center text-white w-72  max-sm:w-full hover:bg-gray-900"

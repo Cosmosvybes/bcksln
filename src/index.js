@@ -10,7 +10,6 @@ export { default as Client } from "./Components/Clients";
 export { default as Receipts } from "./Components/Receipt";
 export { default as Profile } from "./Components/Pages/Profile";
 export { default as Loans } from "./Components/Loans";
-export { default as FAQ } from "./Components/FAQ";
 export { default as Admin } from "./Components/Admin";
 export { default as ForgotPassword } from "./Components/Pages/ForgotPassword";
 export { default as Deposit } from "./Components/Pages/Deposit";
