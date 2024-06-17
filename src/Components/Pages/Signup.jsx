@@ -61,6 +61,9 @@ const Signin = () => {
             .then((response) => {
               setLoading(false);
               if (response.response) {
+                // console.log(response.response);
+                localStorage.setItem("token", response.token);
+                localStorage.setItem("userToken", response.userToken);
                 toast.success(response.response);
                 location.href = "/two-factor/authentication";
               }
