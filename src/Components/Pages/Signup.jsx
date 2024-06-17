@@ -80,7 +80,7 @@ const Signin = () => {
   return (
     <>
       {!showTerms ? (
-        <div className="relative py-10 max-md:py-0 max-sm:py-0 px-64 max-lg:px-0 max-sm:px-0 h-auto max-sm:h-auto flex flex-col max-lg:gap-2 bg-gray-100 ">
+        <div className="relative py-5 max-md:py-0 max-sm:py-0 px-48 max-lg:px-0 max-sm:px-0 h-auto max-sm:h-auto flex flex-col max-lg:gap-2 bg-gray-100 ">
           <button
             className="flex justify-start  max-sm:ml-3 ml-8 items-center py-2"
             onClick={() => history.back()}
