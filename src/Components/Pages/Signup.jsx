@@ -55,15 +55,16 @@ const Signin = () => {
             body: JSON.stringify(userData),
           })
             .then((result) => {
-              if (!result.ok) {
-                throw new Error("internal server error");
-              } else if (result.status === 403) {
-                toast.warn(
-                  "User email already exist, sign in or tyr new e-mail"
-                );
-                return;
+              const { ok, status, json } = result;
+              if (!ok) {
+                if (status == 403) {
+                  throw new Error("User email exist");
+                } else {
+                  throw new Error("internal server errror,try again");
+                }
               }
-              return result.json();
+
+              return json();
             })
             .then((response) => {
               setLoading(false);
@@ -79,7 +80,7 @@ const Signin = () => {
             })
             .catch((err) => {
               setLoading(false);
-              toast.error(err.message);
+              toast.warn(err.message);
             });
         } else {
           setLoading(false);
@@ -92,9 +93,9 @@ const Signin = () => {
   return (
     <>
       {!showTerms ? (
-        <div className="relative py-5 max-md:py-0 max-sm:py-0 px-48 max-lg:px-0 max-sm:px-0 h-auto max-sm:h-auto flex flex-col max-lg:gap-2 bg-gray-100 ">
+        <div className="relative py-5 max-md:py-0 max-sm:py-0 px-48 max-lg:px-0 max-sm:px-0 h-auto max-sm:h-auto  max-lg:gap-0 bg-gray-100">
           <button
-            className="flex justify-start  max-sm:ml-3 ml-8 items-center py-2"
+            className="flex justify-start  max-sm:ml-3 ml-8 items-center py-0"
             onClick={() => history.back()}
           >
             <ArrowLeft className="text-2xl inline" /> back
@@ -103,7 +104,7 @@ const Signin = () => {
             {" "}
             Get started
           </h1>
-          <h3 className="text-gray-500 font-extralight text-3xl ml-8 max-sm:text-xs  max-sm:ml-3 ">
+          <h3 className="text-gray-500 font-extralight text-3xl ml-8 max-sm:text-sm max-sm:ml-3">
             Sign up to join us.
           </h3>
 
