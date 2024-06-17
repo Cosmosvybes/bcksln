@@ -28,12 +28,10 @@ const Signin = () => {
       })
       .then((response) => {
         setLoading(false);
-        if (!response.isAdmin && response.isAuthorised) {
+        if (response.isAuthorised) {
           localStorage.setItem("token", response.token);
           localStorage.setItem("userToken", response.userToken);
           navigate("/two-factor/authentication");
-        } else if (response.isAdmin) {
-          navigate("/administration/account");
         } else {
           toast.warning(response.response);
           setLoading(false);

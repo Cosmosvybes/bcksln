@@ -12,9 +12,7 @@ const TwoFactor = () => {
 
   const handleSubmit = () => {
     const token = localStorage.getItem("token");
-    // https://bck-server.onrender.com
-    //bck-server.onrender.com
-    https: setLoading(true);
+    setLoading(true);
     fetch(`https://bck-server.onrender.com/api/verify/${token}`, {
       method: "POST",
       credentials: "include",
@@ -28,9 +26,13 @@ const TwoFactor = () => {
       })
       .then((response) => {
         setLoading(false);
-        if (response.isAUthenticated && response.user?.isVerified) {
-          // document.cookie =
-          //   "Two_Fa=; expires=Thu, 01 Oct 1970 00:00; path=/api/verify";
+        if (
+          response.user?.isAdmin &&
+          response.isAUthenticated &&
+          response.user?.isVerified
+        ) {
+          navigate("/administration/account");
+        } else if (response.isAUthenticated && response.user?.isVerified) {
           navigate("/dashboard");
           if (!response.user.isVerified) {
             navigate("/welcome");
