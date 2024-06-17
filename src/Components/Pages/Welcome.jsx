@@ -25,7 +25,7 @@ const Welcome = () => {
             <div className="flex justify-center mt-4">
               <Link
                 to={"/verify"}
-                className="bg-black rounded-lg px-4 py-2 text-white hover:bg-gray-800"
+                className="bg-black rounded-lg px-4 py-3 w-72 max-sm:w-full text-center text-white hover:bg-gray-800"
               >
                 Verify Now <ArrowRight className="inline text-2xl" />
               </Link>

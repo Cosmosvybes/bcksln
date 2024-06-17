@@ -10,7 +10,7 @@ import Webcam from "react-webcam";
 import { Link, useNavigate } from "react-router-dom";
 import { ImageDownload } from "react-huge-icons/solid";
 import { toast } from "react-toastify";
-import { Input } from "reactstrap";
+import { Input, Spinner } from "reactstrap";
 
 let userToken = localStorage.getItem("userToken");
 
@@ -18,7 +18,7 @@ const Verifiy = () => {
   const [ssn, setSsn] = useState("");
   const webcameRef = useRef(null);
   const [preview, setPreview] = useState(null);
-  const [switchBtn, setSwitchBtn] = useState(true);
+
   const navigate = useNavigate();
   const handleUpload = () => {
     const imageUrl = webcameRef.current.getScreenshot();
@@ -44,11 +44,14 @@ const Verifiy = () => {
   };
 
   const handleProceed = () => {
+    setIsLoading(true);
     if (!ssn) {
       toast.warn("SSN is missing");
+      setIsLoading(false);
       return;
     } else if (!preview || !imageToServer) {
       toast.warn("upload your verification identity");
+      setIsLoading(false);
       return;
     }
 
@@ -66,7 +69,6 @@ const Verifiy = () => {
       credentials: "include",
     })
       .then((result) => {
-        setIsLoading(true);
         if (!result.ok) {
           throw new Error("Operation failed, internal error");
         }
@@ -90,20 +92,20 @@ const Verifiy = () => {
   return (
     <>
       {showWebCam ? (
-        <div className="relative flex justify-start items-center h-screen max-sm:h-screen flex-col py-2 bg-gray-100 px-44 max-sm:px-2">
-          <img src={heart} alt="heart" className="w-30 h-30 object-cover" />
+        <div className="relative flex justify-start items-center h-screen max-sm:h-screen flex-col  bg-gray-100 px-44 max-sm:px-2">
+          <img src={heart} alt="heart" className="w-30 h-30 object-contain" />
           <RemoveRectangle
             className="text-5xl z-20 max-sm:text-3xl absolute right-20 max-sm:right-6 text-gray-500 top-4"
             onClick={() => history.back()}
           />
 
-          <h1 className="text-Black font-extrabold text-7xl max-md:text-3xl max-sm:text-2xl ">
+          <h1 className="text-Black font-semibold mb-2 text-5xl max-md:text-3xl max-sm:text-2xl ">
             Identity Verification
           </h1>
 
-          <div className="flex h-auto w-full flex-col py-2  bg-gray-200 rounded-md border justify-center items-center px-2 ">
+          <div className="flex h-auto w-full flex-col py-2  bg-gray-50 rounded-md  justify-center items-center px-2 ">
             <div className="flex justify-center items-center mb-2">
-              <p className="mr-2 ">Identity type</p>
+              <p className="mr-2 ">Select identity type</p>
               <select
                 id="identity"
                 className="w-36 border-gray-300 outline-gray-300 rounded-lg px-2 bg-gray-200 py-1"
@@ -113,11 +115,12 @@ const Verifiy = () => {
                 <option>Govt ID</option>
               </select>
             </div>
+         
             <Input
               type="text"
               name="ssn"
-              className="py-2 w-96 max-sm:w-full text-center"
-              placeholder="000-000-0000"
+              className="py-2 w-96 bg-gray-50 max-sm:w-full text-center"
+              placeholder="SSN"
               value={ssn}
               onChange={(e) => setSsn(e.target.value)}
             />
@@ -144,42 +147,38 @@ const Verifiy = () => {
               />
               <p className="ml-2 ">Take selfie</p>
             </div>
+            <div className="flex justify-start gap-1">
+              {imageFilePreview && (
+                <div className="flex w-10 h-10 mt-2">
+                  <img
+                    src={imageFilePreview}
+                    alt="preview"
+                    className="object-cover rounded-md"
+                  />
+                </div>
+              )}
+              {preview && (
+                <div className="flex w-10 h-10 mt-2">
+                  <img
+                    src={preview}
+                    alt="preview"
+                    className="object-cover rounded-md"
+                  />
+                </div>
+              )}
+            </div>
           </div>
-          <div className="flex justify-start gap-1">
-            {imageFilePreview && (
-              <div className="flex w-10 h-10 mt-2">
-                <img
-                  src={imageFilePreview}
-                  alt="preview"
-                  className="object-cover rounded-md"
-                />
-              </div>
-            )}
-            {preview && (
-              <div className="flex w-10 h-10 mt-2">
-                <img
-                  src={preview}
-                  alt="preview"
-                  className="object-cover rounded-md"
-                />
-              </div>
-            )}
-          </div>
+
           <div className="flex justify-center mt-4">
-            {switchBtn ? (
+            {isLoading ? (
+              <Spinner type="border" />
+            ) : (
               <button
-                className="bg-black rounded-lg px-4 py-2 text-white hover:bg-gray-800"
+                className="bg-black rounded-lg px-4 py-3 w-96 max-sm:w-full text-center text-white hover:bg-gray-800"
                 onClick={handleProceed}
               >
-                {isLoading ? "Loading" : "Submit details"}
+                Upload document now
               </button>
-            ) : (
-              <Link
-                to={"/dashboard"}
-                className="bg-black rounded-lg px-4 py-2 text-white duration-300 transition-opacity hover:bg-gray-800"
-              >
-                Continue <ArrowRight className="inline text-2xl" />
-              </Link>
             )}
           </div>
         </div>
