@@ -74,7 +74,7 @@ const Signin = () => {
             })
             .catch((err) => {
               setLoading(false);
-              toast.error(err);
+              toast.error(err.message);
             });
         } else {
           setLoading(false);
