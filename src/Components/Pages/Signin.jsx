@@ -45,14 +45,18 @@ const Signin = () => {
 
   return (
     <>
-      <div className="relative py-10 border max-md:py-0 max-sm:py-2 px-64 max-sm:px-0 max-md:px-5 flex justify-start flex-col  h-screen bg-gray-100 ">
-        <h1 className="text-Black font-semibold text-5xl max-sm:ml-2 ml-7 mt-5 max-sm:text-4xl">
+      <div className="relative py-4 border max-md:py-0 max-sm:py-2 px-64 max-sm:px-0 max-md:px-5 flex justify-start flex-col  h-screen bg-gray-100 ">
+        <h1 className="text-Black font-semibold text-5xl max-sm:ml-2 ml-6 mt-2 max-sm:text-4xl">
           {" "}
           Welcome back
         </h1>
-        <h3 className="text-gray-500 font-extralight text-3xl max-sm:ml-2  ml-8 max-sm:text-2xl mt-1">
-          Sign in to continue
-        </h3>
+        <div className="relative flex justify-start gap-2 max-sm:ml-3  items-center ml-8">
+          <div className="relative h-5 px-0.5 bg-black"></div>
+          <h3 className="text-gray-500 font-extralight text-xl max-sm:text-xl ">
+            Sign in to continue
+          </h3>
+        </div>
+
         <div className="flex justify-between w-full max-sm:w-auto bg-gray-100 mt-2 rounded-md px-8 py-3 max-sm:px-2 max-sm:flex-col">
           <div className="relative block">
             <h1 className="text-black font-extralight text-sm  mb-2">
@@ -110,7 +114,7 @@ const Signin = () => {
                     <div className="relative block">
                       <p>Are you new here ?</p>
                       <Link
-                        to={"/register"}
+                        to={"/register/new/user"}
                         className="text-black text-sm text-right underline -mt-1  block"
                       >
                         {" "}

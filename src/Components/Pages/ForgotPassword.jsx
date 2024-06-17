@@ -14,11 +14,14 @@ const ForgotPasswor = () => {
   const handlePasswordRecovery = async (e) => {
     setIsLoading(true);
     e.preventDefault();
-    let response = await fetch("https://bck-server.onrender.com/api/password-recovery", {
-      method: "PATCH",
-      headers: { "Content-Type": "Application/json" },
-      body: JSON.stringify({ email }),
-    });
+    let response = await fetch(
+      "https://bck-server.onrender.com/api/password-recovery",
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "Application/json" },
+        body: JSON.stringify({ email }),
+      }
+    );
     let data = await response.json();
     if (!response.ok) {
       setIsLoading(false);
@@ -45,12 +48,12 @@ const ForgotPasswor = () => {
             <ArrowLeft className="text-2xl inline " /> back
           </button>
         </div>
-        <h1 className="text-8xl  mt-2 font-extrabold  max-sm:text-4xl mb-2 ml-2">
+        <h1 className="text-Black font-semibold text-5xl max-sm:ml-2 ml-6 mt-2 max-sm:text-4xl">
           Forgot Password
         </h1>
         <div className="flex bg-gray-50 h-96  mt-4 flex-col justify-center items-center rounded-lg max-sm:px-4">
           <MailNotification className="text-5xl max-sm:text-6xl" />
-          <h1 className="text-4xl max-sm:text-3xl mb-1">Mail Address Here</h1>
+          <h1 className="text-4xl max-sm:text-3xl mb-1">Email Address Here</h1>
           <p className="max-sm:text-center max-sm:text-xs">
             Enter your email address for password recovery
           </p>

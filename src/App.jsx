@@ -33,7 +33,7 @@ function App() {
           path="/welcome"
           element={isLoggedIn ? <Welcome /> : <Signin />}
         ></Route>
-        <Route path="/register" element={<Signup />}></Route>
+        <Route path="/register/new/user" element={<Signup />}></Route>
         <Route
           path="/verify"
           element={isLoggedIn ? <Verify /> : <Signin />}

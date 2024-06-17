@@ -93,20 +93,24 @@ const Signin = () => {
   return (
     <>
       {!showTerms ? (
-        <div className="relative py-5 max-md:py-0 max-sm:py-0 px-48 max-lg:px-0 max-sm:px-0 h-auto max-sm:h-auto  max-lg:gap-0 bg-gray-100">
+        <div className="relative py-3 max-md:py-0 max-sm:py-2 px-48 max-lg:px-0 max-sm:px-0 h-auto max-sm:h-auto  max-lg:gap-0 bg-gray-100">
           <button
-            className="flex justify-start  max-sm:ml-3 ml-8 items-center py-0"
+            className="flex justify-start  max-sm:ml-1 mb-4  ml-8 items-center py-0"
             onClick={() => history.back()}
           >
             <ArrowLeft className="text-2xl inline" /> back
           </button>
-          <h1 className="text-Black font-semibold text-5xl max-sm:text-4xl ml-8 max-sm:ml-2 ">
+          <h1 className="text-Black font-semibold text-5xl max-sm:text-4xl ml-6 max-sm:ml-1">
             {" "}
-            Get started
+            Get started{" "}
+            <ArrowRight className="text-5xl max-sm:text-4xl text-gray-400 inline" />
           </h1>
-          <h3 className="text-gray-500 font-extralight text-3xl ml-8 max-sm:text-sm max-sm:ml-3">
-            Sign up to join us.
-          </h3>
+          <div className="relative flex justify-start gap-2 max-sm:ml-2  items-center ml-8">
+            <div className="relative h-5 px-0.5 bg-black"></div>
+            <h3 className="text-gray-500 font-extralight text-xl max-sm:text-xl ">
+              Sign up to join us.
+            </h3>
+          </div>
 
           <div className="flex justify-between gap-2 w-full  max-lg:w-auto max-md:w-auto bg-gray-100 mt-2 rounded-md px-8  py-3 max-sm:px-2 max-md:flex-col-reverse max-sm:flex-col">
             <div className="relative block">
@@ -116,9 +120,9 @@ const Signin = () => {
               <div className="relative max-sm:w-full h-auto ">
                 <Form className="">
                   <Col>
-                    <Label>
+                    {/* <Label> */}
                       <b className="text-gray-400 text-sm">Firstname</b>
-                    </Label>
+                    {/* </Label> */}
                     <Input
                       type="text"
                       value={firstname}
@@ -126,9 +130,9 @@ const Signin = () => {
                       placeholder="Enter your firstname"
                       className="border border-gray-100 w-full m px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                     />
-                    <Label>
+                    {/* <Label> */}
                       <b className="text-gray-400 text-sm">Lastname</b>
-                    </Label>
+                    {/* </Label> */}
                     <Input
                       type="text"
                       value={lastname}
@@ -136,9 +140,9 @@ const Signin = () => {
                       placeholder="Enter your lastname"
                       className="border border-gray-100 w-full m px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                     />
-                    <Label>
+                    {/* <Label> */}
                       <b className="text-gray-400 text-sm">Email</b>
-                    </Label>
+                    {/* </Label> */}
                     <Input
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -146,9 +150,9 @@ const Signin = () => {
                       placeholder="Enter your email"
                       className="border border-gray-100 w-full m px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                     />
-                    <Label>
+                    {/* <Label> */}
                       <b className="text-gray-400 text-sm">Phone</b>
-                    </Label>
+                    {/* </Label> */}
                     <Input
                       type="phone"
                       value={phone}
@@ -156,9 +160,9 @@ const Signin = () => {
                       placeholder="000-000-0000"
                       className="border  text-xl border-gray-100 w-96 px-4 py-2 max-lg:w-full rounded-lg outline-gray-400 block max-sm:w-full"
                     />
-                    <Label>
+                    {/* <Label> */}
                       <b className="text-gray-400 text-sm">Password</b>
-                    </Label>
+                    {/* </Label> */}
                     <Input
                       type="password"
                       value={password}
@@ -166,9 +170,9 @@ const Signin = () => {
                       placeholder="Enter your password"
                       className="border border-gray-100 w-full m px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                     />
-                    <Label>
+                    {/* <Label> */}
                       <b className="text-gray-400 text-sm">Confirm Password</b>
-                    </Label>
+                    {/* </Label> */}
                     <Input
                       type="password"
                       value={comfirmPassword}
@@ -206,13 +210,16 @@ const Signin = () => {
                           onClick={handleSignUp}
                           className=" rounded-lg border duration-300 transition border-black bg-black w-44 max-sm:w-full px-4 py-2  mt-2 text-white hover:bg-gray-800 hover:text-white"
                         >
-                          Sign in
+                          Create account
                           <ArrowRight className="inline text-white hover:text-white" />
                         </Button>
                       )}
-                      <div className="flex justify-start w-full text-gray-500 gap-3 items-center mt-2">
+                      <div className="flex justify-start w-full text-gray-500 gap-3 flex-col mt-2">
                         <p>Already have an account ?</p>
-                        <Link to={"/"} className="text-black   inline mr-2">
+                        <Link
+                          to={"/"}
+                          className="text-black block mr-2 underline -mt-6"
+                        >
                           Sign in
                         </Link>
                       </div>
