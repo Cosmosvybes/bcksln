@@ -20,7 +20,7 @@ const Signin = () => {
     setShowTerms(!showTerms);
   };
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
     const regex = /^([0-9]{3})[-\s]?([0-9]{3})[-\s]?([0-9]{4})$/;
@@ -55,7 +55,10 @@ const Signin = () => {
             body: JSON.stringify(userData),
           })
             .then((result) => {
-              if (!result.ok) throw new Error("Operation failed");
+              if (!result.ok) {
+                let response = result.json();
+                throw new Error(response.response);
+              }
               return result.json();
             })
             .then((response) => {
