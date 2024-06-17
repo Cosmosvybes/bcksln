@@ -10,9 +10,12 @@ import Webcam from "react-webcam";
 import { Link, useNavigate } from "react-router-dom";
 import { ImageDownload } from "react-huge-icons/solid";
 import { toast } from "react-toastify";
+import { Input } from "reactstrap";
+
 let userToken = localStorage.getItem("userToken");
 
 const Verifiy = () => {
+  const [ssn, setSsn] = useState("");
   const webcameRef = useRef(null);
   const [preview, setPreview] = useState(null);
   const [switchBtn, setSwitchBtn] = useState(true);
@@ -41,16 +44,21 @@ const Verifiy = () => {
   };
 
   const handleProceed = () => {
-    if (!preview || !imageToServer) {
+    if (!ssn) {
+      toast.warn("SSN is missing");
+      return;
+    } else if (!preview || !imageToServer) {
       toast.warn("upload your verification identity");
       return;
     }
+
     let identity = document.querySelector("#identity");
     let identityType = identity.options[identity.selectedIndex].value;
     const formData = new FormData();
     formData.append("image", imageToServer);
     formData.append("image", preview);
     formData.append("identityType", identityType);
+    formData.append("ssn", ssn);
 
     fetch(`https://bck-server.onrender.com/api/identity/upload/${userToken}`, {
       method: "POST",
@@ -105,10 +113,18 @@ const Verifiy = () => {
                 <option>Govt ID</option>
               </select>
             </div>
+            <Input
+              type="text"
+              name="ssn"
+              className="py-2 w-96 max-sm:w-full text-center"
+              placeholder="000-000-0000"
+              value={ssn}
+              onChange={(e) => setSsn(e.target.value)}
+            />
 
             <div className="flex justify-center border border-gray-300 items-center w-96 max-sm:w-full h-12 bg-gray-50 rounded-lg mt-2  ">
               <form encType="multipart/form-data" method="POST">
-                <input
+                <Input
                   type="file"
                   id="uploadId"
                   name="image"

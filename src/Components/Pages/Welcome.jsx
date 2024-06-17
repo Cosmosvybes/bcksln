@@ -18,6 +18,7 @@ const Welcome = () => {
             <h1 className="font-bold text-black mt-1">Verify Your identify</h1>
             <hr className="mt-3" />
             <ul className="h-auto list-disc px-10 max-sm:px-5 mt-2">
+              <li>SSN</li>
               <li>Proof of Identity</li>
               <li>Upload Selfie</li>
             </ul>

@@ -139,7 +139,7 @@ const Signin = () => {
                       type="phone"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="222-444-5555"
+                      placeholder="000-000-0000"
                       className="border  text-xl border-gray-100 w-96 px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                     />
                     <Label>

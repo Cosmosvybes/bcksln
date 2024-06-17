@@ -50,7 +50,7 @@ const Signin = () => {
           {" "}
           Welcome back
         </h1>
-        <h3 className="text-gray-500 font-extralight text-3xl max-sm:ml-3  ml-8 max-sm:text-2xl  mt-3">
+        <h3 className="text-gray-500 font-extralight text-3xl max-sm:ml-2  ml-8 max-sm:text-2xl mt-1">
           Sign in to continue
         </h3>
         <div className="flex justify-between w-full max-sm:w-auto bg-gray-100 mt-2 rounded-md px-8 py-3 max-sm:px-2 max-sm:flex-col">
@@ -100,7 +100,7 @@ const Signin = () => {
                       <p>Forgot password?</p>
                       <Link
                         to={"/forgot-password"}
-                        className="text-black text-sm  underline block mt-1"
+                        className="text-black text-sm text-left -mt-2  underline block"
                       >
                         {" "}
                         click here
@@ -111,7 +111,7 @@ const Signin = () => {
                       <p>Are you new here ?</p>
                       <Link
                         to={"/register"}
-                        className="text-black text-sm underline  block"
+                        className="text-black text-sm text-right underline -mt-2  block"
                       >
                         {" "}
                         Create account
