@@ -56,24 +56,25 @@ const Signin = () => {
           })
             .then((result) => {
               if (!result.ok) {
-                let response = result.json();
-                throw new Error(response.response);
+                throw new Error("internal server error");
               }
               return result.json();
             })
             .then((response) => {
               setLoading(false);
               if (response.response) {
-                // console.log(response.response);
                 localStorage.setItem("token", response.token);
                 localStorage.setItem("userToken", response.userToken);
                 toast.success(response.response);
                 location.href = "/two-factor/authentication";
+              } else {
+                toast.warn(response.response);
+                setLoading(false);
               }
             })
             .catch((err) => {
               setLoading(false);
-              toast.error(err.message);
+              toast.error(err);
             });
         } else {
           setLoading(false);
