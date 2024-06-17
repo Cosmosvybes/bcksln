@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { HomeFilter, MenuLineHorizontal } from "react-huge-icons/solid";
 import Button from "./Button";
 import { Loans, Receipts } from "..";
-import { ArrowBackCircle, Receipt } from "react-huge-icons/outline";
+import { ArrowBackCircle } from "react-huge-icons/outline";
 import Clients from "./Clients";
 
 const Admin = () => {
@@ -32,7 +32,7 @@ const Admin = () => {
   };
 
   const view = <div className="relative">{handleView()}</div>;
-  
+
   const handlePageNavigate = (name) => {
     const pageSelected = pages.find((page) => page.pageName === name);
     setPage(pageSelected.pageName);

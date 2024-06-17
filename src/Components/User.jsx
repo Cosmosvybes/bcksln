@@ -1,9 +1,4 @@
-import {
-  BadgePercent,
-  CheckCircle,
-  InformationCircle,
-  Mail,
-} from "react-huge-icons/solid";
+import { CheckCircle, InformationCircle, Mail } from "react-huge-icons/solid";
 import { Spinner } from "reactstrap";
 
 const User = ({
@@ -38,25 +33,26 @@ const User = ({
       <div className="flex  justify-start items-center gap-2">
         <h1>ID Type : {IDType}</h1>
       </div>
-      <div className="flex  justify-start items-center gap-2">
+      <div className="flex  justify-start items-center gap-2 text-xl">
         {" "}
-        Name
+        Name:
         <h1> {firstname}</h1>
         <h1> {lastname}</h1>
       </div>
       <div className="flex items-center  justify-start gap-2">
         <Mail className="inline  text-3xl " />
-        <h3 className="max-sm:text-xs text-center"> Email :{email}</h3>
+        <h3 className="max-sm:text-sm text-center text-xl"> Email:{email}</h3>
       </div>
       <div className="flex items-center  justify-start gap-2">
         <InformationCircle className="inline text-3xl " />
-        <p className="text-center ">
-          Status{" "}
+        <p className="text-center text-xl ">
+          Status:{" "}
           <span style={{ color: isVerified ? "green" : "Brown" }}>
             {isVerified ? (
               <p className="inline text-gray-400">
                 {" "}
-                Approved <CheckCircle className="text-xl text-green-500 inline" />{" "}
+                Approved{" "}
+                <CheckCircle className="text-xl text-green-500 inline" />{" "}
               </p>
             ) : (
               "Pending"
@@ -80,7 +76,7 @@ const User = ({
           {!isVerified && (
             <button
               onClick={() => approve(id)}
-              className="text-green-600 bg-green-300 hover:bg-green-700 rounded-md px-3 py-2"
+              className="text-green-600 bg-green-300 hover:bg-green-700 rounded-md px-3 py-2 text-xl"
             >
               Approve
             </button>

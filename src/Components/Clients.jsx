@@ -55,21 +55,27 @@ const Clients = () => {
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-2  max-sm:grid-cols-1  py-2 px-2  bg-gray-50 h-auto">
-            {users.map((data, i) => (
-              <div className="relative" key={i}>
-                <User
-                  firstname={data.user.firstname}
-                  lastname={data.user.lastname}
-                  IDType={data.identityType}
-                  isVerified={data.isVerified}
-                  email={data.email}
-                  photo={data.photos}
-                  id={data.email}
-                  reject={handleReject}
-                  approve={handleApprov}
-                />
+            {users.length > 0 ? (
+              <div className="relative">
+                {users.map((data, i) => (
+                  <div className="relative" key={i}>
+                    <User
+                      firstname={data.user.firstname}
+                      lastname={data.user.lastname}
+                      IDType={data.identityType}
+                      isVerified={data.isVerified}
+                      email={data.email}
+                      photo={data.photos}
+                      id={data.email}
+                      reject={handleReject}
+                      approve={handleApprov}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            ) : (
+              <p className="text-gray-400 text-center">No payment receipt record yet!</p>
+            )}
           </div>
         )}
       </section>

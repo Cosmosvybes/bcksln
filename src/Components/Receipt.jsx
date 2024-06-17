@@ -23,13 +23,14 @@ const Receipt = () => {
       return;
     }
     let okayResponse = await response.json();
+    console.log(okayResponse);
     toast.success(okayResponse.response);
   };
 
   const handleReject = async (id) => {
     dispatch(approveHandler({ id: id }));
     let response = await fetch(
-      `https://bck-server.onrender.com/reject-downpayment/${id}`,
+      `https://bck-server.onrender.com/api/reject-downpayment/${id}`,
       { method: "PATCH", credentials: "include" }
     );
     if (!response.ok) {

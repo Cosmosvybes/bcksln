@@ -12,34 +12,35 @@ const PaymentReceipt = ({
 }) => {
   return (
     <>
-      <div className="flex max-sm:w-auto justify-start py-2 max-sm: h-auto  px-2 flex-col bg-gray-100 rounded-md gap-2">
+      <div className="flex max-sm:w-auto justify-start py-2 max-sm:h-auto  px-2 flex-col bg-gray-100 rounded-md gap-2">
         <p className=" rounded-md  py-1 text-green-700 "> Payment Receipt</p>
         <div className="relative py-0.5 w-10 bg-green-700 -mt-2"></div>
         <p> Photos</p>
         <div
-          className={`justify-start items-center grid ${
+          className={`justify-start items-center gap-2 grid ${
             typeof photo == "object" ? "grid-cols-2" : "grid-cols-1"
           } `}
         >
           {typeof photo === "object" ? (
             photo.map((photoImage, i) => (
               <div className="relative" key={i}>
-                <img
-                  src={photoImage}
-                  alt="image"
-                  className="w-10 h-10 object-contain"
-                />
+                <a href={photoImage}>
+                  <img
+                    src={photoImage}
+                    alt="image"
+                    className="w-30 h-30 object-contain"
+                  />
+                </a>
               </div>
             ))
           ) : (
-            <img
-              src={photo}
-              alt="image"
-              className="w-10 h-10 object-contain "
-            />
+            <img src={photo} alt="image" className="w-20 h-20 object-contain" />
           )}
         </div>
         <div className="flex justify-start items-center gap-2">
+          <h1 className="text-gray-400 text-2xl"> Sender name : {firstname}</h1>
+        </div>
+        <div className="flex justify-start items-center gap-2 text-gray-400">
           Payment Status :
           <h1
             className={`${
@@ -58,17 +59,17 @@ const PaymentReceipt = ({
             )}
           </h1>
         </div>
-        <div className="flex justify-start items-center gap-2">
-          <h1> Sender name : {firstname}</h1>
-        </div>
+
         <div className="flex items-center justify-start gap-2">
           <Mail className="inline text-2xl" />
-          <h3 className="max-sm:text-xs text-center">Email {email}</h3>
+          <h3 className="max-sm:text-xl text-center text-gray-400">
+            Email: {email}
+          </h3>
         </div>
         <div className="flex items-center justify-start gap-2">
           <MoneyDollar className="inline text-2xl" />
-          <h3 className="max-sm:text-xs text-center">
-            Payment Amount ${amount}
+          <h3 className="max-sm:text-xl text-center text-gray-400">
+            Payment Amount: ${amount}
           </h3>
           {/* </p> */}
         </div>
@@ -77,7 +78,7 @@ const PaymentReceipt = ({
           {isVerified && (
             <button
               onClick={() => reject(id)}
-              className="bg-red-500 px-3 py-2 rounded-md text-white"
+              className="bg-red-500 px-3 max-sm:w-full max-md:w-full max-lg:w-full  py-2 rounded-md text-white"
             >
               Reject
             </button>
@@ -85,7 +86,7 @@ const PaymentReceipt = ({
           {!isVerified && (
             <button
               onClick={() => approve(id, serverId)}
-              className="text-green-600 bg-green-300 rounded-md px-3 py-2"
+              className="bg-green-500 px-3 max-sm:w-full max-md:w-full max-lg:w-full  py-2 rounded-md text-white"
             >
               Approve
             </button>

@@ -1,4 +1,5 @@
 // import { BookOpenInfo } from "react-huge-icons/outline";
+import { UserCircle } from "react-huge-icons/solid";
 import {
   ArrowRight,
   Atm,
@@ -29,7 +30,7 @@ const LoanDetails = ({
         <div className="relative ml-0 py-0.5 w-10 bg-green-700 -mt-1"></div>
         <div className="flex justify-start items-center gap-2">
           {" "}
-          Status <ArrowRight className="inline text-gray-400 text-2xl" />{" "}
+          Status <ArrowRight className="inline text-gray-400 text-4xl" />{" "}
           <p
             className={`text-xs px-1 py-1 w-18 rounded-md font-thin ${
               status ? "text-green-500" : "text-amber-600"
@@ -39,41 +40,41 @@ const LoanDetails = ({
           </p>
         </div>
         <div className="flex justify-start items-center gap-2">
-          <Mail className="inline text-amber-500 text-2xl " />
-          <h1 className=" text-center text-gray-400 ">Email {email}</h1>
+          <Mail className="inline text-amber-500 text-4xl " />
+          <h1 className=" text-center text-gray-400  text-sm">Email {email}</h1>
           {/* <h1> {lastname}</h1> */}
         </div>
         <div className="flex justify-start items-center gap-2">
-          <Mail className="inline text-amber-500 text-2xl " />
-          <h1 className=" text-center text-gray-400 ">
+          <UserCircle className="inline text-amber-500 text-4xl " />
+          <h1 className=" text-center text-gray-400 text-xl ">
             Name {user.firstname} {user.lastname}
           </h1>
           {/* <h1> {lastname}</h1> */}
         </div>
         <div className="flex items-center justify-start gap-2">
-          <InformationPolygon className="inline text-amber-500 text-2xl " />
-          <h3 className=" text-center text-gray-400 ">Loan Type: {loanType}</h3>
+          <InformationPolygon className="inline text-amber-500 text-4xl " />
+          <h3 className=" text-center text-gray-400 text-xl ">Loan Type: {loanType}</h3>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <MoneyDollar className="inline text-amber-500 text-2xl " />
-          <p className="text-center text-gray-400  ">Amount :${amount}</p>
+          <MoneyDollar className="inline text-amber-500 text-4xl " />
+          <p className="text-center text-gray-400 text-xl  ">Amount :${amount}</p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <DocumentText className="inline text-amber-500 text-2xl " />
-          <p className="text-center text-gray-400  ">
+          <DocumentText className="inline text-amber-500 text-4xl " />
+          <p className="text-center text-gray-400 text-xl  ">
             Loan term : {term} Months
           </p>
         </div>
         <div className="flex items-center justify-start gap-2">
-          <MoneyDollar className="inline text-amber-500 text-2xl " />
-          <p className="text-center text-gray-400  ">
+          <MoneyDollar className="inline text-amber-500 text-4xl " />
+          <p className="text-center text-gray-400 text-xl ">
             Monthly Payment:${monthlyPay}
           </p>
         </div>
 
         <div className="flex  justify-start gap-2">
-          <Atm className="inline text-amber-500 text-2xl " />
-          <p className="text-center text-gray-400  text-xs ">
+          <Atm className="inline text-amber-500 text-4xl " />
+          <p className="text-center text-gray-400  text-sm">
             Pay Method: {paymentMethod}
           </p>
         </div>
