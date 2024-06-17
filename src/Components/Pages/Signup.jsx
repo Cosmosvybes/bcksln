@@ -57,6 +57,11 @@ const Signin = () => {
             .then((result) => {
               if (!result.ok) {
                 throw new Error("internal server error");
+              } else if (result.status === 403) {
+                toast.warn(
+                  "User email already exist, sign in or tyr new e-mail"
+                );
+                return;
               }
               return result.json();
             })
