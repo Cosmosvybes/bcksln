@@ -1,12 +1,13 @@
-import { ArrowLeft, ArrowRight } from "react-huge-icons/outline";
+import { ArrowRight } from "react-huge-icons/outline";
 import signin from "../../assets/signin.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { toast } from "react-toastify";
 import { Button, Col, Form, Input, Label, Spinner } from "reactstrap";
 
 const Signin = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,14 +28,15 @@ const Signin = () => {
       })
       .then((response) => {
         setLoading(false);
-        if (response.isAuthorised) {
+        if (!response.isAdmin && response.isAuthorised) {
           localStorage.setItem("token", response.token);
           localStorage.setItem("userToken", response.userToken);
-          location.href = "/two-factor/authentication";
+          navigate("/two-factor/authentication");
+        } else if (response.isAdmin) {
+          navigate("/administration/account");
         } else {
           toast.warning(response.response);
           setLoading(false);
-          // setResponse(response.response);
         }
       })
       .catch((err) => {
