@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useLayoutEffect, useState } from "react";
 import { HomeFilter, Logout, MenuLineHorizontal } from "react-huge-icons/solid";
 import Button from "./Button";
 import { Loans, Receipts } from "..";
@@ -6,6 +6,8 @@ import { ArrowBackCircle } from "react-huge-icons/outline";
 import Clients from "./Clients";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "reactstrap";
+import { isLoggedIn } from "./Auth/Auth.controller";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -60,73 +62,33 @@ const Admin = () => {
     if (!localStorage.getItem("userToken")) navigate("/");
     toast.success("account signed out");
   };
+
+  useLayoutEffect(() => {
+    function reloadPage() {
+      return navigate("/administration/account");
+    }
+    reloadPage();
+  }, []);
   return (
     <>
-      <section className="bg-gray-100  scroll-smooth">
-        {!menuSwitch && (
-          <div className="h-10 hidden fixed z-20 top-0 right-0 max-sm:block bg-transparent   w-full">
-            <MenuLineHorizontal
-              className="text-5xl absolute right-0 text-amber-500"
-              onClick={handleSwitch}
-            />
-          </div>
-        )}
-
-        {menuSwitch && (
-          <div
-            className={`absolute max-sm:flex max-md:flex max-lg:flex flex-col hidden justify-between left-0 top-0 z-10 ${
-              menuSwitch ? "w-72" : "w-0"
-            } transition duration-300 h-screen bg-amber-500`}
-          >
-            <div className="relative w-full  gap-1 flex flex-col h-full">
-              {pages.map((page, i) => (
-                <div className="relative" key={i}>
-                  <Button
-                    name={page.pageName}
-                    view={handlePageNavigate}
-                    isSelected={page.isSlected}
-                  />
-                </div>
-              ))}
+      <Suspense fallback={!isLoggedIn && <Spinner type="border" />}>
+        <section className="bg-gray-100  scroll-smooth">
+          {!menuSwitch && (
+            <div className="h-10 hidden fixed z-20 top-0 right-0 max-sm:block bg-transparent   w-full">
+              <MenuLineHorizontal
+                className="text-5xl absolute right-0 text-amber-500"
+                onClick={handleSwitch}
+              />
             </div>
+          )}
 
-            <ArrowBackCircle
-              onClick={handleSwitch}
-              className="text-4xl text-amber-950 absolute right-2 top-2"
-            />
-
-            <div className="relative   flex-col px-2 ">
-              {" "}
-              <div className="relative flex justify-start  ">
-                <HomeFilter className="inline text-amber-700" />
-                <h1 className="text-sm  text-amber-700 font-semibold">
-                  Admin {"/"}
-                  {""} {page}
-                </h1>
-              </div>
-              <p className=" text-amber-700">
-                Bucksloan &copy; {new Date().getFullYear}
-              </p>
-            </div>
-            <button
-              className="text-amber-500 bg-red-500 py-3 px-2 text-left"
-              onClick={handleLogout}
+          {menuSwitch && (
+            <div
+              className={`absolute max-sm:flex max-md:flex max-lg:flex flex-col hidden justify-between left-0 top-0 z-10 ${
+                menuSwitch ? "w-72" : "w-0"
+              } transition duration-300 h-screen bg-amber-500`}
             >
-              {" "}
-              <Logout className="inline text-3xl text-amber-500" />
-              Sign out
-            </button>
-          </div>
-        )}
-        <div className="flex w-full justify-between flex-col h-screen   bg-amber-500 ">
-          <div className="relative w-full bg-gray-100 h-screen flex justify-between">
-            <div className="flex flex-col w-96  bg-amber-300 max-sm:hidden ">
-              <div className="relative h-24 flex items-center mb-1  bg-amber-700">
-                <h1 className="text-2xl font-bold text-amber-300 ml-5">
-                  Admin Data
-                </h1>
-              </div>
-              <div className="relative w-full   gap-1 flex flex-col h-full">
+              <div className="relative w-full  gap-1 flex flex-col h-full">
                 {pages.map((page, i) => (
                   <div className="relative" key={i}>
                     <Button
@@ -138,7 +100,12 @@ const Admin = () => {
                 ))}
               </div>
 
-              <div className="relative h-52  flex-col px-2 ">
+              <ArrowBackCircle
+                onClick={handleSwitch}
+                className="text-4xl text-amber-950 absolute right-2 top-2"
+              />
+
+              <div className="relative   flex-col px-2 ">
                 {" "}
                 <div className="relative flex justify-start  ">
                   <HomeFilter className="inline text-amber-700" />
@@ -152,20 +119,64 @@ const Admin = () => {
                 </p>
               </div>
               <button
-                className="text-amber-500 bg-red-500 py-3 px-2 text-left"
+                className="text-red-500 bg-red-100 py-3 px-2 text-left"
                 onClick={handleLogout}
               >
                 {" "}
-                <Logout className="inline text-3xl text-amber-500" />
+                <Logout className="inline text-3xl text-red-500" />
                 Sign out
               </button>
             </div>
-            <div className="w-full main h-auto py-2 overflow-y-auto ">
-              {view}
+          )}
+          <div className="flex w-full justify-between flex-col h-screen   bg-amber-500 ">
+            <div className="relative w-full bg-gray-100 h-screen flex justify-between">
+              <div className="flex flex-col w-96  bg-amber-300 max-sm:hidden ">
+                <div className="relative h-24 flex items-center mb-1  bg-amber-700">
+                  <h1 className="text-2xl font-bold text-amber-300 ml-5">
+                    Admin Data
+                  </h1>
+                </div>
+                <div className="relative w-full   gap-1 flex flex-col h-full">
+                  {pages.map((page, i) => (
+                    <div className="relative" key={i}>
+                      <Button
+                        name={page.pageName}
+                        view={handlePageNavigate}
+                        isSelected={page.isSlected}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="relative h-52  flex-col px-2 ">
+                  {" "}
+                  <div className="relative flex justify-start  ">
+                    <HomeFilter className="inline text-amber-700" />
+                    <h1 className="text-sm  text-amber-700 font-semibold">
+                      Admin {"/"}
+                      {""} {page}
+                    </h1>
+                  </div>
+                  <p className=" text-amber-700">
+                    Bucksloan &copy; {new Date().getFullYear}
+                  </p>
+                </div>
+                <button
+                  className="text-red-500 bg-red-100 py-3 px-2 text-left"
+                  onClick={handleLogout}
+                >
+                  {" "}
+                  <Logout className="inline text-3xl text-red-500" />
+                  Sign out
+                </button>
+              </div>
+              <div className="w-full main h-auto py-2 overflow-y-auto ">
+                {view}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Suspense>
     </>
   );
 };
