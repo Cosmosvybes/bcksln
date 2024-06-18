@@ -62,15 +62,15 @@ const PaymentReceipt = ({
 
         <div className="flex items-center justify-start gap-2">
           <Mail className="inline text-2xl" />
-          <h3 className="max-sm:text-xl text-center text-gray-400">
+          <h4 className="max-sm:text-sm text-center text-gray-400">
             Email: {email}
-          </h3>
+          </h4>
         </div>
         <div className="flex items-center justify-start gap-2">
           <MoneyDollar className="inline text-2xl" />
-          <h3 className="max-sm:text-xl text-center text-gray-400">
+          <h4 className="max-sm:text-xl text-center text-gray-400">
             Payment Amount: ${amount}
-          </h3>
+          </h4>
           {/* </p> */}
         </div>
 

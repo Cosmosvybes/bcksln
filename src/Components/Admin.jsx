@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { HomeFilter, MenuLineHorizontal } from "react-huge-icons/solid";
+import { HomeFilter, Logout, MenuLineHorizontal } from "react-huge-icons/solid";
 import Button from "./Button";
 import { Loans, Receipts } from "..";
 import { ArrowBackCircle } from "react-huge-icons/outline";
 import Clients from "./Clients";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState("Registered users");
   const [pages] = useState([
     {
@@ -15,6 +18,7 @@ const Admin = () => {
     },
     { id: 2, pageName: "Loan application", isSlected: false },
     { id: 3, pageName: "Payment Receipt", isSlected: false },
+
     ,
   ]);
 
@@ -50,6 +54,12 @@ const Admin = () => {
     });
   };
 
+  //sign out
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    if (!localStorage.getItem("userToken")) navigate("/");
+    toast.success("account signed out");
+  };
   return (
     <>
       <section className="bg-gray-100  scroll-smooth">
@@ -68,7 +78,7 @@ const Admin = () => {
               menuSwitch ? "w-72" : "w-0"
             } transition duration-300 h-screen bg-amber-500`}
           >
-            <div className="relative w-full   gap-1 flex flex-col h-full">
+            <div className="relative w-full  gap-1 flex flex-col h-full">
               {pages.map((page, i) => (
                 <div className="relative" key={i}>
                   <Button
@@ -98,6 +108,14 @@ const Admin = () => {
                 Bucksloan &copy; {new Date().getFullYear}
               </p>
             </div>
+            <button
+              className="text-amber-500 bg-red-500 py-3 px-2 text-left"
+              onClick={handleLogout}
+            >
+              {" "}
+              <Logout className="inline text-3xl text-amber-500" />
+              Sign out
+            </button>
           </div>
         )}
         <div className="flex w-full justify-between flex-col h-screen   bg-amber-500 ">
@@ -133,6 +151,14 @@ const Admin = () => {
                   Bucksloan &copy; {new Date().getFullYear}
                 </p>
               </div>
+              <button
+                className="text-amber-500 bg-red-500 py-3 px-2 text-left"
+                onClick={handleLogout}
+              >
+                {" "}
+                <Logout className="inline text-3xl text-amber-500" />
+                Sign out
+              </button>
             </div>
             <div className="w-full main h-auto py-2 overflow-y-auto ">
               {view}

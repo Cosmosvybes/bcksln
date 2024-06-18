@@ -23,7 +23,6 @@ const Receipt = () => {
       return;
     }
     let okayResponse = await response.json();
-    console.log(okayResponse);
     toast.success(okayResponse.response);
   };
 

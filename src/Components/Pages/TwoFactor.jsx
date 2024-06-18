@@ -32,6 +32,7 @@ const TwoFactor = () => {
           response.user?.isVerified
         ) {
           navigate("/administration/account");
+          
         } else if (response.isAUthenticated && response.user?.isVerified) {
           navigate("/dashboard");
           if (!response.user.isVerified) {
