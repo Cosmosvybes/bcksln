@@ -25,10 +25,13 @@ import Profile from "./Profile";
 import { useNavigate } from "react-router-dom";
 import ReviewPage from "./ReviewPage";
 import { toast } from "react-toastify";
+import { Spinner } from "reactstrap";
 
 const Dashboard = () => {
   let navigate = useNavigate();
-  const { user, accountCard } = useSelector((state) => state.userSlice);
+  const { user, isLoading, accountCard } = useSelector(
+    (state) => state.userSlice
+  );
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -124,6 +127,7 @@ const Dashboard = () => {
 
           <h1 className="text-4xl max-sm:text-xl text-gray-100 font-extrabold">
             $ {user.accountBalance}
+            .00
           </h1>
           <div className="flex flex-col justify-start">
             <strong className="text-sm font-bold text-gray-50">
@@ -360,7 +364,15 @@ const Dashboard = () => {
           {dashboardContainer}
         </section>
       ) : (
-        <ReviewPage />
+        <div className="relative">
+          {isLoading ? (
+            <div className="relative flex justify-center h-screen items-center">
+              <Spinner type="border" />
+            </div>
+          ) : (
+            <ReviewPage />
+          )}
+        </div>
       )}
     </>
   );
