@@ -53,10 +53,7 @@ function App() {
           element={<PasswordAuth />}
         ></Route>
 
-        <Route
-          path="/application"
-          element={isLoggedIn ? <Application /> : <Signin />}
-        ></Route>
+        <Route path="/application" element={<Application />}></Route>
 
         <Route
           path="/administration/account"
