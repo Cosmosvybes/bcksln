@@ -115,7 +115,7 @@ const Signin = () => {
                       <p className=" text-gray-500">Are you new here ?</p>
                       <Link
                         to={"/register/new/user"}
-                        className="text-gray-700 text-sm text-left -mt-1  underline block"
+                        className="text-gray-700 text-sm text-right -mt-1  underline block"
                       >
                         {" "}
                         Create account
