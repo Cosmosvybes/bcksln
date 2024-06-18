@@ -101,21 +101,21 @@ const Signin = () => {
                   )}
                   <div className="flex w-96  mt-3 max-sm:w-auto  justify-between px-1">
                     <div className="relative block">
-                      <p>Forgot password?</p>
+                      <p className=" text-gray-500">Forgot password?</p>
                       <Link
                         to={"/forgot-password"}
-                        className="text-black text-sm text-left -mt-1  underline block"
+                        className="text-gray-700 text-sm text-left -mt-1  underline block"
                       >
                         {" "}
-                        click here
+                        Click here
                       </Link>
                     </div>
 
                     <div className="relative block">
-                      <p>Are you new here ?</p>
+                      <p className=" text-gray-500">Are you new here ?</p>
                       <Link
                         to={"/register/new/user"}
-                        className="text-black text-sm text-right underline -mt-1  block"
+                        className="text-gray-700 text-sm text-left -mt-1  underline block"
                       >
                         {" "}
                         Create account

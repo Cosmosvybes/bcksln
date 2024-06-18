@@ -121,7 +121,7 @@ const Signin = () => {
                 <Form className="">
                   <Col>
                     {/* <Label> */}
-                      <b className="text-gray-400 text-sm">Firstname</b>
+                    <b className="text-gray-400 text-sm">Firstname</b>
                     {/* </Label> */}
                     <Input
                       type="text"
@@ -131,7 +131,7 @@ const Signin = () => {
                       className="border border-gray-100 w-full m px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                     />
                     {/* <Label> */}
-                      <b className="text-gray-400 text-sm">Lastname</b>
+                    <b className="text-gray-400 text-sm">Lastname</b>
                     {/* </Label> */}
                     <Input
                       type="text"
@@ -141,7 +141,7 @@ const Signin = () => {
                       className="border border-gray-100 w-full m px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                     />
                     {/* <Label> */}
-                      <b className="text-gray-400 text-sm">Email</b>
+                    <b className="text-gray-400 text-sm">Email</b>
                     {/* </Label> */}
                     <Input
                       value={email}
@@ -151,7 +151,7 @@ const Signin = () => {
                       className="border border-gray-100 w-full m px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                     />
                     {/* <Label> */}
-                      <b className="text-gray-400 text-sm">Phone</b>
+                    <b className="text-gray-400 text-sm">Phone</b>
                     {/* </Label> */}
                     <Input
                       type="phone"
@@ -161,7 +161,7 @@ const Signin = () => {
                       className="border  text-xl border-gray-100 w-96 px-4 py-2 max-lg:w-full rounded-lg outline-gray-400 block max-sm:w-full"
                     />
                     {/* <Label> */}
-                      <b className="text-gray-400 text-sm">Password</b>
+                    <b className="text-gray-400 text-sm">Password</b>
                     {/* </Label> */}
                     <Input
                       type="password"
@@ -171,7 +171,7 @@ const Signin = () => {
                       className="border border-gray-100 w-full m px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                     />
                     {/* <Label> */}
-                      <b className="text-gray-400 text-sm">Confirm Password</b>
+                    <b className="text-gray-400 text-sm">Confirm Password</b>
                     {/* </Label> */}
                     <Input
                       type="password"
@@ -214,13 +214,13 @@ const Signin = () => {
                           <ArrowRight className="inline text-white hover:text-white" />
                         </Button>
                       )}
-                      <div className="flex justify-start w-full text-gray-500 gap-3 flex-col mt-2">
-                        <p>Already have an account ?</p>
+                      <div className="flex justify-start w-full text-gray-500 gap-1  flex-col mt-2">
+                        <p className="ml-2 text-gray-500">Already have an account ?</p>
                         <Link
                           to={"/"}
-                          className="text-black block mr-2 underline -mt-6"
+                          className=" text-sm text-gray-700 text-left -mt-2 underline ml-2  block"
                         >
-                          Sign in
+                          Sign in here
                         </Link>
                       </div>
                     </div>
