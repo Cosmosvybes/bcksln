@@ -1,11 +1,18 @@
 import { useLayoutEffect, useState } from "react";
-import { ArrowLeft, ArrowRight } from "react-huge-icons/outline";
+import { ArrowRight } from "react-huge-icons/outline";
 import deposit from "../../assets/support.webp";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Spinner } from "reactstrap";
 
 const Application = () => {
+  useLayoutEffect(() => {
+    function reloadPage() {
+      return navigate("/application");
+    }
+    reloadPage();
+  }, []);
+
   let navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [loanTypes] = useState([

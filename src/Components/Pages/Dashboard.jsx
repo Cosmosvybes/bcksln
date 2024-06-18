@@ -103,14 +103,6 @@ const Dashboard = () => {
           <div className="relative">
             <NotificationWithCircle className="text-amber-700 text-3xl" />
           </div>
-
-          {/* <Link to={"/profile"} className="">
-            <img
-              src={picture}
-              alt="profil picture"
-              className="w-20 h-20 object-cover rounded-full max-sm:w-16 max-sm:h-16 max-sm:rounded-full"
-            />
-          </Link> */}
         </div>
         <div className="flex mt-2 bg-amber-600 h-auto w-full rounded-lg   flex-col gap-2 justify-between py-2  px-10 max-sm:px-2">
           <div className="flex justify-between items-center w-full">
