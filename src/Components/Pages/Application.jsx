@@ -328,8 +328,6 @@ const Application = () => {
                 onChange={handleAmount}
               >
                 <option>0</option>
-                <option>2000</option>
-                <option>3000</option>
                 <option>5000</option>
                 <option>10000</option>
                 <option>20000</option>
