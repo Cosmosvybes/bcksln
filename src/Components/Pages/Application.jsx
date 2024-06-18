@@ -10,9 +10,10 @@ const Application = () => {
   const [loading, setLoading] = useState(false);
   const [loanTypes] = useState([
     { id: 1, name: "Mortage loans", interest: 0.05 },
-    { id: 2, name: "Salary advance", interest: 0.03 },
+    { id: 2, name: "Salary advance", interest: 0.04 },
     { id: 3, name: "Auto loans", interest: 0.07 },
-    { id: 4, name: "Pool loans", interest: 0.06 },
+    { id: 4, name: "Personal loans", interest: 0.06 },
+    { id: 4, name: "Student loans", interest: 0.05 },
     { id: 5, name: "Business loans", interest: 0.1 },
   ]);
   const [loanInterest, setLoanInterest] = useState("");
