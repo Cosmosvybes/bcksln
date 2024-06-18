@@ -57,7 +57,7 @@ function App() {
 
         <Route
           path="/administration/account"
-          element={!isLoggedIn ? <Admin /> : <Signin />}
+          element={isLoggedIn ? <Admin /> : <Signin />}
         ></Route>
         <Route
           path="/profile"
