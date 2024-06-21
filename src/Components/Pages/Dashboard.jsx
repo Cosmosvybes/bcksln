@@ -322,7 +322,7 @@ const Dashboard = () => {
                   style={{ opacity: showMenu ? "1" : "0", transition: "0.9s" }}
                   className="relative w-full bg-amber-500 flex justify-between px-2 items-center h-16"
                 >
-                  <h1 className="font-bold  max-sm:text-2xl ml-4">Dashboard</h1>
+                  <h1 className="font-bold text-gray-50  max-sm:text-2xl ml-4">Dashboard</h1>
                   <RemoveRectangle
                     className="text-4xl"
                     onClick={handleShowMenu}

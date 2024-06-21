@@ -95,7 +95,7 @@ const Signin = () => {
       {!showTerms ? (
         <div className="relative py-3 max-md:py-0 max-sm:py-2 px-48 max-lg:px-0 max-sm:px-0 h-auto max-sm:h-auto  max-lg:gap-0 bg-gray-100">
           <button
-            className="flex justify-start  max-sm:ml-1 mb-4  ml-8 items-center py-0"
+            className="flex justify-start  text-gray-400 max-sm:ml-1 mb-4  ml-8 items-center py-0"
             onClick={() => history.back()}
           >
             <ArrowLeft className="text-2xl inline" /> back
@@ -103,7 +103,7 @@ const Signin = () => {
           <h1 className="text-Black font-semibold text-5xl max-sm:text-4xl ml-6 max-sm:ml-1">
             {" "}
             Get started{" "}
-            <ArrowRight className="text-5xl max-sm:text-4xl text-gray-400 inline" />
+            <ArrowRight className="text-5xl max-sm:text-4xl text-gray-900 inline" />
           </h1>
           <div className="relative flex justify-start gap-2 max-sm:ml-2  items-center ml-8">
             <div className="relative h-5 px-0.5 bg-black"></div>

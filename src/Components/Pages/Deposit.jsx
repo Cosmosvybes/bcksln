@@ -13,7 +13,7 @@ const Deposit = () => {
     <>
       <section className="bg-gray-100 relative h-auto py-2   max-sm:h-auto px-8 max-sm:px-2">
         <div className="flex ml-2 justify-start  items-center">
-          <button className="mt-0 ml-1" onClick={() => history.back()}>
+          <button className="mt-0 ml-1 text-gray-400" onClick={() => history.back()}>
             <ArrowLeft className="text-2xl inline " /> back
           </button>
         </div>
@@ -190,7 +190,7 @@ const Deposit = () => {
           <div className="flex w-full justify-end items-center  mt-2">
             <Link
               to={"/initial/deposit"}
-              className="bg-black rounded-lg py-3 text-center text-white w-52 max-sm:w-full hover:bg-gray-900"
+              className="bg-black rounded-lg py-2 text-center text-white w-52 max-sm:w-full hover:bg-gray-900"
             >
               Proceed now <ArrowRight className="inline text-2xl" />
             </Link>

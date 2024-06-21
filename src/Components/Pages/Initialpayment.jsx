@@ -197,7 +197,7 @@ const Initialpayment = () => {
             <section className="bg-gray-100 relative h-auto py-2  max-sm:h-auto px-8 max-sm:px-4">
               <div className="flex ml-0 justify-start  items-center">
                 <button
-                  className="mt-4 mb-2 ml-0"
+                  className="mt-1 text-gray-400 mb-2 ml-0"
                   onClick={() => history.back()}
                 >
                   <ArrowLeft className="text-2xl inline " /> back
@@ -392,12 +392,15 @@ const Initialpayment = () => {
       ) : (
         <section className="bg-gray-100 relative h-auto py-2   max-sm:h-auto px-8 max-sm:px-4">
           <div className="flex ml-0 justify-start  items-center">
-            <button className="mt-4 mb-2 ml-1" onClick={() => history.back()}>
+            <button
+              className="mt-1 text-gray-400 mb-2 ml-0"
+              onClick={() => history.back()}
+            >
               <ArrowLeft className="text-2xl inline " /> back
             </button>
           </div>
           <div className="flex items-center justify-between">
-            <h1 className="text-8xl font-extrabold max-sm:ml-2  max-sm:text-4xl mb-3 ml-1">
+            <h1 className="text-8xl font-extrabold max-sm:ml-2  max-sm:text-2xl mb-3 ml-1">
               Pay with Crypto
             </h1>
             <img src={image} className="w-30 h-20" alt="image" />
@@ -472,7 +475,7 @@ const Initialpayment = () => {
               <p className="inline text-xs">Write amount</p>{" "}
               <ArrowRight className="text-4xl max-sm:text-2xl inline" />
               <Input
-                type="number"
+                type="text"
                 placeholder="$0.00"
                 value={bitcoinAmount}
                 onChange={(e) => setBitcoinAmount(e.target.value)}

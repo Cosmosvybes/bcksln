@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import { RemoveCircle } from "react-huge-icons/outline";
+import { CheckCircle, RemoveCircle } from "react-huge-icons/outline";
 
 const MoreInfo = ({ showMore, callback, data }) => {
   const [loanDetails, setDetails] = useState({});
@@ -15,7 +15,7 @@ const MoreInfo = ({ showMore, callback, data }) => {
             className="absolute right-0 text-2xl text-gray-400"
             onClick={callback}
           />
-          <h1 className="text-2xl text-gray-500">Loan Details</h1>
+          <h1 className="text-2xl text-gray-400">Loan Details</h1>
           <div className="relative block">
             <p className="text-amber-500">Loan Type</p>
             <p className="text-xs text-gray-400">{loanDetails?.loantype}</p>
@@ -24,15 +24,25 @@ const MoreInfo = ({ showMore, callback, data }) => {
             <p className="text-amber-500">Amount</p>
             <p className="text-xs text-gray-400 ">${loanDetails?.amount}</p>
           </div>
-          <div className="relative block">
-            <p className="text-amber-500">Approval Status</p>
-            <p className={`${
-             data.isApproved ? "bg-green-200" : "bg-red-200"
-            } rounded-md w-20 px-2 py-0.5 ${
-              data.isApproved ? "text-green-500" : "text-red-500"
-            }`}>
-              {data.isApproved ? "Approved" : "Pending"}
-            </p>
+          <div className="relative flex justify-start gap-1 items-center">
+            <p className="text-amber-500"> Status</p>
+
+            <div className="flex flex-col gap-1">
+              {data.isApproved ? (
+                <p className="text-xs flex items-center justify-center text-green-500">
+                  approved{" "}
+                  <CheckCircle className="text-green-500 text-xs inline" />
+                </p>
+              ) : (
+                <p
+                  className={`text-xs px-1 py-1 rounded-md font-thin ${
+                    !data.isApproved && "text-amber-600"
+                  } ${!data.isApproved && "bg-amber-200"}`}
+                >
+                  Processing
+                </p>
+              )}
+            </div>
           </div>
           <div className="relative block">
             <p className="text-amber-500">Payment Method</p>
