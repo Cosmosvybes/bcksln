@@ -14,12 +14,14 @@ import {
 } from "react-huge-icons/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getUser, updateAddress } from "../../brain/user";
+// import { getUser, updateAddress } from "../../brain/user";
 import { toast } from "react-toastify";
+import BreadCrumbs from "../BreadCrumbs";
+import { UserCircleBlock } from "react-huge-icons/outline";
 
-const Profile = ({ navButton, showMenu }) => {
+const Profile = ({ closePage, showMenu, user }) => {
   const [edit, setEdit] = useState(true);
-  const { user } = useSelector((state) => state.userSlice);
+  // const { user } = useSelector((state) => state.userSlice);
   const [address, setAddress] = useState("");
   const [postal, setPostal] = useState("");
   const [state, setState] = useState("");
@@ -49,24 +51,16 @@ const Profile = ({ navButton, showMenu }) => {
     toast.success(responseData.response);
     console.log(JSON.stringify({ address: addressObject }));
   };
-  useEffect(() => {
-    dispatch(getUser());
-  }, []);
+
   return (
     <>
-      <div className="relative   h-screen bg-gray-100  px-8 max-sm:px-2">
-        <div
-          className={`relative ${
-            !showMenu ? "z-30" : "z-0"
-          }   justify-between text-gray-400 items-center hidden max-sm:flex`}
-        >
-          {navButton} <p>Profile</p>{" "}
-          <button className="text-gray-400">
-            <ArrowRight className="inline text-3xl" />{" "}
-          </button>
-        </div>
-        <hr className="mb-2 text-gray-300" />
-        <h1 className="text-Black font-semibold text-5xl  text-gray-400 max-sm:ml-2 max-sm:text-xl  max-sm:">
+      <BreadCrumbs
+        parent={"Profile"}
+        icon={<UserCircleBlock />}
+        callback={closePage}
+      />
+      <div className="relative    h-screen bg-gray-100  px-8 max-sm:px-0">
+        <h1 className="text-Black font-semibold text-5xl mt-4 text-gray-400 max-sm:ml-2 max-sm:text-xl  max-sm:">
           {" "}
           User Info
         </h1>

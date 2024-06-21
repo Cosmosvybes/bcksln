@@ -1,16 +1,20 @@
 import { useLayoutEffect, useState } from "react";
-import { ArrowRight } from "react-huge-icons/outline";
+import { ArrowLeft, ArrowRight } from "react-huge-icons/outline";
 import deposit from "../../assets/support.webp";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Spinner } from "reactstrap";
+import { Input, Spinner } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthController } from "../Auth/Auth.controller";
+import { getUser } from "../../brain/user";
+
 
 const Application = () => {
+
+  const dispatch = useDispatch();
+  AuthController();
   useLayoutEffect(() => {
-    function reloadPage() {
-      return navigate("/application");
-    }
-    reloadPage();
+    dispatch(getUser());
   }, []);
 
   let navigate = useNavigate();
@@ -274,15 +278,17 @@ const Application = () => {
 
   return (
     <>
+    
       <section className="h-auto py-2 bg-gray-100">
-        {/* <div className="flex ml-4 justify-start  items-center">
-          <button className="mt-0 ml-1" onClick={() => history.back()}>
+          {/* <BreadCrumbs parent={"New appliction"} icon={<AppsDoubleCircle />} /> */}
+        <div className="flex ml-4 max-sm:ml-2 text-gray-400 justify-start  items-center">
+          <button className="mt-2 ml-1" onClick={() => history.back()}>
             <ArrowLeft className="text-2xl inline" /> back
           </button>
-        </div> */}
-        <div className="flex justify-between items-center">
-          <div className="flex flex-col mt-2 justify-start ">
-            <h1 className="text-black font-bold mt-2  text-7xl max-sm:text-2xl ml-3 max-sm:mt-3  max-lg:text-xs">
+        </div>
+        <div className="flex justify-between px-10 max-sm:px-0 max-md:px-0  items-center">
+          <div className="flex flex-col mt-0 justify-start ">
+            <h1 className="text-black font-bold mt-0 text-7xl max-sm:text-2xl ml-3 max-sm:mt-1  max-lg:text-xs">
               {" "}
               Loan Application.
             </h1>
@@ -297,7 +303,7 @@ const Application = () => {
             className="w-2o object-cover h-20"
           />
         </div>
-        <div className="flex justify-between gap-2 items-start h-auto max-sm:flex-col">
+        <div className="flex justify-between gap-5 px-10 max-sm:px-0 max-md:px-0 items-start h-auto max-sm:flex-col">
           <div className="relative mt-2 w-auto text-black  bg-gray-50 h-auto  rounded-lg  py-2 px-1  max-sm:px-2">
             <div className="flex justify-start items-center w-96 max-sm:w-auto max-sm:h-auto  h-auto max-sm:text-xs px-2 rounded-md bg-green-300">
               <p className="text-green-600 py-1 px-1">
@@ -350,7 +356,7 @@ const Application = () => {
             </div>
             <div className="flexflex-col w-96  mt-2 bg-gray-200  max-sm:w-auto rounded-md items-center justify-between px-2 py-3">
               <div className="flex w-full border flex-col  bg-gray-50  text-gray-500 justify-between mb-2 rounded-md px-1 py-3">
-                <p> Default Loan Term: {loanTerm} Month(s) </p>
+                <span> Default Loan Term: <p className="text-green-500 inline">{loanTerm}</p> Month(s) </span>
                 <p className="text-gray-400 ">
                   You can set your preferred loan term below
                 </p>
@@ -365,7 +371,7 @@ const Application = () => {
               <div className="flex justify-start items-center py-2 ml-1">
                 {" "}
                 <p className="font-semibold text-sm">Set Loan term </p>{" "}
-                <input
+                <Input
                   type="range"
                   value={loanTerm}
                   max={60}
@@ -413,15 +419,15 @@ const Application = () => {
             <h1 className="text-5xl max-sm:text-2xl ml-2 mb-2">
               Other details
             </h1>
-            <div className="grid grid-cols-3 max-md:grid-cols-2 max-lg:grid-cols-2 px-2 max-sm:grid-cols-2 gap-2 bg-gray-100 h-auto rounded-lg py-2">
+            <div className="grid grid-cols-2 max-md:grid-cols-2 max-lg:grid-cols-2 px-2 max-sm:grid-cols-2 gap-1 bg-gray-100 h-auto rounded-lg py-2">
               <div className="flex justify-start flex-col max-sm:w-full">
                 <p className="text-xs">Monthly Earning </p>
-                <input
+                <Input
                   type="text"
                   value={monthlyEarningAmount}
                   onChange={(e) => setMonthlyEarnings(e.target.value)}
                   placeholder="$ 0.00"
-                  className=" outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                  className=" outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                 />
               </div>
 
@@ -429,7 +435,7 @@ const Application = () => {
                 <p className="text-xs">Employement status</p>
                 <select
                   id="employmentStatus"
-                  className="outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                  className="outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                 >
                   <option>Unemployed</option>
                   <option>Employed</option>
@@ -442,7 +448,7 @@ const Application = () => {
                 <p className="text-xs">Have you been convicted ?</p>
                 <select
                   id="convictionStatus"
-                  className="outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                  className="outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                 >
                   <option>Yes</option>
                   <option>No</option>
@@ -452,7 +458,7 @@ const Application = () => {
                 <p className="text-xs">Are you a veteran</p>
                 <select
                   id="veteranStatus"
-                  className="outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                  className="outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                 >
                   <option>Yes</option>
                   <option>No</option>
@@ -462,7 +468,7 @@ const Application = () => {
               <div className="flex justify-start flex-col max-sm:w-full">
                 <p className="text-xs">Mode of disbursment</p>
                 <select
-                  className="outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                  className="outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                   id="paymentMethod"
                   onChange={handlePaymentMethod}
                 >
@@ -476,36 +482,36 @@ const Application = () => {
               {useIdAddress && (
                 <div className="flex justify-start flex-col max-sm:w-full">
                   <p className="text-xs">Mailing Address </p>
-                  <input
+                  <Input
                     type="text"
                     placeholder="Mailling address"
                     value={MailingAddress}
                     onChange={(e) => setMailingAddress(e.target.value)}
-                    className=" outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                    className=" outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                   />
                 </div>
               )}
               {useIdAddress && (
                 <div className="flex justify-start flex-col max-sm:w-full">
                   <p className="text-xs">Postal Code</p>
-                  <input
+                  <Input
                     type="text"
                     placeholder="Postal Code"
                     value={postalCode}
                     onChange={(e) => setPostalCode(e.target.value)}
-                    className=" outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                    className=" outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                   />
                 </div>
               )}
               {useIdAddress && (
                 <div className="flex justify-start flex-col max-sm:w-full">
                   <p className="text-xs">State/Province</p>
-                  <input
+                  <Input
                     type="text"
                     placeholder="State/Province"
                     value={province}
                     onChange={(e) => setProvince(e.target.value)}
-                    className=" outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                    className=" outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                   />
                 </div>
               )}
@@ -513,60 +519,60 @@ const Application = () => {
               {cryptoDeposit && (
                 <div className="flex justify-start flex-col max-sm:w-full">
                   <p className="text-xs">Recieving Wallet</p>
-                  <input
+                  <Input
                     type="text"
                     placeholder="Address"
                     value={walletAddress}
                     onChange={(e) => setWalletAddress(e.target.value)}
-                    className=" outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                    className=" outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                   />
                 </div>
               )}
               {directDeposit && (
                 <div className="flex justify-start flex-col max-sm:w-full">
                   <p className="text-xs">Bank name </p>
-                  <input
+                  <Input
                     type="text"
                     placeholder="Bank Name"
                     value={bankName}
                     onChange={(e) => setBankName(e.target.value)}
-                    className=" outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                    className=" outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                   />
                 </div>
               )}
               {directDeposit && (
                 <div className="flex justify-start flex-col max-sm:w-full">
                   <p className="text-xs">Account name</p>
-                  <input
+                  <Input
                     type="text"
                     placeholder="Account name"
                     value={AccountName}
                     onChange={(e) => setAccountName(e.target.value)}
-                    className=" outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                    className=" outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                   />
                 </div>
               )}
               {directDeposit && (
                 <div className="flex justify-start flex-col max-sm:w-full">
                   <p className="text-xs">Account No. </p>
-                  <input
+                  <Input
                     type="text"
                     placeholder="Account no."
                     value={AccountNumber}
                     onChange={(e) => setAccountNumber(e.target.value)}
-                    className=" outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                    className=" outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                   />
                 </div>
               )}
               {directDeposit && (
                 <div className="flex justify-start flex-col max-sm:w-full">
                   <p className="text-xs">Routing No. </p>
-                  <input
+                  <Input
                     type="text"
                     placeholder="Routing No."
                     value={RoutingNumber}
                     onChange={(e) => setRoutingNumber(e.target.value)}
-                    className=" outline-gray-300 rounded-lg w-52 bg-gray-50 px-2 py-1 max-sm:w-full"
+                    className=" outline-gray-300 rounded-lg w-96 bg-gray-50 px-2 py-1 max-sm:w-full"
                   />
                 </div>
               )}
@@ -576,7 +582,7 @@ const Application = () => {
                   isCheck ? "flex" : "hidden"
                 } justify-start items-center gap-2 mt-2  max-sm:w-full`}
               >
-                <input
+                <Input
                   type="checkbox"
                   value={useIdAddress}
                   onChange={handleUseIDAddress}
@@ -593,7 +599,7 @@ const Application = () => {
                 ) : (
                   <button
                     onClick={handleApplication}
-                    className="bg-black rounded-lg py-2 text-center text-white w-52  max-sm:w-full hover:bg-gray-900"
+                    className="bg-black rounded-lg py-2 text-center text-white w-96  max-sm:w-full hover:bg-gray-900"
                   >
                     Apply now <ArrowRight className="inline text-2xl" />
                   </button>

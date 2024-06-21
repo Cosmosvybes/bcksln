@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Input, Spinner } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import { useDispatch } from "react-redux";
 
 const TwoFactor = () => {
+  const dispatcher = useDispatch();
   let navigate = useNavigate();
   const [code, setCode] = useState("");
   let [loading, setLoading] = useState(false);
@@ -32,14 +34,16 @@ const TwoFactor = () => {
           response.user?.isVerified
         ) {
           navigate("/administration/account");
-          
+          localStorage.setItem("isAuthenticated", true);
         } else if (response.isAUthenticated && response.user?.isVerified) {
+          localStorage.setItem("isAuthenticated", true);
           navigate("/dashboard");
           if (!response.user.isVerified) {
             navigate("/welcome");
           }
         } else {
           if (response.isAUthenticated) {
+            localStorage.setItem("isAuthenticated", true);
             navigate("/welcome");
           } else {
             toast.warn(response.response);
@@ -49,6 +53,7 @@ const TwoFactor = () => {
       .catch((err) => {
         setLoading(false);
         toast.error(err.message);
+        console.log(err);
       });
   };
 

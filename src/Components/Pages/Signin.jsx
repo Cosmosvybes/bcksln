@@ -66,9 +66,7 @@ const Signin = () => {
               <Form className="">
                 {/* <Row> */}
                 <Col>
-                  <Label>
-                    <b className="text-gray-400">Email</b>
-                  </Label>
+                  <b className="text-gray-400">Email</b>
                   <Input
                     type="text"
                     value={email}
@@ -76,9 +74,7 @@ const Signin = () => {
                     placeholder="Email here"
                     className="border border-gray-100 w-full px-4 py-2 rounded-lg outline-gray-400 block max-sm:w-full"
                   />
-                  <Label>
-                    <b className="text-gray-400">Password</b>
-                  </Label>
+                  <b className="text-gray-400">Password</b>
                   <Input
                     type="password"
                     value={password}
@@ -129,7 +125,7 @@ const Signin = () => {
           </div>
           <div className="relative block w-96 max-md:w-full max-sm:w-full ">
             <img src={signin} alt="image" className="object-cover" />
-            <p className="text-gray-500 text-sm max-sm:text-xs">
+            <p className="text-gray-500 text-sm text-center max-sm:text-xs">
               Unlock your potential with BucksLoan! Enjoy quick approvals,
               competitive rates, and personalized service. Sign in now to take
               the first step toward achieving your financial goals.

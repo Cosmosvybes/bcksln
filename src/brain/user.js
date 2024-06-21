@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
 
 export const getUser = createAsyncThunk("user/getUser", async () => {
   const userToken = localStorage.getItem("userToken");
@@ -17,6 +16,7 @@ const userSlice = createSlice({
   name: "userProfile",
   initialState: {
     user: {},
+    isAuthenticated: false,
     accountCard: {},
     isLoading: true,
   },
@@ -24,6 +24,10 @@ const userSlice = createSlice({
     updateAddress: (state, action) => {
       const { address, postal, state_ } = action.payload;
       state.user.address = { address, postal, state_ };
+    },
+
+    closeAuth: (state) => {
+      state.isAuthenticated = false;
     },
   },
   extraReducers: (builder) => {
@@ -33,6 +37,7 @@ const userSlice = createSlice({
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
+      state.isAuthenticated = true;
       state.accountCard = action.payload.cards[0];
     });
     builder.addCase(getUser.rejected, (state, action) => {
@@ -40,5 +45,6 @@ const userSlice = createSlice({
     });
   },
 });
-export const { updateAddress } = userSlice.actions;
+export const { updateAddress, userAuthenticator, closeAuth } =
+  userSlice.actions;
 export default userSlice.reducer;

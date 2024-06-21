@@ -236,7 +236,7 @@ const Signin = () => {
                 className="object-contain h-96 w-full max-md:w-full max-sm:w-full"
               />
               <div className="relative  px-2 py-2 w-full">
-                <p className="text-gray-500 max-sm:text-xs text-sm">
+                <p className="text-gray-500 max-sm:text-xs text-center text-sm">
                   Unlock the future you deserve with BucksLoan’s flexible and
                   affordable loan options! Whether you're planning a dream
                   vacation, starting a new business, or consolidating debt, we

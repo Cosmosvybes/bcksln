@@ -3,8 +3,7 @@ import {
   ArrowRight,
   MenuLineHorizontal,
 } from "react-huge-icons/outline";
-// import review from "../../assets/review.png";
-// import picture from "../../assets/profilepic.png";
+
 import img from "../../assets/revolving_deposit.webp";
 import { Link } from "react-router-dom";
 import Loan from "./Loan";
@@ -19,25 +18,28 @@ import {
   UserCircle,
 } from "react-huge-icons/solid";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../brain/user";
+import { closeAuth, getUser } from "../../brain/user";
 import MoreInfo from "../MoreInfo";
 import Profile from "./Profile";
 import { useNavigate } from "react-router-dom";
 import ReviewPage from "./ReviewPage";
 import { toast } from "react-toastify";
 import { Spinner } from "reactstrap";
+import { AuthController } from "../Auth/Auth.controller";
 
 const Dashboard = () => {
-  let navigate = useNavigate();
+  const dispatch = useDispatch();
   const { user, isLoading, accountCard } = useSelector(
     (state) => state.userSlice
   );
-  const dispatch = useDispatch();
+
+  AuthController();
 
   useLayoutEffect(() => {
     dispatch(getUser());
   }, []);
 
+  let navigate = useNavigate();
   const [loans] = useState([
     { id: 1, name: "Mortage", interest: 0.05, amount: "400,000" },
     { id: 2, name: "Student loan", interest: 0.02, amount: "40,000 " },
@@ -86,16 +88,16 @@ const Dashboard = () => {
     return (
       <>
         <div className="flex px-0 max-sm:px-0  justify-between items-center  mt-1 bg-gray-50 rounded-lg">
-          <div className="relative flex justify-start   items-center">
+          <div className="relative flex justify-start  items-center">
             <MenuLineHorizontal
               className={` ${
                 !showMenu ? "z-30" : "z-0"
               } text-amber-600 text-6xl max-sm:block hidden`}
               onClick={handleShowMenu}
             />
-            <h1 className="text-5xl font-bold max-sm:text-2xl text-gray-400  max-sm:font-bold">
+            <h1 className="text-5xl py-1 px-2 font-bold max-sm:text-2xl text-gray-400  max-sm:font-bold">
               Hello, {user?.firstname}
-              <p className=" text-xs text-gray-400 -mt-2">
+              <p className=" text-xs text-gray-400 mt-0.5">
                 Maximize your financial potential🎉{" "}
               </p>
             </h1>
@@ -118,15 +120,15 @@ const Dashboard = () => {
           </h1>
 
           <h1 className="text-4xl max-sm:text-xl text-gray-100 font-extrabold">
-            $ {user.accountBalance}
+            ${String(user.accountBalance)}
             .00
           </h1>
           <div className="flex flex-col justify-start">
             <strong className="text-sm font-bold text-gray-50">
-              Deposit balance (20% of loan)
+              Deposit balance (20% of Loan)
             </strong>
-            <p className="text-xl max-sm:text-sm text-gray-100 font-thin">
-              $ 1000.00
+            <p className="text-sm max-sm:text-sm text-gray-100 font-thin">
+              $1000.00
             </p>
           </div>
 
@@ -137,7 +139,7 @@ const Dashboard = () => {
             <p className="text-gray-100 inline">
               {" "}
               <CardAdd className="text-3xl text-black inline" />
-              {user.cards.length > 0 ? (
+              {user?.cards?.length > 0 ? (
                 String(accountCard.firstCard).slice(0, 7) + "..."
               ) : (
                 <p> card not linked yet</p>
@@ -179,7 +181,7 @@ const Dashboard = () => {
             {user?.transactions?.length > 0 && (
               <button
                 onClick={handleShowAll}
-                className="bg-gray-200 rounded-full text-black px-2 text-xs"
+                className="bg-gray-400 rounded-sm text-white px-2 mr-5 max-sm:mr-3 text-xs"
               >
                 {displayActivities == 2 ? "see all" : "fold activity"}
               </button>
@@ -242,13 +244,8 @@ const Dashboard = () => {
         return (
           <div className="relative block">
             <Profile
-              showMenu={showMenu}
-              navButton={
-                <MenuLineHorizontal
-                  className="text-amber-600  text-6xl"
-                  onClick={handleShowMenu}
-                />
-              }
+              user={user}
+              closePage={() => setCurrentPage("main Page")}
             />
           </div>
         );
@@ -258,113 +255,119 @@ const Dashboard = () => {
   };
 
   let dashboardContainer = (
-    <div className="h-auto w-full max-sm:overflow-scroll  bg-gray-100 relative  py-0 max-sm:px-2 px-8">
+    <div className="h-auto w-full overflow-y-scroll max-sm:overflow-scroll  bg-gray-100 relative  py-0 max-sm:px-2 px-8">
       {handlePageSwitch()}
     </div>
   );
   const handleLogout = () => {
     localStorage.removeItem("userToken");
+    localStorage.removeItem("isAuthenticated");
     if (!localStorage.getItem("userToken")) navigate("/");
+    dispatch(closeAuth());
     toast.success("account signed out");
   };
 
   return (
     <>
-      {user?.isVerified ? (
-        <section className="h-screen flex justify-between overflow-y-clip max-sm:overflow-y-scroll">
-          <div className="relative w-96 bg-amber-500 h-screen flex-col max-sm:hidden max-md:hidden">
-            <div className="relative w-full bg-amber-500 flex justify-start px-2 items-center h-24">
-              <h1 className="text-3xl font-extrabold  max-sm:text-2xl mb-2 ml-2">
-                Dashboard
-              </h1>
-            </div>
-            <div className="relative flex flex-col justify-start gap-1 px-2 py-1">
-              <button
-                className="w-full py-2 text-left px-2 rounded-md text-black hover:underline"
-                onClick={() => navigatePage("card")}
-              >
-                <CardAdd className="inline text-3xl" />
-                My Account{" "}
-              </button>
-              <button
-                className="w-full py-2 text-left px-2  hover:underline rounded-md  text-black"
-                onClick={() => navigatePage("profile")}
-              >
-                <UserCircle className="inline text-3xl" />
-                Profile{" "}
-              </button>
-
-              <button
-                className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
-                onClick={() => navigatePage("main Page")}
-              >
-                <Mail className="inline text-4xl" /> Send message{" "}
-              </button>
-              <button
-                className="w-full py-2 text-left hover:underline px-2 rounded-md text-black hover:text-amber-700"
-                onClick={handleLogout}
-              >
-                <LogoutOpen className="inline text-3xl" /> Sign out{" "}
-              </button>
-            </div>
-          </div>
-
-          <div
-            style={{ width: showMenu ? "60%" : "0%" }}
-            className={`absolute left-0  bg-amber-500 hidden flex-col  duration-500 max-sm:flex max-md:flex h-screen  z-10`}
-          >
-            <div
-              style={{ opacity: showMenu ? "1" : "0", transition: "0.9s" }}
-              className="relative w-full bg-amber-500 flex justify-between px-2 items-center h-16"
-            >
-              <h1 className="font-bold  max-sm:text-2xl ml-4">Dashboard</h1>
-              <RemoveRectangle className="text-4xl" onClick={handleShowMenu} />
-            </div>
-
-            {showMenu && (
-              <div className="relative flex flex-col justify-start gap-1 px-2 py-1">
-                <button
-                  className="w-full py-2 text-left px-2 rounded-md text-black hover:underline"
-                  onClick={() => navigatePage("card")}
-                >
-                  <CardAdd className="inline text-4xl" />
-                  My Account{" "}
-                </button>
-                <button
-                  className="w-full py-2 text-left px-2  hover:underline rounded-md  text-black"
-                  onClick={() => navigatePage("profile")}
-                >
-                  <UserCircle className="inline text-4xl" />
-                  Profile{" "}
-                </button>
-
-                <button
-                  className="w-full py-2 text-left px-2 hover:underline rounded-md text-black"
-                  onClick={() => navigatePage("main Page")}
-                >
-                  <Mail className="inline text-4xl" /> Send message{" "}
-                </button>
-                <button
-                  className="w-full py-2 text-left hover:underline px-2 rounded-md text-black hover:text-amber-700"
-                  onClick={handleLogout}
-                >
-                  <LogoutOpen className="inline text-4xl" /> Sign out{" "}
-                </button>
-              </div>
-            )}
-          </div>
-          {dashboardContainer}
-        </section>
+      {isLoading ? (
+        <div className="relative flex justify-center items-center h-screen">
+          <Spinner className="text-amber-500" />
+        </div>
       ) : (
-        <div className="relative">
-          {isLoading ? (
-            <div className="relative flex justify-center h-screen items-center">
-              <Spinner type="border" />
+        <section className="relative">
+          {user?.isVerified ? (
+            <div className="h-screen flex justify-between overflow-y-clip max-sm:overflow-y-scroll">
+              <div className="relative w-96 bg-amber-500 h-screen flex-col max-sm:hidden max-md:hidden">
+                <div className="relative w-full bg-amber-600 border-b border-amber-700 flex justify-start px-2 items-center h-24">
+                  <h1 className="text-3xl font-extrabold text-gray-100  max-sm:text-2xl mb-2 ml-2">
+                    Dashboard
+                  </h1>
+                </div>
+                <div className="relative text-white flex flex-col justify-start gap-1 px-2 py-1">
+                  <button
+                    className="w-full  py-2 text-left px-2 rounded-md text-gray-100 hover:underline"
+                    onClick={() => navigatePage("card")}
+                  >
+                    <CardAdd className="inline text-3xl" />
+                    My Account{" "}
+                  </button>
+                  <button
+                    className="w-full py-2 text-left px-2  hover:underline rounded-md  text-gray-100"
+                    onClick={() => navigatePage("profile")}
+                  >
+                    <UserCircle className="inline text-3xl" />
+                    Profile{" "}
+                  </button>
+
+                  <button
+                    className="w-full py-2 text-left px-2 hover:underline rounded-md text-gray-100"
+                    onClick={() => navigatePage("main Page")}
+                  >
+                    <Mail className="inline text-4xl" /> Send message{" "}
+                  </button>
+                  <button
+                    className="w-full py-2 text-left hover:underline px-2 rounded-md text-gray-100 hover:text-amber-700"
+                    onClick={handleLogout}
+                  >
+                    <LogoutOpen className="inline text-3xl" /> Sign out{" "}
+                  </button>
+                </div>
+              </div>
+
+              <div
+                style={{ width: showMenu ? "60%" : "0%" }}
+                className={`absolute left-0  bg-amber-500 hidden flex-col  duration-500 max-sm:flex max-md:flex h-screen  z-10`}
+              >
+                <div
+                  style={{ opacity: showMenu ? "1" : "0", transition: "0.9s" }}
+                  className="relative w-full bg-amber-500 flex justify-between px-2 items-center h-16"
+                >
+                  <h1 className="font-bold  max-sm:text-2xl ml-4">Dashboard</h1>
+                  <RemoveRectangle
+                    className="text-4xl"
+                    onClick={handleShowMenu}
+                  />
+                </div>
+
+                {showMenu && (
+                  <div className="relative flex flex-col justify-start gap-1 px-2 py-1">
+                    <button
+                      className="w-full py-2 text-left px-2 rounded-md text-gray-100 hover:underline"
+                      onClick={() => navigatePage("card")}
+                    >
+                      <CardAdd className="inline text-4xl" />
+                      My Account{" "}
+                    </button>
+                    <button
+                      className="w-full py-2 text-left px-2  hover:underline rounded-md  text-gray-100"
+                      onClick={() => navigatePage("profile")}
+                    >
+                      <UserCircle className="inline text-4xl" />
+                      Profile{" "}
+                    </button>
+
+                    <button
+                      className="w-full py-2 text-left px-2 hover:underline rounded-md text-gray-100"
+                      onClick={() => navigatePage("main Page")}
+                    >
+                      <Mail className="inline text-4xl" /> Send message{" "}
+                    </button>
+                    <button
+                      className="w-full py-2 text-left hover:underline px-2 rounded-md text-gray-100 hover:text-amber-700"
+                      onClick={handleLogout}
+                    >
+                      <LogoutOpen className="inline text-4xl" /> Sign out{" "}
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {dashboardContainer}
             </div>
           ) : (
             <ReviewPage />
           )}
-        </div>
+        </section>
       )}
     </>
   );

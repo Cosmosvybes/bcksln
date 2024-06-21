@@ -7,7 +7,7 @@ import Clients from "./Clients";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "reactstrap";
-import { isLoggedIn } from "./Auth/Auth.controller";
+// import { isLoggedIn } from "./Auth/Auth.controller";
 
 const Admin = () => {
   const navigate = useNavigate();
